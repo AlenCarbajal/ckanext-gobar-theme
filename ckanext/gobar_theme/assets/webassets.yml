@@ -1,0 +1,14 @@
+# gobar_theme-js:
+#   filter: rjsmin
+#   output: ckanext-gobar_theme/%(version)s-gobar_theme.js
+#   contents:
+#     - js/gobar_theme.js
+#   extra:
+#     preload:
+#       - base/main
+
+# gobar_theme-css:
+#   filter: cssrewrite
+#   output: ckanext-gobar_theme/%(version)s-gobar_theme.css
+#   contents:
+#     - css/gobar_theme.css

@@ -1,0 +1,6 @@
+include README.rst
+include LICENSE
+include requirements.txt
+recursive-include ckanext/gobar_theme *.html *.json *.js *.less *.css *.mo *.yml
+recursive-include ckanext/gobar_theme/migration *.ini *.py *.mako
+recursive-include ckanext/gobar_theme/public *.*
