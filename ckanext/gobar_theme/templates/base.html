@@ -1,45 +1,53 @@
+{% extends "base.html" %}
+
+{% block head %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}{{ g.site_title }}{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  {# Poncho dependencies #}
-  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>{% block title %}{{ g.site_title }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {# Poncho local styles #}
-  <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/poncho.min.css">
-  <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/icono-arg.css">
+    {# Poncho dependencies #}
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  {% block styles %}
-    {{ super() }}
-  {% endblock %}
+    {# Poncho local styles #}
+    <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/poncho.min.css">
+    <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/icono-arg.css">
+
+    {# CKAN extra styles (no super(), porque el padre no define styles) #}
+    {% block styles %}{% endblock %}
 </head>
+{% endblock head %}
 
+
+{% block body %}
 <body>
 
-  {% block page %}
-    {% include "header.html" %}
-    
-    <main role="main">
-      {% block content %}{% endblock %}
-    </main>
-    
-    {% include "footer.html" %}
-  {% endblock %}
-  
-  {# Base scripts #}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% block page %}
 
-  {# Poncho local scripts #}
-  <script src="/gobar_theme/vendor/poncho/js/poncho.min.js"></script>
+        {% include "header.html" %}
 
-  {% block scripts %}
-  {% endblock %}
+        <main role="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include "footer.html" %}
+
+    {% endblock page %}
+
+    {# Base scripts #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    {# Poncho local scripts #}
+    <script src="/gobar_theme/vendor/poncho/js/poncho.min.js"></script>
+
+    {% block scripts %}{% endblock %}
 
 </body>
+{% endblock body %}
 </html>
+
