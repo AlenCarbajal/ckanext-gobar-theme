@@ -1,36 +1,8 @@
-{% extends "base.html" %}
+{% ckan_extends %}
 
-{# Inyectamos CSS/metadata en el head del core #}
-{% block head %}
+{# Inyectamos CSS/JS propios en el <head> #}
+{% block styles %}
     {{ super() }}
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    {# Poncho dependencies #}
-    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    {# Poncho local styles (ruta dentro del plugin) #}
-    <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/poncho.min.css">
-    <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/icono-arg.css">
-{% endblock %}
-
-
-{% block page %}
-    {{ super() }}
-{% endblock %}
-
-
-{# body/scripting: colocamos scripts al final de body usando el bloque scripts del core #}
-{% block scripts %}
-    {{ super() }}
-
-    {# Base scripts #}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    {# Poncho local scripts #}
-    <script src="/gobar_theme/vendor/poncho/js/poncho.min.js"></script>
+    <link rel="stylesheet" href="{{ h.url_for_static('/gobar_theme/css/poncho.css') }}">
+    <link rel="stylesheet" href="{{ h.url_for_static('/gobar_theme/css/custom.css') }}">
 {% endblock %}
