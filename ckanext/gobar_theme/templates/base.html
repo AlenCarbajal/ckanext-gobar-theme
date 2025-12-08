@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
+{# Inyectamos CSS/metadata en el head del core #}
 {% block head %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
+    {{ super() }}
+
     <meta charset="utf-8">
-    <title>{% block title %}{{ g.site_title }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {# Poncho dependencies #}
@@ -13,30 +12,20 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    {# Poncho local styles #}
+    {# Poncho local styles (ruta dentro del plugin) #}
     <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/poncho.min.css">
     <link rel="stylesheet" href="/gobar_theme/vendor/poncho/css/icono-arg.css">
-
-    {# CKAN extra styles (no super(), porque el padre no define styles) #}
-    {% block styles %}{% endblock %}
-</head>
-{% endblock head %}
+{% endblock %}
 
 
-{% block body %}
-<body>
+{% block page %}
+    {{ super() }}
+{% endblock %}
 
-    {% block page %}
 
-        {% include "header.html" %}
-
-        <main role="main">
-            {% block content %}{% endblock %}
-        </main>
-
-        {% include "footer.html" %}
-
-    {% endblock page %}
+{# body/scripting: colocamos scripts al final de body usando el bloque scripts del core #}
+{% block scripts %}
+    {{ super() }}
 
     {# Base scripts #}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -44,9 +33,4 @@
 
     {# Poncho local scripts #}
     <script src="/gobar_theme/vendor/poncho/js/poncho.min.js"></script>
-
-    {% block scripts %}{% endblock %}
-
-</body>
-{% endblock body %}
-</html>
+{% endblock %}
