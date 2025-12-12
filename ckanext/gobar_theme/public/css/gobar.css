@@ -1,0 +1,104 @@
+
+/* header */
+header.masthead {
+    background: #383691;
+}
+
+header > div > nav > div > ul > li {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: medium;
+}
+
+
+/* body */
+.homepage .main.hero {
+    background-color: #fff;
+    background-image: none;
+}
+
+/* distribucion contenido */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.homepage {
+    flex: 1 0 auto;
+}
+
+.site-footer {
+    flex-shrink: 0;
+}
+
+/* barra de busqueda */
+
+.homepage .module-search {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+.homepage .main-hero .module-search{
+    background: transparent;
+    box-shadow: none;
+}
+
+.homepage .main.hero .search-form{
+    background: transparent;
+    color: #383691;
+}
+
+.homepage .main.hero .search-form input[type="text"] {
+    border: 2px solid #383691;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+form#dataset-search-form .search-input-group {
+    display: flex;
+}
+
+form#dataset-search-form .search-input-group input[type="text"].form-control {
+    flex: 1;
+    border: 2px solid #383691;
+    border-radius: 25px 0 0 25px;
+    border-right: none;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+form#dataset-search-form .search-input-group button.btn {
+    border: 2px solid #383691;
+    border-left: none;
+    border-radius: 0 25px 25px 0;
+    background-color: #383691;
+    color: white;
+    padding: 10px 30px;
+}
+
+form#dataset-search-form .search-input-group button.btn:hover {
+    background-color: #2d2b73;
+}
+
+
+/* mapa */
+
+/* Wrapper responsivo para el mapa */
+.dataset-map {
+    width: 100%;
+    aspect-ratio: 9/16;
+    position: relative;
+}
+
+/* Leaflet ajustado al wrapper */
+.dataset-map .leaflet-container {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+}

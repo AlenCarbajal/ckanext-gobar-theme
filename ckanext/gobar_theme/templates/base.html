@@ -1,8 +1,23 @@
 {% ckan_extends %}
 
-{# Inyectamos CSS/JS propios en el <head> #}
+{% block title %}
+    {% if self.subtitle() %}
+        {{ g.site_title }} - {{ self.subtitle() }}
+    {% else %}
+        {{ g.site_title }}
+    {% endif %}
+{% endblock %}
+
+{% block head_extras %}
+    <link rel="shortcut icon" href="{{ h.url_for_static('images/favicon.ico') }}" />
+{% endblock %}
+
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ h.url_for_static('/gobar_theme/css/poncho.css') }}">
-    <link rel="stylesheet" href="{{ h.url_for_static('/gobar_theme/css/custom.css') }}">
+     <link rel="stylesheet" href="{{ h.url_for_static('css/gobar.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ h.url_for_static('/vendor/poncho/js/poncho.min.js') }}"></script>
 {% endblock %}
