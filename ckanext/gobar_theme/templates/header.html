@@ -6,22 +6,3 @@
          alt="datos.gob.ar" style="height: 36px;" />
   </a>
 {% endblock %}
-
-{% block header_site_navigation_tabs %}
-  {{ super() }}
-  <li class="nav-item {% if '/paginas' in request.path %}active{% endif %}">
-    <a href="/paginas" class="nav-link">
-      <i class="fa fa-file-text-o" aria-hidden="true"></i> Páginas
-    </a>
-  </li>
-  <li class="nav-item">
-    <a href="/paginas/mapa" class="nav-link">
-      <i class="fa fa-map" aria-hidden="true"></i> Mapa
-    </a>
-  </li>
-  <li class="nav-item">
-    <a href="/paginas/api-docs" class="nav-link">
-      <i class="fa fa-code" aria-hidden="true"></i> API
-    </a>
-  </li>
-{% endblock %}
