@@ -32,39 +32,27 @@
   --font-cuerpo: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* ── FULL-WIDTH BREAKOUT ──
-   Las secciones de la home están dentro del wrapper de CKAN
-   (primary block). Esto las saca a ancho completo. */
-.gobar-hero,
-.gobar-orgs-carousel,
-.gobar-categories,
-.gobar-featured,
-.gobar-tools {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+/* ── HOMEPAGE FULL-WIDTH ──
+   Solo afecta la home. Hace que el bloque primary
+   ocupe 100% sin la columna lateral de CKAN. */
+body.homepage .wrapper > .row {
+  display: block;
 }
-
-/* Eliminar padding/margin que CKAN pone en el wrapper del primary block */
-.homepage .primary,
-.homepage .main,
-.homepage .main.col-sm-12,
-.homepage [role="main"] {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
+body.homepage .wrapper > .row > .primary {
+  width: 100%;
+  max-width: 100%;
+  float: none;
+  padding: 0;
 }
-.homepage .wrapper,
-.homepage .main-content {
-  padding: 0 !important;
+body.homepage .wrapper {
+  padding: 0;
+}
+body.homepage .main {
+  padding: 0;
 }
 
 /* ── BASE ── */
-body { font-family: var(--font-cuerpo) !important; color: var(--gobar-negro); line-height: 1.6; overflow-x: hidden; }
+body { font-family: var(--font-cuerpo) !important; color: var(--gobar-negro); line-height: 1.6; }
 h1,h2,h3,h4,h5,h6,.page-heading { font-family: var(--font-titulos) !important; font-weight: 600; color: var(--gobar-negro); }
 a { color: var(--gobar-azul); }
 a:hover,a:focus { color: var(--gobar-primary); }
