@@ -1,0 +1,53 @@
+/* ==========================================================================
+   GOBAR SERIES — estilos exclusivos del explorador de series de tiempo
+   ========================================================================== */
+
+body.series-page .main { padding: 0 !important; }
+
+/* Contenedor full-width */
+#series-explorer-wrapper .container { width: 100% !important; max-width: 100% !important; padding-left: 32px !important; padding-right: 32px !important; }
+
+/* Eliminar pseudo-elemento que genera la línea vertical gris */
+body.series-page #series-explorer-wrapper *::before,
+body.series-page #series-explorer-wrapper *::after { border-right: none !important; border-left: none !important; width: auto !important; position: static !important; }
+#series-explorer-wrapper .row::before,
+#series-explorer-wrapper .row::after,
+#series-explorer-wrapper [class*="col-"]::before,
+#series-explorer-wrapper [class*="col-"]::after { content: none !important; display: none !important; border: none !important; }
+#series-explorer-wrapper .col-xs-4,
+#series-explorer-wrapper .col-sm-4 { border-left: none !important; }
+
+/* ── Buscador: pill igual al de conjuntos de datos ── */
+#series-explorer-wrapper .form-group { display: flex !important; align-items: stretch !important; margin-bottom: 32px !important; }
+#series-explorer-wrapper .form-autocomplete { flex: 1 !important; display: block !important; }
+#series-explorer-wrapper .form-autocomplete .form-control { width: 100% !important; border: 2px solid var(--gobar-primary) !important; border-right: none !important; border-radius: 25px 0 0 25px !important; padding: 10px 20px !important; font-size: 1rem !important; box-shadow: none !important; height: 100% !important; outline: none !important; background: #fff !important; }
+#series-explorer-wrapper .form-autocomplete .form-control:focus { box-shadow: none !important; }
+#series-explorer-wrapper .dp-form-search .fa-search { background-color: var(--gobar-primary) !important; color: #fff !important; border: 2px solid var(--gobar-primary) !important; border-left: none !important; border-radius: 0 25px 25px 0 !important; padding: 10px 20px !important; font-size: 1rem !important; display: flex !important; align-items: center !important; cursor: pointer !important; flex-shrink: 0 !important; }
+#series-explorer-wrapper .dp-form-search .fa-search:hover { background-color: var(--gobar-primary-dark) !important; border-color: var(--gobar-primary-dark) !important; }
+
+/* ── Tarjetas ── */
+#series-explorer-wrapper .series-card { background: #fff !important; border: 1px solid #E0E0E0 !important; border-left: 4px solid var(--gobar-primary) !important; border-radius: 8px !important; padding: 0 !important; margin-bottom: 16px !important; box-shadow: 0 1px 4px rgba(0,0,0,.06) !important; transition: box-shadow .2s, transform .15s !important; overflow: hidden !important; }
+#series-explorer-wrapper .series-card:hover { box-shadow: 0 4px 16px rgba(106,27,153,.12) !important; transform: translateY(-1px) !important; }
+#series-explorer-wrapper .p-headers { padding: 16px 20px 12px !important; border-bottom: 1px solid var(--gobar-gris-bg) !important; }
+#series-explorer-wrapper .card-title { color: var(--gobar-primary) !important; font-size: 1rem !important; font-weight: 700 !important; margin: 0 0 6px !important; line-height: 1.4 !important; font-family: var(--font-cuerpo) !important; }
+#series-explorer-wrapper .card-desc { color: var(--gobar-gris-oscuro) !important; font-size: 0.85rem !important; margin: 0 !important; line-height: 1.5 !important; }
+#series-explorer-wrapper .card-desc p { margin: 0 !important; }
+#series-explorer-wrapper .p-metadata { padding: 10px 20px 14px !important; display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
+#series-explorer-wrapper .card-info { display: inline-flex !important; background: var(--gobar-gris-bg) !important; border: 1px solid #E0E0E0 !important; border-radius: 20px !important; padding: 3px 10px !important; font-size: 0.78rem !important; color: var(--gobar-gris-oscuro) !important; white-space: nowrap !important; line-height: 1.5 !important; }
+
+/* ── Chart ── */
+#series-explorer-wrapper .d3-line-chart-container { border-left: 1px solid var(--gobar-gris-bg) !important; padding: 14px 16px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }
+#series-explorer-wrapper .d3-line-chart { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important; }
+#series-explorer-wrapper .d3-line-chart .date { font-size: 0.75rem !important; color: var(--gobar-gris) !important; text-align: center !important; }
+#series-explorer-wrapper .d3-line-chart .value { font-size: 1.1rem !important; font-weight: 700 !important; color: var(--gobar-primary) !important; text-align: center !important; }
+#series-explorer-wrapper .d3-line-chart .frequency { font-size: 0.7rem !important; color: var(--gobar-gris) !important; text-align: center !important; margin-top: 4px !important; text-transform: uppercase !important; letter-spacing: .03em !important; }
+
+/* ── Paginador ── */
+#series-explorer-wrapper .pagination { display: flex !important; gap: 4px !important; list-style: none !important; padding: 16px 0 !important; justify-content: center !important; }
+#series-explorer-wrapper .pagination li a,
+#series-explorer-wrapper .pagination li span { display: inline-block !important; padding: 7px 13px !important; border: 1px solid #E0E0E0 !important; border-radius: 6px !important; color: var(--gobar-primary) !important; font-size: 0.9rem !important; text-decoration: none !important; background: #fff !important; transition: background .15s !important; }
+#series-explorer-wrapper .pagination li a:hover { background: var(--gobar-gris-bg) !important; }
+#series-explorer-wrapper .pagination li.active a,
+#series-explorer-wrapper .pagination li.active span { background: var(--gobar-primary) !important; color: #fff !important; border-color: var(--gobar-primary) !important; }
+#series-explorer-wrapper .pagination li.disabled a,
+#series-explorer-wrapper .pagination li.disabled span { color: var(--gobar-gris-claro) !important; border-color: #eee !important; pointer-events: none !important; }

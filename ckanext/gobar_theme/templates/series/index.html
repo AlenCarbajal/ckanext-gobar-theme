@@ -1,0 +1,43 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ page_title }}{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  {% asset 'gobar_theme/gobar_theme_css' %}
+{% endblock %}
+
+{% block bodytag %}{{ super() }} class="series-page"{% endblock %}
+
+{% block content %}
+<div class="main">
+  <div id="series-explorer-wrapper"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdn.jsdelivr.net/gh/datosgobar/series-tiempo-ar-explorer@2.8.3/dist/js/main.js"></script>
+<script>
+  window.onload = function() {
+    TSExplorer.render('series-explorer-wrapper', {
+      seriesApiUri: 'https://apis.datos.gob.ar/series/api',
+      catalogId: 'datosgobar',
+      locale: 'AR',
+      numbersAbbreviate: true,
+      featured: [
+        "103.1_I2N_2016_M_15",
+        "168.1_T_CAMBIOR_D_0_0_26",
+        "11.3_VIPAA_2004_M_31",
+        "143.3_NO_PR_2004_A_21",
+        "tmi_arg",
+      ],
+      formatChartUnits: true,
+      laps: { Diaria: 90, Mensual: 24, Trimestral: 20, Semestral: 10, Anual: 10 },
+      maxDecimals: 2,
+      decimalsBillion: 2,
+      decimalsMillion: 2,
+    });
+  };
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+/* ==========================================================================
+   GOBAR CUSTOM PAGES — estilos para /paginas/* y /recursos/*
+   ========================================================================== */
+
+.cp-wrapper { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+.cp-layout { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; align-items: start; }
+.cp-sidebar { position: sticky; top: 80px; }
+.cp-nav { background: #fff; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1rem; }
+.cp-nav-title { font-size: 1rem; font-weight: 700; margin: 0 0 .75rem; padding-bottom: .5rem; border-bottom: 2px solid var(--gobar-primary); color: var(--gobar-primary); font-family: var(--font-cuerpo); }
+.cp-nav-list { list-style: none; padding: 0; margin: 0; }
+.cp-nav-item a { display: block; padding: .5rem .75rem; border-radius: 4px; color: var(--gobar-negro); text-decoration: none; transition: background .15s; font-family: var(--font-cuerpo); font-size: 14px; }
+.cp-nav-item a:hover { background: var(--gobar-gris-bg); text-decoration: none; }
+.cp-nav-item.active a { background: var(--gobar-primary); color: #fff; }
+.cp-nav-item a i { margin-right: .5rem; width: 18px; text-align: center; }
+.cp-main { min-width: 0; }
+.cp-title { font-size: 1.75rem; font-weight: 700; color: var(--gobar-negro); margin: 0 0 .5rem; }
+.cp-description { color: var(--gobar-gris); font-size: 1.05rem; margin-bottom: 2rem; }
+.cp-section { margin-bottom: 2rem; }
+.cp-section h2 { color: var(--gobar-primary-dark); }
+.cp-pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+.cp-card { display: flex; flex-direction: column; align-items: center; justify-content: center; background: #fff; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem 1rem; text-decoration: none; color: var(--gobar-negro); transition: box-shadow .2s, transform .2s; }
+.cp-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,.08); transform: translateY(-2px); text-decoration: none; color: var(--gobar-primary); }
+.cp-card-icon { margin-bottom: .75rem; color: var(--gobar-primary); }
+.cp-card-title { font-size: 1rem; font-weight: 600; margin: 0; text-align: center; font-family: var(--font-cuerpo); }
+.cp-stats-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.cp-stat-card { position: relative; background: #fff; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.5rem; text-align: center; overflow: hidden; }
+.cp-stat-number { display: block; font-size: 2.5rem; font-weight: 800; color: var(--gobar-primary); line-height: 1; }
+.cp-stat-label { display: block; font-size: .95rem; color: var(--gobar-gris); margin-top: .25rem; }
+.cp-stat-icon { position: absolute; top: 12px; right: 14px; font-size: 1.4rem; color: #E0E0E0; }
+.cp-table-wrapper { overflow-x: auto; }
+.cp-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.cp-table th,.cp-table td { padding: .6rem .75rem; text-align: left; border-bottom: 1px solid #E0E0E0; }
+.cp-table thead th { background: var(--gobar-gris-bg); font-weight: 600; font-size: .9rem; }
+.cp-table tbody tr:hover { background: var(--gobar-gris-bg); }
+.cp-table a { color: var(--gobar-primary); }
+.cp-dataset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.cp-dataset-card { background: #fff; border: 1px solid #E0E0E0; border-radius: 8px; padding: 1rem; }
+.cp-dataset-card h4 { margin: 0 0 .25rem; font-size: 1rem; }
+.cp-dataset-card h4 a { color: var(--gobar-primary); text-decoration: none; }
+.cp-step { margin-bottom: 2rem; }
+.cp-step h2 { display: flex; align-items: center; gap: .75rem; }
+.cp-step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--gobar-primary); color: #fff; border-radius: 50%; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.cp-contact-card { background: var(--gobar-gris-bg); border: 1px solid #E0E0E0; border-radius: 8px; padding: 1.25rem; margin: 1rem 0 2rem; }
+.cp-contact-card p { margin: .4rem 0; }
+.cp-contact-card i { width: 20px; color: var(--gobar-primary); margin-right: .5rem; }
+.cp-faq-item { margin-bottom: .75rem; border: 1px solid #E0E0E0; border-radius: 8px; padding: .75rem 1rem; }
+.cp-faq-item summary { font-weight: 600; cursor: pointer; }
+.cp-faq-item p { margin: .5rem 0 0; }
+.cp-api-docs pre { background: #1a202c; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: .9rem; }
+.cp-api-docs code { font-family: 'Fira Code','Consolas',monospace; }
+.cp-map-legend { padding: .75rem; background: var(--gobar-gris-bg); border-radius: 8px; margin-bottom: 1rem; font-size: .9em; border: 1px solid #E0E0E0; }
+.cp-spatial-list { padding-left: 1.25rem; }
+.cp-spatial-list li { padding: .3rem 0; }
+.cp-text-muted { color: var(--gobar-gris); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .cp-layout { grid-template-columns: 1fr; }
+  .cp-sidebar { position: static; }
+}

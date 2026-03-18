@@ -1,0 +1,121 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ page_title }}{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  {% asset 'gobar_theme/gobar_theme_css' %}
+{% endblock %}
+
+{% block content %}
+<div class="main">
+  {# ── Hero full-width, fuera del .container de CKAN ── #}
+  <section style="background-color: #383691; color: #fff; padding: 40px 0 32px;">
+    <div class="container">
+      <h1 style="margin: 0 0 8px; font-size: 2rem; font-weight: 700; color: #fff;">Recursos</h1>
+      <p style="margin: 0; font-size: 1.05rem; opacity: 0.85;">
+        Herramientas y servicios de la Dirección de Datos Abiertos
+      </p>
+    </div>
+  </section>
+
+  <div id="content">
+    <div class="container" style="padding-top: 48px; padding-bottom: 64px;">
+
+      {# ── Productos ── #}
+      <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 24px; color: #222;">Productos</h2>
+      <div class="row" style="margin-bottom: 56px;">
+        {% for producto in h.gobar_productos_list() %}
+        <div class="col-md-4" style="margin-bottom: 24px; display: flex;">
+          <div style="
+            border: 1px solid #e0e0e0;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+          ">
+            <div style="width: 100%; height: 80px; display: flex; align-items: center; margin-bottom: 16px;">
+              <img
+                src="{{ h.url_for_static(producto.logo) }}"
+                alt="{{ producto.title }}"
+                style="max-height: 80px; max-width: 100%; width: auto; object-fit: contain;"
+              />
+            </div>
+            <p style="color: #555; font-size: 0.9rem; flex-grow: 1; margin-bottom: 20px; line-height: 1.5;">
+              {{ producto.description }}
+            </p>
+            <a
+              href="{{ producto.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: inline-block;
+                background-color: #383691;
+                color: #fff;
+                border-radius: 4px;
+                padding: 8px 16px;
+                font-size: 0.875rem;
+                text-decoration: none;
+                align-self: flex-start;
+              "
+            >
+              Ver recurso &nbsp;<i class="fa fa-external-link" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      {# ── Comunidad ── #}
+      <h2 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 24px; color: #222;">Comunidad</h2>
+      <div class="row">
+        {% for item in h.gobar_comunidad_list() %}
+        <div class="col-md-4" style="margin-bottom: 24px; display: flex;">
+          <div style="
+            border: 1px solid #e0e0e0;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+          ">
+            <div style="margin-bottom: 14px;">
+              <i class="{{ item.icon }}" aria-hidden="true"
+                 style="font-size: 2rem; color: #383691;"></i>
+            </div>
+            <h3 style="font-size: 1rem; font-weight: 600; margin: 0 0 10px; color: #222;">
+              {{ item.title }}
+            </h3>
+            <p style="color: #555; font-size: 0.9rem; flex-grow: 1; margin-bottom: 20px; line-height: 1.5;">
+              {{ item.description }}
+            </p>
+            <a
+              href="{{ item.url }}"
+              {% if item.url.startswith('http') %}target="_blank" rel="noopener noreferrer"{% endif %}
+              style="
+                display: inline-block;
+                background-color: #383691;
+                color: #fff;
+                border-radius: 4px;
+                padding: 8px 16px;
+                font-size: 0.875rem;
+                text-decoration: none;
+                align-self: flex-start;
+              "
+            >
+              Ir al recurso &nbsp;<i class="fa {% if item.url.startswith('http') %}fa-external-link{% else %}fa-arrow-right{% endif %}" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

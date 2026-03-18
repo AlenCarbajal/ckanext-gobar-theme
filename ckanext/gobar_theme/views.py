@@ -146,5 +146,37 @@ def api_docs():
     )
 
 
+
+# ── Blueprint de recursos/productos ──
+recursos_bp = Blueprint(
+    "recursos",
+    __name__,
+    url_prefix="/recursos",
+)
+
+
+@recursos_bp.route("/")
+def recursos():
+    return toolkit.render("recursos/index.html", extra_vars={
+        "page_title": "Recursos",
+    })
+
+
+
+# ── Blueprint de series de tiempo ──
+series_bp = Blueprint(
+    "series",
+    __name__,
+    url_prefix="/series",
+)
+
+
+@series_bp.route("/")
+def series():
+    return toolkit.render("series/index.html", extra_vars={
+        "page_title": "Series de Tiempo",
+    })
+
+
 def get_blueprints() -> list[Blueprint]:
-    return [custom_pages]
+    return [custom_pages, recursos_bp, series_bp]
