@@ -19,7 +19,110 @@
 {{ super() }}
 <script src="https://cdn.jsdelivr.net/gh/datosgobar/series-tiempo-ar-explorer@2.8.3/dist/js/main.js"></script>
 <script>
+  function formatPeriod(value) {
+    var sep = ' \u2013 ';
+    // YYYY-MM-DD-YYYY-MM-DD
+    var m = value.match(/^(\d{4}-\d{2}-\d{2})-(\d{4}-\d{2}-\d{2})$/);
+    if (m) return m[1] + sep + m[2];
+    // YYYY-MM-YYYY-MM
+    m = value.match(/^(\d{4}-\d{2})-(\d{4}-\d{2})$/);
+    if (m) return m[1] + sep + m[2];
+    // YYYY-YYYY
+    m = value.match(/^(\d{4})-(\d{4})$/);
+    if (m) return m[1] + sep + m[2];
+    return value;
+  }
+
+  function processSeriesCard(card) {
+    if (card.dataset.gobarpProcessed) return;
+    const pHeaders = card.querySelector('.p-headers');
+    const pMetadata = card.querySelector('.p-metadata');
+    if (!pHeaders || !pMetadata) return;
+    card.dataset.gobarpProcessed = '1';
+
+    // Ocultar card-desc (descripción de la serie, queda como segundo subtítulo)
+    const cardDesc = pHeaders.querySelector('.card-desc');
+    if (cardDesc) cardDesc.style.display = 'none';
+
+    const badges = Array.from(pMetadata.querySelectorAll('.card-info'));
+
+    // 1. Mover Publicador al header como único subtítulo
+    const pubBadge = badges.find(b => b.textContent.startsWith('Publicador:'));
+    if (pubBadge) {
+      const pubVal = pubBadge.textContent.replace(/^Publicador:\s*/, '').trim();
+      const pubEl = document.createElement('p');
+      pubEl.className = 'card-publisher';
+      pubEl.textContent = pubVal;
+      pHeaders.appendChild(pubEl);
+    }
+
+    // 2. Convertir badges restantes a filas de tabla
+    var idRow = null;
+    var consultasRow = null;
+    pMetadata.innerHTML = '';
+
+    // Insertar Dataset primero (texto del card-desc)
+    const descText = cardDesc ? cardDesc.textContent.trim() : '';
+    if (descText) {
+      const datasetRow = document.createElement('div');
+      datasetRow.className = 'card-meta-row';
+      datasetRow.innerHTML = '<span class="meta-label">Dataset</span><span class="meta-value">' + descText + '</span>';
+      pMetadata.appendChild(datasetRow);
+    }
+
+    badges.forEach(function(b) {
+      const text = b.textContent.trim();
+      const colonIdx = text.indexOf(':');
+      if (colonIdx === -1) return;
+      const label = text.slice(0, colonIdx).trim();
+      const rawValue = text.slice(colonIdx + 1).trim();
+
+      if (/^Publicador$/i.test(label)) return;
+
+      const value = /^Per[ií]odo$/i.test(label) ? formatPeriod(rawValue) : rawValue;
+
+      const row = document.createElement('div');
+      row.className = 'card-meta-row';
+      row.innerHTML = '<span class="meta-label">' + label + '</span><span class="meta-value">' + value + '</span>';
+
+      if (/^ID$/i.test(label)) {
+        idRow = row;
+        row.className = 'card-id-row';
+      } else if (/^Consultas/i.test(label)) {
+        consultasRow = row;
+      } else {
+        pMetadata.appendChild(row);
+      }
+    });
+
+    // 3. ID (izquierda) y Consultas (derecha) al pie, en el mismo contenedor
+    if (idRow || consultasRow) {
+      var idContainer = document.createElement('div');
+      idContainer.className = 'p-card-id';
+      if (idRow) idContainer.appendChild(idRow);
+      if (consultasRow) {
+        consultasRow.className = 'card-consultas-row';
+        idContainer.appendChild(consultasRow);
+      }
+      var bodyRow = pMetadata.closest('.row') || pMetadata.parentElement;
+      bodyRow.parentElement.appendChild(idContainer);
+    }
+  }
+
+  const cardObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType !== 1) return;
+        var cards = node.classList && node.classList.contains('series-card')
+          ? [node]
+          : Array.from(node.querySelectorAll('.series-card'));
+        cards.forEach(processSeriesCard);
+      });
+    });
+  });
+
   window.onload = function() {
+    cardObserver.observe(document.getElementById('series-explorer-wrapper'), { childList: true, subtree: true });
     TSExplorer.render('series-explorer-wrapper', {
       seriesApiUri: 'https://apis.datos.gob.ar/series/api',
       catalogId: 'datosgobar',
@@ -40,4 +143,5 @@
     });
   };
 </script>
+
 {% endblock %}
