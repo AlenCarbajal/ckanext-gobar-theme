@@ -179,7 +179,7 @@
             <div class="gobar-featured-org">
               {{ pkg.organization.title if pkg.organization else 'Sin organización' }}
             </div>
-            <div class="gobar-featured-title">{{ pkg.title }}</div>
+            <div class="gobar-featured-title">{{ pkg.dataset_title }}</div>
             <div class="gobar-featured-desc">
               {{ h.truncate(pkg.notes or '', 120) }}
             </div>
