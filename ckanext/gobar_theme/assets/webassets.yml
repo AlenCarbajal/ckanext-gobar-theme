@@ -4,7 +4,10 @@ gobar_theme_css:
     preload:
       - base/main
   contents:
-    - css/gobar-theme.css
+    - css/gobar-base.css
+    - css/gobar-home.css
+    - css/gobar-custom-pages.css
+    - css/gobar-series.css
 
 gobar_theme_js:
   output: gobar-theme/%(version)s_gobar_theme.js

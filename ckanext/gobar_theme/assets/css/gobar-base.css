@@ -1,0 +1,97 @@
+/* ==========================================================================
+   GOBAR BASE — variables, tipografía, navbar, footer, botones
+   Cargado en todas las páginas
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* ── VARIABLES ── */
+:root {
+  --gobar-azul: #0072BC;
+  --gobar-celeste: #2897D4;
+  --gobar-verde: #2E7D33;
+  --gobar-amarillo: #F9A822;
+  --gobar-naranja: #F4772B;
+  --gobar-rojo: #C62828;
+  --gobar-fucsia: #EC407A;
+  --gobar-violeta: #6A1B99;
+  --gobar-turquesa: #37BCD2;
+  --gobar-primary: var(--gobar-violeta);
+  --gobar-primary-dark: #4A1472;
+  --gobar-primary-darker: #2E1065;
+  --gobar-accent: var(--gobar-turquesa);
+  --gobar-accent-dark: #0D3B4F;
+  --gobar-negro: #333333;
+  --gobar-gris-oscuro: #555555;
+  --gobar-gris: #888888;
+  --gobar-gris-claro: #CCCCCC;
+  --gobar-gris-bg: #F2F2F2;
+  --gobar-blanco: #FFFFFF;
+  --font-titulos: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-cuerpo: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ── BASE ── */
+body { font-family: var(--font-cuerpo) !important; color: var(--gobar-negro); line-height: 1.6; }
+h1,h2,h3,h4,h5,h6,.page-heading { font-family: var(--font-titulos) !important; font-weight: 600; color: var(--gobar-negro); }
+a { color: var(--gobar-azul); }
+a:hover,a:focus { color: var(--gobar-primary); }
+
+/* ── NAVBAR ── */
+.navbar,.masthead { background-color: var(--gobar-primary-darker) !important; border: none; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.navbar .navbar-brand { font-family: var(--font-cuerpo); font-weight: 700; font-size: 18px; color: var(--gobar-blanco)!important; }
+
+/* Alineación vertical del navbar */
+.main-navbar .navbar-nav { align-items: center; }
+.main-navbar .navbar-nav > li { display: flex; align-items: center; }
+
+/* Unificar estilos para nav-link (Bootstrap 5) y bare li>a (build_nav_main) */
+.navbar-nav > li > a,
+.navbar-nav .nav-item .nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-cuerpo);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: .01em;
+  color: rgba(255,255,255,.8) !important;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item .nav-link:focus {
+  color: var(--gobar-blanco) !important;
+  background-color: rgba(255,255,255,.08) !important;
+  border-radius: 4px;
+}
+.navbar-nav > li.active > a,
+.navbar-nav .nav-item.active .nav-link {
+  color: var(--gobar-blanco) !important;
+  background-color: rgba(255,255,255,.12) !important;
+  border-radius: 4px;
+}
+.navbar .search-form input[type="text"],.navbar .search-form .search-input { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 4px; color: var(--gobar-blanco); font-family: var(--font-cuerpo); font-size: 13px; }
+.navbar .search-form input[type="text"]::placeholder { color: rgba(255,255,255,.4); }
+
+/* ── FOOTER ── */
+.site-footer,footer { background-color: var(--gobar-primary-darker)!important; color: rgba(255,255,255,.5); font-family: var(--font-cuerpo); }
+.site-footer a,footer a { color: rgba(255,255,255,.6)!important; }
+.site-footer a:hover,footer a:hover { color: var(--gobar-blanco)!important; text-decoration: none; }
+
+/* ── BOTONES ── */
+.btn-primary { background-color: var(--gobar-primary)!important; border-color: var(--gobar-primary)!important; font-family: var(--font-cuerpo); font-weight: 600; }
+.btn-primary:hover,.btn-primary:focus { background-color: var(--gobar-primary-dark)!important; border-color: var(--gobar-primary-dark)!important; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 991px) {
+  .gobar-hero h1 { font-size: 28px; }
+  .gobar-counters { gap: 16px; }
+  .gobar-counter-number { font-size: 30px; }
+}
+@media (max-width: 768px) {
+  .gobar-hero { padding: 60px 0 40px; }
+  .gobar-section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .gobar-org-card { flex: 0 0 140px; }
+}

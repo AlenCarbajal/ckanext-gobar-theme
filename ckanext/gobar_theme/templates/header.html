@@ -6,3 +6,13 @@
          alt="datos.gob.ar" style="height: 36px;" />
   </a>
 {% endblock %}
+
+{% block header_site_navigation_tabs %}
+  {{ super() }}
+  <li class="nav-item{% if '/recursos' in request.path %} active{% endif %}">
+    <a class="nav-link" href="{{ h.url_for('recursos.recursos') }}">Recursos</a>
+  </li>
+  <li class="nav-item{% if '/series' in request.path %} active{% endif %}">
+    <a class="nav-link" href="{{ h.url_for('series.series') }}">Series</a>
+  </li>
+{% endblock %}
