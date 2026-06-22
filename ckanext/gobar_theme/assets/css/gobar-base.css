@@ -105,3 +105,13 @@ footer .lang-select .select2-chosen { color: #333!important; }
   .gobar-section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
   .gobar-org-card { flex: 0 0 140px; }
 }
+
+/* Mapa de filtro espacial (/dataset): más alto, acorde a las proporciones de
+   Argentina, que es muy alargada N-S. Sobrescribe el height:200px fijo de
+   ckanext-spatial (spatial_query.css), que carga después, por eso !important. */
+.dataset-map #dataset-map-container,
+.module-narrow #dataset-map-container {
+  height: auto !important;
+  aspect-ratio: 20 / 19;
+  min-height: 260px;
+}
