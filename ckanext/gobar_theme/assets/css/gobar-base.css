@@ -80,6 +80,16 @@ a:hover,a:focus { color: var(--gobar-primary); }
 .site-footer a,footer a { color: rgba(255,255,255,.6)!important; }
 .site-footer a:hover,footer a:hover { color: var(--gobar-blanco)!important; text-decoration: none; }
 
+/* Selector de idioma del footer: el footer fuerza color de texto casi blanco,
+   y el widget (select2/autocomplete) lo hereda → texto blanco sobre fondo
+   blanco. Forzamos texto oscuro dentro del control. */
+.site-footer .lang-select select,
+footer .lang-select select,
+.site-footer .lang-select .select2-selection__rendered,
+footer .lang-select .select2-selection__rendered,
+.site-footer .lang-select .select2-chosen,
+footer .lang-select .select2-chosen { color: #333!important; }
+
 /* ── BOTONES ── */
 .btn-primary { background-color: var(--gobar-primary)!important; border-color: var(--gobar-primary)!important; font-family: var(--font-cuerpo); font-weight: 600; }
 .btn-primary:hover,.btn-primary:focus { background-color: var(--gobar-primary-dark)!important; border-color: var(--gobar-primary-dark)!important; }
