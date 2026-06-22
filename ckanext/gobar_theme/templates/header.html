@@ -1,5 +1,9 @@
 {% ckan_extends %}
 
+{# Elimina la barra de cuenta/login del tope (account-masthead). El acceso queda
+   solo por /user/login. Se vacía el bloque entero para no renderizar la barra. #}
+{% block header_account %}{% endblock %}
+
 {% block header_logo %}
   <a class="logo" href="{{ h.url_for('home.index') }}">
     <img src="{{ h.url_for_static('images/Logo_datos-gob-ar_Blanco.png') }}"
