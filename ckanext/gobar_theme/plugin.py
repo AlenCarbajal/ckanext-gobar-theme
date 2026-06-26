@@ -2,24 +2,36 @@
 from __future__ import annotations
 
 import logging
+from collections import OrderedDict
 from typing import Any
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckan.common import CKANConfig
 from ckan.config.declaration import Declaration, Key
+from ckan.lib.plugins import DefaultTranslation
 
 from ckanext.gobar_theme.views import get_blueprints
 from ckanext.gobar_theme import helpers as gobar_helpers
 
 log = logging.getLogger(__name__)
 
+# Campos select de scheming (valores URI) que se exponen como facetas. Se
+# indexan con prefijo ``vocab_`` porque en el schema Solr de CKAN ese campo
+# dinámico es ``string`` (sin tokenizar) y por lo tanto faceteable de forma
+# exacta, a diferencia de ``extras_*`` que es texto analizado. Ver
+# before_dataset_index y dataset_facets.
+SCHEMING_FACET_FIELDS = ("dataset_status", "dataset_accrualPeriodicity")
 
-class GobarThemePlugin(plugins.SingletonPlugin):
+
+class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IConfigDeclaration)
+    plugins.implements(plugins.IFacets)
+    plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.ITranslation)
 
     # ── IConfigurer ──
     def update_config(self, config_: CKANConfig) -> None:
@@ -50,3 +62,37 @@ class GobarThemePlugin(plugins.SingletonPlugin):
         declaration.declare_bool(
             key.ckanext.gobar_theme.show_api_docs, True
         )
+
+    # ── IFacets ──
+    def dataset_facets(
+        self, facets_dict: "OrderedDict[str, Any]", package_type: str
+    ) -> "OrderedDict[str, Any]":
+        # Para harvest u otros tipos, no tocar las facetas heredadas.
+        if package_type and package_type != "dataset":
+            return facets_dict
+        facets = OrderedDict()
+        facets["organization"] = toolkit._("Organizaciones")
+        facets["groups"] = toolkit._("Grupos")
+        facets["res_format"] = toolkit._("Formato")
+        facets["vocab_dataset_status"] = toolkit._("Estado")
+        facets["vocab_dataset_accrualPeriodicity"] = toolkit._(
+            "Frecuencia de actualización"
+        )
+        facets["tags"] = toolkit._("Etiquetas")
+        return facets
+
+    # ── IPackageController ──
+    def before_dataset_index(
+        self, pkg_dict: dict[str, Any]
+    ) -> dict[str, Any]:
+        # Expone los campos select de scheming (extras con valor URI) como
+        # campos ``vocab_*`` (string en Solr) para poder facetar de forma
+        # exacta. Se indexa la ETIQUETA legible (p. ej. "actualizado") en lugar
+        # de la URI, de modo que la faceta y el filtro muestren texto claro.
+        for field in SCHEMING_FACET_FIELDS:
+            value = pkg_dict.get(field)
+            if value:
+                pkg_dict["vocab_" + field] = gobar_helpers.gobar_facet_label(
+                    field, value
+                )
+        return pkg_dict
