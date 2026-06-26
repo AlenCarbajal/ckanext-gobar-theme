@@ -1,0 +1,43 @@
+# Traducción / override de cadenas para ckanext-gobar-theme (es).
+# Mismo contenido que es_AR. Completar los msgstr. Ver README_i18n.md.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-gobar-theme\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Datasets"
+msgstr "datasets"
+
+msgid "Dataset"
+msgstr "dataset"
+
+msgid "Add Dataset"
+msgstr "Agregar dataset"
+
+msgid "Edit Dataset"
+msgstr "Editar dataset"
+
+msgid "Search datasets..."
+msgstr "Buscar datasets..."
+
+msgid "There are no datasets that match this search"
+msgstr ""
+
+msgid "{number} dataset found for \"{query}\""
+msgid_plural "{number} datasets found for \"{query}\""
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "{number} dataset found"
+msgid_plural "{number} datasets found"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "No datasets found"
+msgstr ""
