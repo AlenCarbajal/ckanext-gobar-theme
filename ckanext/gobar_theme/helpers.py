@@ -198,6 +198,42 @@ def gobar_format_date(date_str: str | None, fmt: str = "%d/%m/%Y") -> str:
         return str(date_str)
 
 
+def gobar_facet_label(facet_name: str, value: str) -> str:
+    """Devuelve la etiqueta legible de un valor de faceta.
+
+    Las facetas ``extras_dataset_status`` y ``extras_dataset_accrualPeriodicity``
+    guardan URIs como valor. Esta función busca el ``label`` correspondiente en
+    las ``choices`` del schema de scheming. Si no lo encuentra (o el campo no es
+    de scheming), devuelve el valor sin modificar.
+    """
+    if not value:
+        return value
+    field_name = facet_name
+    for prefix in ("vocab_", "extras_"):
+        if field_name.startswith(prefix):
+            field_name = field_name[len(prefix):]
+            break
+    try:
+        schema = toolkit.h.scheming_get_dataset_schema("dataset")
+    except Exception:
+        return value
+    if not schema:
+        return value
+    for field in schema.get("dataset_fields", []):
+        if field.get("field_name") != field_name:
+            continue
+        for choice in field.get("choices") or []:
+            if choice.get("value") == value:
+                label = choice.get("label")
+                if isinstance(label, dict):
+                    try:
+                        return toolkit.h.scheming_language_text(label)
+                    except Exception:
+                        return label.get("es") or label.get("en") or value
+                return label or value
+    return value
+
+
 # ── Registry ──
 
 def get_helpers() -> dict[str, Any]:
@@ -216,4 +252,6 @@ def get_helpers() -> dict[str, Any]:
         "gobar_format_date": gobar_format_date,
         "gobar_productos_list": gobar_productos_list,
         "gobar_comunidad_list": gobar_comunidad_list,
+        # Facetas
+        "gobar_facet_label": gobar_facet_label,
     }

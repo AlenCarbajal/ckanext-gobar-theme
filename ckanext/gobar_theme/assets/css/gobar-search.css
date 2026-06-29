@@ -1,0 +1,332 @@
+/* ==========================================================================
+   GOBAR SEARCH — facetas colapsables de la búsqueda de datasets + publicador
+   ========================================================================== */
+
+/* Quita el recuadro/encabezado pesado de .module de CKAN core en las facetas */
+.gobar-facet.module {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  margin-bottom: 0;
+}
+
+.gobar-facet .gobar-facet-details {
+  border-bottom: 1px solid var(--gobar-gris-claro, #e0e0e0);
+}
+
+/* ── Encabezado clickeable (summary) ── */
+.gobar-facet .gobar-facet-summary {
+  cursor: pointer;
+  list-style: none;            /* oculta el marcador nativo (Firefox) */
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 0.5rem;
+  user-select: none;
+  transition: color 0.15s ease;
+}
+
+.gobar-facet .gobar-facet-summary:hover {
+  color: var(--gobar-primary, #6A1B99);
+}
+
+.gobar-facet .gobar-facet-summary::-webkit-details-marker {
+  display: none;              /* oculta el triángulo nativo (WebKit/Blink) */
+}
+
+/* Título: resetea el estilo de .module-heading de core (fondo gris, borde) */
+.gobar-facet .gobar-facet-summary .module-heading {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-titulos, Georgia, serif);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: inherit;
+}
+
+/* Caret hecho con bordes (sin depender de la fuente de íconos) */
+.gobar-facet .gobar-facet-summary::after {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: 0.75rem;
+  border-right: 2px solid var(--gobar-gris, #888);
+  border-bottom: 2px solid var(--gobar-gris, #888);
+  transform: translateY(-2px) rotate(45deg);   /* apunta hacia abajo */
+  transition: transform 0.2s ease;
+}
+
+.gobar-facet .gobar-facet-details[open] > .gobar-facet-summary::after {
+  transform: translateY(2px) rotate(225deg);    /* apunta hacia arriba */
+}
+
+.gobar-facet .gobar-facet-summary:hover::after {
+  border-color: var(--gobar-primary, #6A1B99);
+}
+
+/* ── Lista de items de la faceta ── */
+.gobar-facet nav .nav-facet {
+  margin: 0 0 0.4rem;
+  padding: 0;
+  border: none;
+}
+
+/* Quita las líneas punteadas que CKAN core (mixin simple-item) pone como
+   border-bottom dotted en cada <li> de faceta. !important para ganarle a la
+   regla de core sin importar especificidad. NO afecta al caret (::after) ni al
+   separador de grupo (.gobar-facet-details). */
+.gobar-facet .nav-facet > li,
+.gobar-facet .nav-facet .nav-item,
+.gobar-facet .nav-facet .nav-item:last-child,
+.gobar-facet .module-content,
+.gobar-facet .module-footer {
+  border: 0 !important;
+  background: none;
+}
+
+.gobar-facet nav .nav-facet .nav-item > a {
+  padding: 0.3rem 0.5rem;
+  border: 0 !important;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.4rem;
+}
+
+/* El nombre del item (p. ej. organización) se muestra completo y envuelve */
+.gobar-facet nav .nav-facet .item-label {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.gobar-facet nav .nav-facet .nav-item > a:hover {
+  background: var(--gobar-gris-bg, #f2f2f2);
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.gobar-facet .module-footer {
+  padding: 0 0.5rem 0.5rem;
+}
+
+.gobar-facet .module-content.empty {
+  padding: 0.1rem 0.5rem 0.7rem;
+  margin: 0;
+  color: var(--gobar-gris, #888);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   TARJETAS DE DATASET (lista de búsqueda)
+   ========================================================================== */
+.dataset-list.dataset-list {
+  margin: 0;
+}
+
+.dataset-list .dataset-item {
+  list-style: none;
+  background: var(--gobar-blanco, #fff);
+  border: 1px solid var(--gobar-gris-claro, #e3e3e3);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.dataset-list .dataset-item:hover {
+  border-color: var(--gobar-celeste, #2897D4);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+  transform: translateY(-2px);
+}
+
+/* Encabezado: título (izq) + chip de supertheme (der) */
+.dataset-list .dataset-item .gobar-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dataset-list .dataset-item .dataset-heading {
+  font-family: var(--font-titulos, Georgia, serif);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin: 0;
+  flex: 1;
+}
+
+.dataset-list .dataset-item .dataset-heading a {
+  color: var(--gobar-primary-darker, #2E1065);
+}
+
+.dataset-list .dataset-item .dataset-heading a:hover,
+.dataset-list .dataset-item .dataset-heading a:focus {
+  color: var(--gobar-azul, #0072BC);
+}
+
+/* Nodo (organización): una línea, atenuada */
+.dataset-list .dataset-item .gobar-card-node {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--gobar-gris, #888);
+}
+
+/* Publicador (organismo): más chico y liviano que el nodo */
+.dataset-list .dataset-item .gobar-card-publisher {
+  margin: 0.05rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #a3a3a3;
+}
+
+/* Descripción */
+.dataset-list .dataset-item .gobar-card-notes {
+  color: var(--gobar-gris-oscuro, #555);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}
+
+.dataset-list .dataset-item .dataset-content > p.empty {
+  color: var(--gobar-gris, #888);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0;
+}
+
+/* ── Chip de supertheme (acrónimo, compacto) ── */
+.gobar-card-themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  flex: none;
+}
+
+.gobar-theme-tag {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--gobar-primary-dark, #4A1472);
+  background: #efe6f7;
+  border: 1px solid #ddc9ec;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ── Pie: formatos (izq) + estado (der), separados por divisor ── */
+.dataset-list .dataset-item .gobar-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.85rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--gobar-gris-claro, #ececec);
+}
+
+/* Formatos: solo layout. Los colores por formato los pone CKAN core con
+   .badge[data-format=...] (colores claros por categoría). */
+.dataset-list .dataset-item .dataset-resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.dataset-list .dataset-item .dataset-resources li {
+  margin: 0;
+}
+
+/* Estado del dataset (derecha del pie), con punto de color */
+.gobar-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--gobar-gris-oscuro, #555);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.gobar-card-status::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--gobar-verde, #2E7D33);
+}
+
+.gobar-card-status[data-status="desactualizado"]::before {
+  background: var(--gobar-amarillo, #F9A822);
+}
+
+.gobar-card-status[data-status="sin mantenimiento"]::before {
+  background: var(--gobar-rojo, #C62828);
+}
+
+/* ==========================================================================
+   PAGINACIÓN (lista de búsqueda)
+   ========================================================================== */
+.pagination-wrapper {
+  margin: 1.5rem 0 0.5rem;
+}
+
+.pagination {
+  gap: 0.3rem;
+  align-items: center;
+}
+
+/* Dimensiones FIJAS e iguales para todos los botones (números, …, flechas),
+   así no varían según el contenido. Contenido centrado con flex. */
+.pagination .page-item .page-link,
+.pagination .page-item > a,
+.pagination li > a {
+  box-sizing: border-box;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gobar-gris-oscuro, #555);
+  background: var(--gobar-blanco, #fff);
+  border: 1px solid var(--gobar-gris-claro, #e3e3e3);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pagination .page-item .page-link:hover,
+.pagination li > a:hover {
+  color: var(--gobar-blanco, #fff);
+  background: var(--gobar-celeste, #2897D4);
+  border-color: var(--gobar-celeste, #2897D4);
+  text-decoration: none;
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-item.active > a {
+  color: var(--gobar-blanco, #fff);
+  background: var(--gobar-primary, #6A1B99);
+  border-color: var(--gobar-primary, #6A1B99);
+}
+
+.pagination .disabled > a,
+.pagination .page-item.disabled .page-link {
+  color: var(--gobar-gris-claro, #ccc);
+  background: var(--gobar-blanco, #fff);
+  border-color: var(--gobar-gris-claro, #eee);
+  pointer-events: none;
+  cursor: default;
+}
