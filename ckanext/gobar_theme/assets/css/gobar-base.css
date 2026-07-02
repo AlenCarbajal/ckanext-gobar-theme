@@ -39,8 +39,12 @@ h1,h2,h3,h4,h5,h6,.page-heading { font-family: var(--font-titulos) !important; f
 a { color: var(--gobar-primary); }
 a:hover,a:focus { color: var(--gobar-primary); }
 
-/* ── NAVBAR ── */
-.navbar,.masthead { background-color: var(--gobar-primary) !important; border: none; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+/* ── NAVBAR ──
+   El color y la sombra van SOLO en .masthead (ancho completo). El .navbar
+   vive adentro, al ancho del container: si también lleva fondo/sombra se ve
+   como una segunda franja con otra textura dentro del header. */
+.masthead { background-color: var(--gobar-primary) !important; border: none; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.masthead .navbar, .navbar { background: transparent !important; border: none; box-shadow: none; }
 .navbar .navbar-brand { font-family: var(--font-cuerpo); font-weight: 700; font-size: 18px; color: var(--gobar-blanco)!important; }
 
 /* Alineación vertical del navbar */
