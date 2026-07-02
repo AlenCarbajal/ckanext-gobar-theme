@@ -186,7 +186,8 @@ ul.hierarchy-tree li.highlighted > a {
   position: relative;
   list-style: none;
   background: var(--gobar-blanco);
-  border: 1px solid var(--gobar-primary);
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px rgba(33,45,81,.08);
   border-radius: 8px;
   padding: 1.25rem 1rem;
   text-align: center;

@@ -130,7 +130,7 @@
 .dataset-list .dataset-item {
   list-style: none;
   background: var(--gobar-blanco, #fff);
-  border: 1px solid var(--gobar-primary, #393793);
+  border: 1px solid transparent;
   border-radius: 10px;
   padding: 1.1rem 1.25rem;
   margin-bottom: 1rem;
@@ -140,7 +140,7 @@
 }
 
 .dataset-list .dataset-item:hover {
-  border-color: var(--gobar-accent, #B369ED);
+  border-color: var(--gobar-primary, #393793);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
   transform: translateY(-2px);
 }
