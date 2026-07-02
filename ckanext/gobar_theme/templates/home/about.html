@@ -1,0 +1,54 @@
+{% ckan_extends %}
+
+{% block subtitle %}Acerca{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active"><a href="{{ h.url_for('home.about') }}">Acerca</a></li>
+{% endblock %}
+
+{% block about %}
+  <h1 class="page-heading">Acerca</h1>
+
+  <p>
+    Desde la Dirección de Datos Abiertos, asistimos a los organismos
+    gubernamentales nacionales, provinciales y municipales en la
+    implementación de estrategias de apertura de sus datos, generando
+    estándares, procedimientos, buenas prácticas y normativas con los
+    siguientes objetivos:
+  </p>
+
+  <ul>
+    <li>
+      Evaluar y analizar activos con el objetivo de hacer recomendaciones y
+      sugerencias en la calidad de la información brindada así como en sus
+      metadatos.
+    </li>
+    <li>
+      Aportar servicios y soluciones innovadoras que permitan abrir datos
+      públicos, crear nuevas oportunidades de desarrollo, generar valor y
+      beneficios en el uso y reutilización de la información.
+    </li>
+    <li>
+      Liderar, coordinar y generar espacios de discusión con referentes de
+      datos abiertos provenientes de organismos públicos y de la sociedad
+      civil.
+    </li>
+    <li>
+      Promover la colaboración entre el Estado y la ciudadanía, impulsando la
+      transparencia activa, la rendición de cuentas y las políticas públicas
+      basadas en evidencia.
+    </li>
+  </ul>
+
+  <h2>¿Qué productos brindamos?</h2>
+
+  <p>
+    Con el objeto de cumplir con las solicitudes de información por parte de
+    la ciudadanía, así como impulsar activamente la apertura de datos en los
+    organismos nacionales, desarrollamos y ponemos a disposición los
+    siguientes productos.
+  </p>
+
+  <h2>Sobre CKAN</h2>
+  {% snippet 'home/snippets/about_text.html' %}
+{% endblock %}

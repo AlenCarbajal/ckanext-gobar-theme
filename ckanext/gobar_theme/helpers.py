@@ -140,12 +140,6 @@ def gobar_comunidad_list() -> list[dict[str, str]]:
             "url": "https://infra.datos.gob.ar/vocabulario/",
         },
         {
-            "title": "INDAP",
-            "description": "Programa que buscará fortalecer las bases sobre las cuales se construyen las políticas de apertura de datos en la República Argentina.",
-            "icon": "fa fa-bar-chart",
-            "url": "https://www.argentina.gob.ar/indap",
-        },
-        {
             "title": "Contacto",
             "description": "Escribinos con tus consultas, sugerencias o para sumarte a la comunidad.",
             "icon": "fa fa-envelope",

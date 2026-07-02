@@ -118,6 +118,24 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         facets["tags"] = toolkit._("Etiquetas")
         return facets
 
+    # IFacets exige también estos dos: CKAN los invoca en las páginas de
+    # grupo/organización y sin ellos esas vistas dan 500 (AttributeError).
+    def group_facets(
+        self,
+        facets_dict: "OrderedDict[str, Any]",
+        group_type: str,
+        package_type: str | None,
+    ) -> "OrderedDict[str, Any]":
+        return facets_dict
+
+    def organization_facets(
+        self,
+        facets_dict: "OrderedDict[str, Any]",
+        organization_type: str,
+        package_type: str | None,
+    ) -> "OrderedDict[str, Any]":
+        return facets_dict
+
     # ── IPackageController ──
     def before_dataset_index(
         self, pkg_dict: dict[str, Any]
