@@ -12,10 +12,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Datasets"
-msgstr "datasets"
+msgstr "Datasets"
 
 msgid "Dataset"
-msgstr "dataset"
+msgstr "Dataset"
 
 msgid "Add Dataset"
 msgstr "Agregar dataset"

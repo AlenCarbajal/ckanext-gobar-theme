@@ -11,12 +11,27 @@
   </a>
 {% endblock %}
 
+{# Nav propio (sin build_nav_main de core): orden y nombres fijados. #}
 {% block header_site_navigation_tabs %}
-  {{ super() }}
+  <li class="nav-item{% if request.path.startswith('/dataset') %} active{% endif %}">
+    <a class="nav-link" href="{{ h.url_for('dataset.search') }}">Datasets</a>
+  </li>
+  <li class="nav-item{% if request.path.startswith('/organization') %} active{% endif %}">
+    <a class="nav-link" href="{{ h.url_for('organization.index') }}">Organizaciones</a>
+  </li>
+  <li class="nav-item{% if request.path.startswith('/group') %} active{% endif %}">
+    <a class="nav-link" href="{{ h.url_for('group.index') }}">Temas</a>
+  </li>
   <li class="nav-item{% if '/recursos' in request.path %} active{% endif %}">
     <a class="nav-link" href="{{ h.url_for('recursos.recursos') }}">Recursos</a>
   </li>
   <li class="nav-item{% if '/series' in request.path %} active{% endif %}">
     <a class="nav-link" href="{{ h.url_for('series.series') }}">Series</a>
   </li>
+  <li class="nav-item{% if request.path.startswith('/about') %} active{% endif %}">
+    <a class="nav-link" href="{{ h.url_for('home.about') }}">Acerca</a>
+  </li>
 {% endblock %}
+
+{# Sin barra de búsqueda en el header: el buscador protagonista está en la home. #}
+{% block header_site_search %}{% endblock %}

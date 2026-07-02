@@ -104,12 +104,6 @@ def gobar_productos_list() -> list[dict[str, str]]:
             "url": "https://georef-ar-api.readthedocs.io",
         },
         {
-            "title": "INDAP",
-            "description": "Programa que buscará fortalecer las bases sobre las cuales se construyen las políticas de apertura de datos en la República Argentina.",
-            "logo": "images/Logo_INDAP_Color.png",
-            "url": "https://www.argentina.gob.ar/indap",
-        },
-        {
             "title": "Paquete de Apertura de Datos",
             "description": "Herramientas y guías para publicar datos abiertos de calidad.",
             "logo": "images/Logo_Paqueta-Apertura-Datos_Color.png",
@@ -125,14 +119,8 @@ def gobar_productos_list() -> list[dict[str, str]]:
 
 
 def gobar_comunidad_list() -> list[dict[str, str]]:
-    """Retorna recursos de la comunidad de datos abiertos."""
+    """Retorna la sección "Documentación y otros" de la página Recursos."""
     return [
-        {
-            "title": "Foro de Datos Abiertos",
-            "description": "Espacio de discusión para la comunidad de datos abiertos de Argentina.",
-            "icon": "fa fa-comments",
-            "url": "https://groups.google.com/g/datos-argentina",
-        },
         {
             "title": "GitHub datosgobar",
             "description": "Repositorios públicos con código, estándares y documentación técnica.",
@@ -140,16 +128,22 @@ def gobar_comunidad_list() -> list[dict[str, str]]:
             "url": "https://github.com/datosgobar",
         },
         {
-            "title": "Estándares de Datos",
-            "description": "Guías y manuales para publicar datos de calidad siguiendo buenas prácticas.",
+            "title": "Perfil de Metadatos",
+            "description": "Especificación del perfil de metadatos para catálogos de datos abiertos de Argentina.",
             "icon": "fa fa-book",
-            "url": "https://datosgobar.github.io/paquete-apertura-datos/",
+            "url": "https://datosgobar.github.io/paquete-apertura-datos/perfil-metadatos/",
         },
         {
-            "title": "Capacitaciones",
-            "description": "Materiales y recursos de formación para publicadores y reutilizadores de datos.",
-            "icon": "fa fa-graduation-cap",
-            "url": "https://www.argentina.gob.ar/datos/capacitaciones",
+            "title": "Vocabularios & Codelists",
+            "description": "Vocabularios controlados y listas de códigos de referencia para publicar datos.",
+            "icon": "fa fa-tags",
+            "url": "https://infra.datos.gob.ar/vocabulario/",
+        },
+        {
+            "title": "INDAP",
+            "description": "Programa que buscará fortalecer las bases sobre las cuales se construyen las políticas de apertura de datos en la República Argentina.",
+            "icon": "fa fa-bar-chart",
+            "url": "https://www.argentina.gob.ar/indap",
         },
         {
             "title": "Contacto",
