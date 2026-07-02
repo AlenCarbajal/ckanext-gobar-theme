@@ -41,3 +41,6 @@ msgstr[1] ""
 
 msgid "No datasets found"
 msgstr ""
+
+msgid "Dataset extent"
+msgstr "Extensión espacial"
