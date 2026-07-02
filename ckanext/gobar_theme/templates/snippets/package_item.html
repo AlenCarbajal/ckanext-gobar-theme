@@ -69,7 +69,10 @@
 
   {% set has_res = package.resources and not hide_resources %}
   {% set status_label = h.gobar_facet_label('dataset_status', package.dataset_status) if package.dataset_status else '' %}
-  {% if has_res or status_label %}
+  {# El estado solo se muestra cuando NO es el estado "normal" (actualizado):
+     se exhibe únicamente para estados marcados (desactualizado / sin mantenimiento). #}
+  {% set show_status = status_label and status_label|lower not in ['actualizado'] %}
+  {% if has_res or show_status %}
     <div class="gobar-card-footer">
       {% block resources %}
         {% if package.resources and not hide_resources %}
@@ -82,7 +85,7 @@
           </ul>
         {% endif %}
       {% endblock %}
-      {% if status_label %}
+      {% if show_status %}
         <span class="gobar-card-status" data-status="{{ status_label }}">{{ status_label }}</span>
       {% endif %}
     </div>
