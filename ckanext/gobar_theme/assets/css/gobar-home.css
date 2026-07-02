@@ -4,10 +4,12 @@
    con ícono, destacados, organizaciones y franja API.
    ========================================================================== */
 
-/* ── Layout full-width ── */
-body.homepage .wrapper > .row { display: block; }
-body.homepage .wrapper > .row > .primary { width: 100%; max-width: 100%; float: none; padding: 0; }
-body.homepage .wrapper { padding: 0; }
+/* ── Layout full-width ──
+   display:block anula el flex column-reverse que core aplica a .wrapper en
+   mobile (pensado para mandar la sidebar de filtros abajo): en la home no hay
+   sidebar y lo que terminaba invertido era el orden de las secciones. */
+body.homepage .wrapper { padding: 0; display: block; }
+body.homepage .primary { width: 100%; max-width: 100%; float: none; padding: 0; }
 body.homepage .main { padding: 0; }
 
 /* ── Hero claro ── */

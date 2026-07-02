@@ -2,6 +2,10 @@
 
 {% block subtitle %}{{ _('Datos Abiertos de Argentina') }}{% endblock %}
 
+{# Los estilos de layout de la home (gobar-home.css) scopean por body.homepage;
+   core no pone ninguna clase en <body>, así que la agregamos acá. #}
+{% block bodytag %}{{ super() }} class="homepage"{% endblock %}
+
 {# Agregar assets del theme #}
 {% block styles %}
   {{ super() }}
