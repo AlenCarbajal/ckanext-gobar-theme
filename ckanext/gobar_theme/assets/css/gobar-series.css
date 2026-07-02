@@ -28,7 +28,7 @@ body.series-page #series-explorer-wrapper *::after { border-right: none !importa
 /* ── Tarjetas ── */
 #series-explorer-wrapper .series-card { background: #fff !important; border: 1px solid #E0E0E0 !important; border-left: 4px solid var(--gobar-primary) !important; border-radius: 8px !important; padding: 0 !important; margin-bottom: 16px !important; box-shadow: 0 1px 4px rgba(0,0,0,.06) !important; transition: box-shadow .2s, transform .15s !important; overflow: hidden !important; user-select: none !important; -webkit-user-select: none !important; }
 #series-explorer-wrapper .series-card:active { background: #f7f4fb !important; }
-#series-explorer-wrapper .series-card:hover { box-shadow: 0 4px 16px rgba(106,27,153,.12) !important; transform: translateY(-1px) !important; text-decoration: none !important; }
+#series-explorer-wrapper .series-card:hover { box-shadow: 0 4px 16px rgba(57,55,147,.12) !important; transform: translateY(-1px) !important; text-decoration: none !important; }
 #series-explorer-wrapper a:hover,
 #series-explorer-wrapper a:hover * { text-decoration: none !important; }
 #series-explorer-wrapper .p-headers { padding: 16px 20px 12px !important; border-bottom: none !important; }

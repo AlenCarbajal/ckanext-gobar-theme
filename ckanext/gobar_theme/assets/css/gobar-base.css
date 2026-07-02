@@ -3,42 +3,44 @@
    Cargado en todas las páginas
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
-/* ── VARIABLES ── */
+/* ── VARIABLES ──
+   Paleta e identidad de marca "Datos Abiertos" (Dirección de Datos Abiertos):
+   navy institucional + índigo + violeta vibrante, Montserrat en todos los
+   pesos (sin familia serif adicional). Ver skill gobar-design-system. */
 :root {
-  --gobar-azul: #0072BC;
-  --gobar-celeste: #2897D4;
+  --gobar-navy: #212D51;
+  --gobar-indigo: #393793;
+  --gobar-indigo-dark: #2D2B73;
+  --gobar-violeta: #B369ED;
+  --gobar-violeta-light: #C282F0;
   --gobar-verde: #2E7D33;
-  --gobar-amarillo: #F9A822;
-  --gobar-naranja: #F4772B;
+  --gobar-amarillo: #E7BA61;
   --gobar-rojo: #C62828;
-  --gobar-fucsia: #EC407A;
-  --gobar-violeta: #6A1B99;
-  --gobar-turquesa: #37BCD2;
-  --gobar-primary: var(--gobar-violeta);
-  --gobar-primary-dark: #4A1472;
-  --gobar-primary-darker: #2E1065;
-  --gobar-accent: var(--gobar-turquesa);
-  --gobar-accent-dark: #0D3B4F;
+  --gobar-primary: var(--gobar-indigo);
+  --gobar-primary-dark: var(--gobar-indigo-dark);
+  --gobar-primary-darker: var(--gobar-navy);
+  --gobar-accent: var(--gobar-violeta);
+  --gobar-accent-dark: var(--gobar-navy);
   --gobar-negro: #333333;
   --gobar-gris-oscuro: #555555;
   --gobar-gris: #888888;
   --gobar-gris-claro: #CCCCCC;
   --gobar-gris-bg: #F2F2F2;
   --gobar-blanco: #FFFFFF;
-  --font-titulos: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-titulos: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   --font-cuerpo: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* ── BASE ── */
 body { font-family: var(--font-cuerpo) !important; color: var(--gobar-negro); line-height: 1.6; }
 h1,h2,h3,h4,h5,h6,.page-heading { font-family: var(--font-titulos) !important; font-weight: 600; color: var(--gobar-negro); }
-a { color: var(--gobar-azul); }
+a { color: var(--gobar-primary); }
 a:hover,a:focus { color: var(--gobar-primary); }
 
 /* ── NAVBAR ── */
-.navbar,.masthead { background-color: var(--gobar-primary-darker) !important; border: none; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.navbar,.masthead { background-color: var(--gobar-primary) !important; border: none; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
 .navbar .navbar-brand { font-family: var(--font-cuerpo); font-weight: 700; font-size: 18px; color: var(--gobar-blanco)!important; }
 
 /* Alineación vertical del navbar */
@@ -76,9 +78,20 @@ a:hover,a:focus { color: var(--gobar-primary); }
 .navbar .search-form input[type="text"]::placeholder { color: rgba(255,255,255,.4); }
 
 /* ── FOOTER ── */
-.site-footer,footer { background-color: var(--gobar-primary-darker)!important; color: rgba(255,255,255,.5); font-family: var(--font-cuerpo); }
-.site-footer a,footer a { color: rgba(255,255,255,.6)!important; }
-.site-footer a:hover,footer a:hover { color: var(--gobar-blanco)!important; text-decoration: none; }
+.site-footer,footer.site-footer { background-color: var(--gobar-primary-dark)!important; border-top: 4px solid var(--gobar-accent); color: rgba(255,255,255,.75); font-family: var(--font-cuerpo); font-size: 14px; padding: 48px 0 32px; }
+.site-footer a { color: rgba(255,255,255,.75)!important; text-decoration: none; }
+.site-footer a:hover { color: var(--gobar-blanco)!important; text-decoration: underline; }
+.gobar-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
+.gobar-footer-brand img { height: 32px; display: block; }
+.gobar-footer-brand p { margin: 14px 0 0; max-width: 26em; line-height: 1.55; }
+.gobar-footer-grid h3 { color: var(--gobar-blanco); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 14px; }
+.gobar-footer-grid ul { list-style: none; margin: 0; padding: 0; }
+.gobar-footer-grid li { margin-bottom: 8px; }
+.gobar-footer-legal { margin-top: 36px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.gobar-footer-legal img { height: 52px; display: block; margin-left: auto; }
+@media (max-width: 768px) {
+  .gobar-footer-grid { grid-template-columns: 1fr 1fr; }
+}
 
 /* Selector de idioma del footer: el footer fuerza color de texto casi blanco,
    y el widget (select2/autocomplete) lo hereda → texto blanco sobre fondo
@@ -95,14 +108,8 @@ footer .lang-select .select2-chosen { color: #333!important; }
 .btn-primary:hover,.btn-primary:focus { background-color: var(--gobar-primary-dark)!important; border-color: var(--gobar-primary-dark)!important; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 991px) {
-  .gobar-hero h1 { font-size: 28px; }
-  .gobar-counters { gap: 16px; }
-  .gobar-counter-number { font-size: 30px; }
-}
 @media (max-width: 768px) {
-  .gobar-hero { padding: 60px 0 40px; }
-  .gobar-section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .gobar-hero { padding: 48px 0 40px; }
   .gobar-org-card { flex: 0 0 140px; }
 }
 
@@ -114,4 +121,106 @@ footer .lang-select .select2-chosen { color: #333!important; }
   height: auto !important;
   aspect-ratio: 20 / 19;
   min-height: 260px;
+}
+
+/* ── ORGANIZACIONES / GRUPOS ──
+   /organization usa el árbol de ckanext-hierarchy (hierarchy_theme.css: bullets,
+   líneas punteadas, link teal) en vez del grid de tarjetas del resto del sitio.
+   /group usa el grid nativo de CKAN (.media-grid), sin estilo propio. Ambos se
+   llevan acá a la línea visual de tarjetas del theme. */
+#publisher-tree {
+  background: var(--gobar-blanco);
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: .25rem 1rem;
+}
+ul.hierarchy-tree-top,
+ul.hierarchy-tree {
+  list-style: none !important;
+  background: none !important;
+  margin: 0;
+  padding: 0;
+}
+ul.hierarchy-tree { margin-left: 1.25rem; }
+ul.hierarchy-tree-top > li,
+ul.hierarchy-tree li {
+  background: none !important;
+  padding: 0 !important;
+  border-bottom: 1px solid var(--gobar-gris-bg);
+}
+ul.hierarchy-tree-top > li:last-child { border-bottom: none; }
+ul.hierarchy-tree-top li > a,
+ul.hierarchy-tree li > a {
+  display: block;
+  padding: .6rem .25rem;
+  font-family: var(--font-cuerpo);
+  font-weight: 500;
+  color: var(--gobar-primary) !important;
+  text-decoration: none;
+  text-shadow: none !important;
+}
+ul.hierarchy-tree-top li > a:hover,
+ul.hierarchy-tree li > a:hover {
+  color: var(--gobar-primary-dark) !important;
+  background: var(--gobar-gris-bg);
+  border-radius: 6px;
+}
+ul.hierarchy-tree-top li.highlighted > a,
+ul.hierarchy-tree li.highlighted > a {
+  font-weight: 700;
+}
+
+.media-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+.media-grid .media-item {
+  position: relative;
+  list-style: none;
+  background: var(--gobar-blanco);
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+.media-grid .media-item:hover {
+  border-color: var(--gobar-primary);
+  box-shadow: 0 4px 12px rgba(57, 55, 147, .1);
+  transform: translateY(-2px);
+}
+.media-grid .media-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 0 auto .75rem;
+  border-radius: 6px;
+}
+.media-grid .media-heading {
+  font-family: var(--font-cuerpo);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--gobar-negro);
+  margin: 0 0 .35rem;
+}
+.media-grid .media-description {
+  font-size: .8rem;
+  color: var(--gobar-gris-oscuro);
+  margin: 0 0 .5rem;
+}
+.media-grid .count {
+  display: block;
+  font-size: .75rem;
+  color: var(--gobar-gris);
+  font-weight: 500;
+}
+.media-grid .media-view {
+  position: absolute;
+  inset: 0;
+  text-indent: -9999px;
+  overflow: hidden;
 }

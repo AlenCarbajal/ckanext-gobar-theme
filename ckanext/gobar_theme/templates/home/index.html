@@ -28,8 +28,8 @@
       </h1>
 
       <p class="lead">
-        Ponemos a tu alcance datos públicos en formatos abiertos para que 
-        puedas usarlos, modificarlos y compartirlos. Estos datos son tuyos. 
+        Ponemos a tu alcance datos públicos en formatos abiertos para que
+        puedas usarlos, modificarlos y compartirlos. Estos datos son tuyos.
         Podés crear visualizaciones, aplicaciones y herramientas con ellos.
       </p>
 
@@ -58,14 +58,10 @@
           <div class="gobar-counter-label">Datasets publicados</div>
         </div>
 
-        <div class="gobar-counter-divider"></div>
-
         <div class="gobar-counter">
           <div class="gobar-counter-number" data-target="{{ h.gobar_organization_count() }}">0</div>
           <div class="gobar-counter-label">Organizaciones con datos</div>
         </div>
-
-        <div class="gobar-counter-divider"></div>
 
         <div class="gobar-counter">
           <div class="gobar-counter-number" data-target="{{ h.gobar_group_count() }}">0</div>
@@ -76,7 +72,83 @@
   </div>
 </section>
 
-{# ── ORGANIZACIONES CAROUSEL ── #}
+{# ── CATEGORÍAS ── #}
+{% set groups = h.gobar_groups_with_details() %}
+<section class="gobar-categories">
+  <div class="container">
+    <div class="gobar-section-header">
+      <div>
+        <div class="gobar-section-label">Explorá por tema</div>
+        <h2 class="gobar-section-title">¿Qué datos estás buscando?</h2>
+      </div>
+      <a href="{{ h.url_for('group.index') }}" class="gobar-section-link">
+        Ver las {{ groups|length }} categorías →
+      </a>
+    </div>
+
+    <div class="gobar-cat-grid">
+      {% for group in groups %}
+        <a href="{{ h.url_for('dataset.search', groups=group.name) }}"
+           class="gobar-cat-card">
+          {% if group.image_display_url %}
+            <img src="{{ group.image_display_url }}"
+                 alt="" />
+          {% else %}
+            <div class="cat-icon-placeholder">
+              <i class="fa fa-folder-open"></i>
+            </div>
+          {% endif %}
+          <div class="gobar-cat-card-name">{{ group.display_name }}</div>
+          <div class="gobar-cat-card-count">{{ group.package_count }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── DATASETS MÁS CONSULTADOS ── #}
+<section class="gobar-featured">
+  <div class="container">
+    <div class="gobar-section-header">
+      <div>
+        <div class="gobar-section-label">Destacados</div>
+        <h2 class="gobar-section-title">Los más consultados</h2>
+      </div>
+      <a href="{{ h.url_for('dataset.search') }}" class="gobar-section-link">
+        Ver los {{ h.gobar_dataset_count() }} datasets →
+      </a>
+    </div>
+
+    <div class="gobar-featured-grid">
+      {% set recent_pkgs = h.gobar_featured_datasets(6) %}
+      {% if recent_pkgs %}
+        {% for pkg in recent_pkgs %}
+          <a href="{{ h.url_for('dataset.read', id=pkg.name) }}"
+             class="gobar-featured-card">
+            <div class="gobar-featured-title">{{ pkg.dataset_title }}</div>
+            <div class="gobar-featured-org">
+              {{ pkg.organization.title if pkg.organization else 'Sin organización' }}
+            </div>
+            <div class="gobar-featured-desc">
+              {{ h.truncate(pkg.notes or '', 120) }}
+            </div>
+            {% if pkg.resources %}
+              <div class="gobar-featured-tags">
+                {% for res in pkg.resources[:3] %}
+                  <span class="gobar-featured-tag">
+                    {{ res.format | upper if res.format else 'N/A' }}
+                  </span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{# ── ORGANIZACIONES ── #}
 {% set orgs = h.gobar_organizations_with_details(20) %}
 {% if orgs %}
 <section class="gobar-orgs-carousel">
@@ -87,7 +159,7 @@
         <h2 class="gobar-section-title">Organizaciones</h2>
       </div>
       <a href="{{ h.url_for('organization.index') }}" class="gobar-section-link">
-        Ver todas →
+        Ver las {{ h.gobar_organization_count() }} organizaciones →
       </a>
     </div>
 
@@ -122,121 +194,15 @@
 </section>
 {% endif %}
 
-{# ── CATEGORÍAS ── #}
-<section class="gobar-categories">
+{# ── FRANJA API (para desarrolladores) ── #}
+<section class="gobar-api-banner">
   <div class="container">
-    <div class="gobar-section-header">
-      <div>
-        <div class="gobar-section-label">Explorar por tema</div>
-        <h2 class="gobar-section-title">Categorías</h2>
-      </div>
-      <a href="{{ h.url_for('dataset.search') }}" class="gobar-section-link">
-        Ver todos los datasets →
-      </a>
+    <div>
+      <div class="gobar-section-label">Para desarrolladores</div>
+      <h2>Todo el catálogo, también por API</h2>
+      <p>Cada dataset de este portal se puede consultar de forma programática, sin claves ni límites para uso razonable.</p>
     </div>
-
-    <div class="gobar-cat-grid">
-      {% set groups = h.gobar_groups_with_details() %}
-      {% for group in groups %}
-        <a href="{{ h.url_for('dataset.search', groups=group.name) }}"
-           class="gobar-cat-card">
-          {% if group.image_display_url %}
-            <img src="{{ group.image_display_url }}"
-                 alt="{{ group.display_name }}" />
-          {% else %}
-            <div class="cat-icon-placeholder">
-              <i class="fa fa-folder-open"></i>
-            </div>
-          {% endif %}
-          <div class="gobar-cat-card-name">{{ group.display_name }}</div>
-          <div class="gobar-cat-card-count">{{ group.package_count }} datasets</div>
-        </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-{# ── DATASETS RECIENTES ── #}
-<section class="gobar-featured">
-  <div class="container">
-    <div class="gobar-section-header">
-      <div>
-        <div class="gobar-section-label">Destacados</div>
-        <h2 class="gobar-section-title">Datasets recientes</h2>
-      </div>
-      <a href="{{ h.url_for('dataset.search', sort='metadata_created desc') }}"
-         class="gobar-section-link">
-        Explorar catálogo →
-      </a>
-    </div>
-
-    <div class="gobar-featured-grid">
-      {% set recent_pkgs = h.gobar_featured_datasets(3) %}
-      {% if recent_pkgs %}
-        {% for pkg in recent_pkgs %}
-          <a href="{{ h.url_for('dataset.read', id=pkg.name) }}"
-             class="gobar-featured-card">
-            <div class="gobar-featured-org">
-              {{ pkg.organization.title if pkg.organization else 'Sin organización' }}
-            </div>
-            <div class="gobar-featured-title">{{ pkg.dataset_title }}</div>
-            <div class="gobar-featured-desc">
-              {{ h.truncate(pkg.notes or '', 120) }}
-            </div>
-            {% if pkg.resources %}
-              <div class="gobar-featured-tags">
-                {% for res in pkg.resources[:3] %}
-                  <span class="gobar-featured-tag">
-                    {{ res.format | upper if res.format else 'N/A' }}
-                  </span>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </a>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-{# ── HERRAMIENTAS ── #}
-<section class="gobar-tools">
-  <div class="container">
-    <div class="gobar-section-header">
-      <div>
-        <div class="gobar-section-label">Recursos</div>
-        <h2 class="gobar-section-title">Herramientas</h2>
-      </div>
-    </div>
-
-    <div class="gobar-tools-grid">
-      <a href="{{ h.url_for('dataset.search') }}" class="gobar-tool-card">
-        <h3>Explorar datasets</h3>
-        <p>
-          Buscá y descargá conjuntos de datos abiertos publicados por
-          organismos del Estado Nacional en formatos reutilizables.
-        </p>
-      </a>
-      <a href="{{ h.url_for('organization.index') }}" class="gobar-tool-card">
-        <h3>Nodos</h3>
-        <p>
-          Accedé a las distintas organizaciones que publican datos abiertos en el portal y explorá sus catálogos.
-        </p>
-      </a>
-      <a href="{{ h.url_for('group.index') }}" class="gobar-tool-card">
-        <h3>Categorías temáticas</h3>
-        <p>
-          Navegá los datos por área temática: economía, salud,
-          educación, transporte y más.
-        </p>
-      </a>
-      <a href="/apis" class="gobar-tool-card">
-        <h3>APIs y herramientas</h3>
-        <p>
-          Explorá el catálogo de APIs públicas, herramientas, desarrollos de la comunidad y recursos para usar los datos abiertos.
-        </p>
-      </a>
-    </div>
+    <a class="gobar-api-btn" href="/apis">Ver la documentación</a>
   </div>
 </section>
 {% endblock %}
