@@ -72,6 +72,9 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         toolkit.add_public_directory(config_, "public")
         # CORREGIDO: apunta a 'assets' donde está webassets.yml
         toolkit.add_resource("assets", "gobar_theme")
+        # Favicon oficial de argentina.gob.ar, servido desde el public/ del
+        # theme (el default de core es /base/images/ckan.ico).
+        config_["ckan.favicon"] = "/images/favicon.ico"
 
     # ── IBlueprint ──
     def get_blueprint(self) -> list:

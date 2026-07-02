@@ -180,9 +180,8 @@
             <img src="{{ org.image_display_url }}"
                  alt="{{ org.display_name }}" class="gobar-org-logo" />
           {% else %}
-            <div class="gobar-org-placeholder">
-              <i class="fa fa-building"></i>
-            </div>
+            <img src="{{ h.url_for_static('images/institucion.svg') }}"
+                 alt="" class="gobar-org-logo" />
           {% endif %}
           <div class="gobar-org-name">{{ org.display_name }}</div>
           <div class="gobar-org-count">{{ org.package_count }} datasets</div>
