@@ -26,7 +26,7 @@
 }
 
 .gobar-facet .gobar-facet-summary:hover {
-  color: var(--gobar-primary, #6A1B99);
+  color: var(--gobar-primary, #393793);
 }
 
 .gobar-facet .gobar-facet-summary::-webkit-details-marker {
@@ -65,7 +65,7 @@
 }
 
 .gobar-facet .gobar-facet-summary:hover::after {
-  border-color: var(--gobar-primary, #6A1B99);
+  border-color: var(--gobar-primary, #393793);
 }
 
 /* ── Lista de items de la faceta ── */
@@ -140,7 +140,7 @@
 }
 
 .dataset-list .dataset-item:hover {
-  border-color: var(--gobar-celeste, #2897D4);
+  border-color: var(--gobar-accent, #B369ED);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
   transform: translateY(-2px);
 }
@@ -162,12 +162,12 @@
 }
 
 .dataset-list .dataset-item .dataset-heading a {
-  color: var(--gobar-primary-darker, #2E1065);
+  color: var(--gobar-primary-darker, #212D51);
 }
 
 .dataset-list .dataset-item .dataset-heading a:hover,
 .dataset-list .dataset-item .dataset-heading a:focus {
-  color: var(--gobar-azul, #0072BC);
+  color: var(--gobar-primary, #393793);
 }
 
 /* Nodo (organización): una línea, atenuada */
@@ -214,9 +214,9 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--gobar-primary-dark, #4A1472);
-  background: #efe6f7;
-  border: 1px solid #ddc9ec;
+  color: var(--gobar-primary-dark, #2D2B73);
+  background: #ECEBF7;
+  border: 1px solid #D3D0EA;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -267,7 +267,7 @@
 }
 
 .gobar-card-status[data-status="desactualizado"]::before {
-  background: var(--gobar-amarillo, #F9A822);
+  background: var(--gobar-amarillo, #E7BA61);
 }
 
 .gobar-card-status[data-status="sin mantenimiento"]::before {
@@ -310,16 +310,16 @@
 .pagination .page-item .page-link:hover,
 .pagination li > a:hover {
   color: var(--gobar-blanco, #fff);
-  background: var(--gobar-celeste, #2897D4);
-  border-color: var(--gobar-celeste, #2897D4);
+  background: var(--gobar-primary-darker, #212D51);
+  border-color: var(--gobar-primary-darker, #212D51);
   text-decoration: none;
 }
 
 .pagination .page-item.active .page-link,
 .pagination .page-item.active > a {
   color: var(--gobar-blanco, #fff);
-  background: var(--gobar-primary, #6A1B99);
-  border-color: var(--gobar-primary, #6A1B99);
+  background: var(--gobar-primary, #393793);
+  border-color: var(--gobar-primary, #393793);
 }
 
 .pagination .disabled > a,
