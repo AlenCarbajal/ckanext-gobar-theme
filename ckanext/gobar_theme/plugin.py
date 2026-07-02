@@ -88,7 +88,10 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     def declare_config_options(
         self, declaration: Declaration, key: Key
     ) -> None:
-        declaration.declare(key.ckanext.gobar_theme.contact_email, "")
+        declaration.declare(
+            key.ckanext.gobar_theme.contact_email,
+            "datosargentina@sicyt.gob.ar",
+        )
         declaration.declare_int(
             key.ckanext.gobar_theme.featured_datasets_limit, 4
         )

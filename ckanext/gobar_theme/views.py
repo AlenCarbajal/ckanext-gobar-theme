@@ -123,12 +123,73 @@ def spatial_map():
     )
 
 
-@custom_pages.route("/contacto")
+CONTACT_TIPOS = (
+    "Errores e incidencias",
+    "Propuestas de mejora",
+    "Soporte",
+    "Sugerencias",
+)
+
+
+@custom_pages.route("/contacto", methods=["GET", "POST"])
 def contact():
-    return toolkit.render(
-        "custom_pages/contact.html",
-        extra_vars={"page_title": "Contacto"},
+    extra_vars: dict[str, Any] = {
+        "page_title": "Contacto",
+        "tipos": CONTACT_TIPOS,
+        "data": {},
+        "errors": {},
+    }
+    if toolkit.request.method != "POST":
+        return toolkit.render("custom_pages/contact.html", extra_vars=extra_vars)
+
+    form = toolkit.request.form
+    # Honeypot: campo invisible que los bots completan.
+    if form.get("website"):
+        return toolkit.redirect_to("custom_pages.contact")
+
+    data = {
+        k: (form.get(k) or "").strip()
+        for k in ("tipo", "nombre", "email", "asunto", "mensaje")
+    }
+    errors = {k: "Este campo es obligatorio" for k, v in data.items() if not v}
+    if "email" not in errors and "@" not in data["email"]:
+        errors["email"] = "Ingresá un email válido"
+    if "tipo" not in errors and data["tipo"] not in CONTACT_TIPOS:
+        errors["tipo"] = "Elegí un tipo de consulta"
+
+    if errors:
+        extra_vars.update(data=data, errors=errors)
+        return toolkit.render("custom_pages/contact.html", extra_vars=extra_vars)
+
+    import ckan.lib.mailer as mailer
+
+    recipient = toolkit.config.get(
+        "ckanext.gobar_theme.contact_email", "datosargentina@sicyt.gob.ar"
+    ) or "datosargentina@sicyt.gob.ar"
+    body = (
+        f"Tipo de consulta: {data['tipo']}\n"
+        f"Nombre: {data['nombre']}\n"
+        f"Email: {data['email']}\n\n"
+        f"{data['mensaje']}"
     )
+    try:
+        mailer.mail_recipient(
+            "Datos Argentina",
+            recipient,
+            subject=f"[Contacto datos.gob.ar] {data['asunto']}",
+            body=body,
+            headers={"Reply-To": data["email"]},
+        )
+    except Exception:
+        log.exception("Fallo el envío del formulario de contacto")
+        toolkit.h.flash_error(
+            "No pudimos enviar tu mensaje. Probá de nuevo más tarde."
+        )
+        extra_vars.update(data=data)
+        return toolkit.render("custom_pages/contact.html", extra_vars=extra_vars)
+
+    toolkit.h.flash_success("¡Gracias! Tu mensaje fue enviado.")
+    return toolkit.redirect_to("custom_pages.contact")
 
 
 @custom_pages.route("/api-docs")
