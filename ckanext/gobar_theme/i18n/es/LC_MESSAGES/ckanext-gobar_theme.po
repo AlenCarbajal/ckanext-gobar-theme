@@ -44,3 +44,15 @@ msgstr ""
 
 msgid "Dataset extent"
 msgstr "Extensión espacial"
+
+#: ckanext/spatial/assets/js/spatial_query.js:92
+msgid "Please draw query extent in the map:"
+msgstr "Dibuje la extensión de la consulta en el mapa"
+
+#: ckanext/spatial/assets/js/spatial_query.js:93
+msgid "Apply"
+msgstr "Aplicar"
+
+#: ckanext/spatial/assets/js/spatial_query.js:94
+msgid "Cancel"
+msgstr "Cancelar"

@@ -1,0 +1,26 @@
+# POT del dominio ckanext-gobar_theme.
+#
+# CKAN usa este archivo SOLO para decidir qué msgid entran al catálogo JS
+# (build_js_translations filtra por ocurrencias en archivos *.js). Por eso
+# acá van únicamente las cadenas usadas desde JavaScript; las overrides de
+# templates/server no necesitan estar listadas (ver README_i18n.md).
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-gobar-theme\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ckanext/spatial/assets/js/spatial_query.js:92
+msgid "Please draw query extent in the map:"
+msgstr ""
+
+#: ckanext/spatial/assets/js/spatial_query.js:93
+msgid "Apply"
+msgstr ""
+
+#: ckanext/spatial/assets/js/spatial_query.js:94
+msgid "Cancel"
+msgstr ""
