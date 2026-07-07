@@ -3,68 +3,308 @@
 # Este catálogo SOBRESCRIBE las traducciones de CKAN core para los mismos
 # msgid. El objetivo principal es mostrar "datasets" en lugar de
 # "Conjuntos de datos".
-#
 # CÓMO COMPLETARLO:
-#   1. Completá / ajustá cada "msgstr" con el texto deseado.
-#   2. Agregá cualquier otra cadena donde hoy aparezca "Conjuntos de datos"
-#      (copiá el msgid EXACTO en inglés tal como está en CKAN core).
-#   3. Devolvé este archivo; se compila con:  python setup.py compile_catalog
-#
-# NOTA: un "msgstr" vacío hace que se use el texto original (inglés). Para que
+# 1. Completá / ajustá cada "msgstr" con el texto deseado.
+# 2. Agregá cualquier otra cadena donde hoy aparezca "Conjuntos de datos"
+# (copiá el msgid EXACTO en inglés tal como está en CKAN core).
+# 3. Devolvé este archivo; se compila con:  python setup.py compile_catalog
+# NOTA: un "msgstr" vacío hace que se use el texto original (inglés). Para
+# que
 # el cambio tenga efecto, el msgstr debe tener contenido.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: ckanext-gobar-theme\n"
+"Project-Id-Version:  ckanext-gobar-theme\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-07 03:56+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es_AR\n"
+"Language-Team: es_AR <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_AR\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.15.0\n"
 
-msgid "Datasets"
-msgstr "Datasets"
+#: ckanext/gobar_theme/plugin.py:113
+msgid "Organizaciones"
+msgstr "Organizaciones"
 
+#: ckanext/gobar_theme/plugin.py:114
+msgid "Grupos"
+msgstr "Temas"
+
+#: ckanext/gobar_theme/plugin.py:115
+msgid "Formato"
+msgstr "Formato"
+
+#: ckanext/gobar_theme/plugin.py:116
+msgid "Estado"
+msgstr "Estado"
+
+#: ckanext/gobar_theme/plugin.py:117
+msgid "Frecuencia de actualización"
+msgstr "Frecuencia de actualización"
+
+#: ckanext/gobar_theme/plugin.py:120
+msgid "Provincia"
+msgstr "Provincia"
+
+#: ckanext/gobar_theme/plugin.py:121
+msgid "Etiquetas"
+msgstr "Etiquetas"
+
+#: ckanext/gobar_theme/views.py:640
+msgid "No encontramos esa serie de tiempo."
+msgstr "No encontramos esa serie de tiempo."
+
+#: ckanext/gobar_theme/logic/validators.py:6
+msgid "Required"
+msgstr "Obligatorio"
+
+#: ckanext/gobar_theme/templates/home/index.html:3
+msgid "Datos Abiertos de Argentina"
+msgstr "Datos Abiertos de Argentina"
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:2
+msgid "E.g. environment"
+msgstr "Ej: ambiente"
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:7
+msgid "Search data"
+msgstr "Buscá datos"
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:9
+msgid "Search datasets"
+msgstr "Buscar datasets"
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:12
+msgid "Search"
+msgstr "Buscar"
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:17
+msgid "Popular tags"
+msgstr "Etiquetas populares"
+
+#: ckanext/gobar_theme/templates/package/snippets/package_item.html:10
+#: ckanext/gobar_theme/templates/snippets/package_item.html:30
+msgid "Draft"
+msgstr "Borrador"
+
+#: ckanext/gobar_theme/templates/package/snippets/package_item.html:12
+#: ckanext/gobar_theme/templates/snippets/package_item.html:32
+msgid "Deleted"
+msgstr "Eliminado"
+
+#: ckanext/gobar_theme/templates/series/detail.html:20
+#: ckanext/gobar_theme/templates/series/index.html:58
+#: ckanext/gobar_theme/templates/series/index.html:70
+#: ckanext/gobar_theme/templates/series/index.html:108
+msgid "No se pudo conectar con la API de series. Reintentá más tarde."
+msgstr "No se pudo conectar con la API de series. Reintentá más tarde."
+
+#: ckanext/gobar_theme/templates/series/detail.html:23
+msgid "Ruta de navegación"
+msgstr "Ruta de navegación"
+
+#: ckanext/gobar_theme/templates/series/detail.html:24
+msgid "Series"
+msgstr "Series"
+
+#: ckanext/gobar_theme/templates/series/detail.html:41
+msgid "+ Agregar a comparación"
+msgstr "+ Agregar a comparación"
+
+#: ckanext/gobar_theme/templates/series/detail.html:42
+msgid "Descargar CSV"
+msgstr "Descargar CSV"
+
+#: ckanext/gobar_theme/templates/series/detail.html:51
+msgid "Metadata"
+msgstr "Metadatos"
+
+#: ckanext/gobar_theme/templates/series/detail.html:53
+msgid "Tema"
+msgstr "Tema"
+
+#: ckanext/gobar_theme/templates/series/detail.html:54
+msgid "Unidades"
+msgstr "Unidades"
+
+#: ckanext/gobar_theme/templates/series/detail.html:55
+msgid "Frecuencia"
+msgstr "Frecuencia"
+
+#: ckanext/gobar_theme/templates/series/detail.html:56
 msgid "Dataset"
 msgstr "Dataset"
 
-msgid "Add Dataset"
-msgstr "Agregar dataset"
+#: ckanext/gobar_theme/templates/series/detail.html:57
+msgid "Fecha de publicación"
+msgstr "Fecha de publicación"
 
-msgid "Edit Dataset"
-msgstr "Editar dataset"
+#: ckanext/gobar_theme/templates/series/detail.html:59
+msgid "Cobertura temporal"
+msgstr "Cobertura temporal"
 
-msgid "Search datasets..."
-msgstr "Buscar datasets..."
+#: ckanext/gobar_theme/templates/series/detail.html:62
+msgid "{n} valores"
+msgstr "{n} valores"
 
-msgid "There are no datasets that match this search"
-msgstr ""
+#: ckanext/gobar_theme/templates/series/detail.html:69
+msgid "Uso"
+msgstr "Uso"
 
-msgid "{number} dataset found for \"{query}\""
-msgid_plural "{number} datasets found for \"{query}\""
-msgstr[0] ""
-msgstr[1] ""
+#: ckanext/gobar_theme/templates/series/detail.html:72
+msgid "Último valor"
+msgstr "Último valor"
 
-msgid "{number} dataset found"
-msgid_plural "{number} datasets found"
-msgstr[0] ""
-msgstr[1] ""
+#: ckanext/gobar_theme/templates/series/detail.html:77
+msgid "Consultas últimos 90 días"
+msgstr "Consultas últimos 90 días"
 
-msgid "No datasets found"
-msgstr ""
+#: ckanext/gobar_theme/templates/series/detail.html:82
+msgid "Consultas totales"
+msgstr "Consultas totales"
 
-msgid "Dataset extent"
-msgstr "Extensión espacial"
+#: ckanext/gobar_theme/templates/series/index.html:30
+msgid "Buscar series de tiempo…"
+msgstr "Buscar series de tiempo…"
 
-#: ckanext/spatial/assets/js/spatial_query.js:92
-msgid "Please draw query extent in the map:"
-msgstr "Dibuje la extensión de la consulta en el mapa"
+#: ckanext/gobar_theme/templates/series/index.html:31
+msgid "Buscar series de tiempo"
+msgstr "Buscar series de tiempo"
 
-#: ckanext/spatial/assets/js/spatial_query.js:93
-msgid "Apply"
-msgstr "Aplicar"
+#: ckanext/gobar_theme/templates/series/index.html:32
+msgid "Buscar"
+msgstr "Buscar"
 
-#: ckanext/spatial/assets/js/spatial_query.js:94
-msgid "Cancel"
-msgstr "Cancelar"
+#: ckanext/gobar_theme/templates/series/index.html:51
+msgid "Series de Tiempo"
+msgstr "Series de Tiempo"
+
+#: ckanext/gobar_theme/templates/series/index.html:52
+msgid "Buscá, explorá y compará series."
+msgstr "Buscá, explorá y compará series."
+
+#: ckanext/gobar_theme/templates/series/index.html:75
+msgid "Series en comparación"
+msgstr "Series en comparación"
+
+#: ckanext/gobar_theme/templates/series/index.html:85
+#: ckanext/gobar_theme/templates/series/index.html:189
+msgid "Quitar de la comparación"
+msgstr "Quitar de la comparación"
+
+#: ckanext/gobar_theme/templates/series/index.html:86
+msgid "Quitar {t} de la comparación"
+msgstr "Quitar {t} de la comparación"
+
+#: ckanext/gobar_theme/templates/series/index.html:119
+msgid "No encontramos series para “{q}”"
+msgstr "No encontramos series para “{q}”"
+
+#: ckanext/gobar_theme/templates/series/index.html:121
+msgid "No encontramos series con estos filtros"
+msgstr "No encontramos series con estos filtros"
+
+#: ckanext/gobar_theme/templates/series/index.html:125
+msgid "Probá con otras palabras, quitá algún filtro o explorá por tema."
+msgstr "Probá con otras palabras, quitá algún filtro o explorá por tema."
+
+#: ckanext/gobar_theme/templates/series/index.html:133
+msgid "Filtros"
+msgstr "Filtros"
+
+#: ckanext/gobar_theme/templates/series/index.html:162
+msgid "{count} series encontradas"
+msgstr "{count} series encontradas"
+
+#: ckanext/gobar_theme/templates/series/index.html:165
+msgid "Ordenar por"
+msgstr "Ordenar por"
+
+#: ckanext/gobar_theme/templates/series/index.html:177
+msgid "{n} serie(s) seleccionada(s) para comparar"
+msgstr "{n} serie(s) seleccionada(s) para comparar"
+
+#: ckanext/gobar_theme/templates/series/index.html:180
+msgid "Comparar"
+msgstr "Comparar"
+
+#: ckanext/gobar_theme/templates/series/index.html:189
+msgid "Agregar a la comparación"
+msgstr "Agregar a la comparación"
+
+#: ckanext/gobar_theme/templates/series/index.html:212
+msgid "Paginación"
+msgstr "Paginación"
+
+#: ckanext/gobar_theme/templates/series/index.html:214
+#: ckanext/gobar_theme/templates/series/index.html:216
+msgid "Anterior"
+msgstr "Anterior"
+
+#: ckanext/gobar_theme/templates/series/index.html:218
+msgid "Página {page} de {pages}"
+msgstr "Página {page} de {pages}"
+
+#: ckanext/gobar_theme/templates/series/index.html:220
+#: ckanext/gobar_theme/templates/series/index.html:222
+msgid "Siguiente"
+msgstr "Siguiente"
+
+#: ckanext/gobar_theme/templates/snippets/facet_list.html:50
+msgid "Show More {facet_type}"
+msgstr "Mostrar más {facet_type}"
+
+#: ckanext/gobar_theme/templates/snippets/facet_list.html:53
+msgid "Show Only Popular {facet_type}"
+msgstr "Mostrar solo los {facet_type} populares"
+
+#: ckanext/gobar_theme/templates/snippets/facet_list.html:57
+msgid "There are no {facet_type} that match this search"
+msgstr "No hay {facet_type} que coincidan con esta búsqueda"
+
+#: ckanext/gobar_theme/templates/snippets/package_item.html:21
+msgid "Private"
+msgstr "Privado"
+
+#: ckanext/gobar_theme/templates/snippets/package_item.html:65
+msgid "There is no description for this dataset"
+msgstr "No hay descripción para este dataset"
+
+#~ msgid "Datasets"
+#~ msgstr "Datasets"
+
+#~ msgid "Add Dataset"
+#~ msgstr "Agregar dataset"
+
+#~ msgid "There are no datasets that match this search"
+#~ msgstr "No hay datasets que coincidan con esta búsqueda"
+
+#~ msgid "{number} dataset found for \"{query}\""
+#~ msgid_plural "{number} datasets found for \"{query}\""
+#~ msgstr[0] "{number} dataset encontrado para \"{query}\""
+#~ msgstr[1] "{number} datasets encontrados para \"{query}\""
+
+#~ msgid "{number} dataset found"
+#~ msgid_plural "{number} datasets found"
+#~ msgstr[0] "{number} dataset encontrado"
+#~ msgstr[1] "{number} datasets encontrados"
+
+#~ msgid "No datasets found"
+#~ msgstr "No se encontraron datasets"
+
+#~ msgid "Dataset extent"
+#~ msgstr "Extensión espacial"
+
+#~ msgid "Please draw query extent in the map:"
+#~ msgstr "Dibuje la extensión de la consulta en el mapa"
+
+#~ msgid "Apply"
+#~ msgstr "Aplicar"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+

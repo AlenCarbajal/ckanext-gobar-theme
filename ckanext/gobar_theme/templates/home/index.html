@@ -129,7 +129,7 @@
         {% for pkg in recent_pkgs %}
           <a href="{{ h.url_for('dataset.read', id=pkg.name) }}"
              class="gobar-featured-card">
-            <div class="gobar-featured-title">{{ pkg.dataset_title }}</div>
+            <div class="gobar-featured-title">{{ pkg.title }}</div>
             <div class="gobar-featured-org">
               {{ pkg.organization.title if pkg.organization else 'Sin organización' }}
             </div>
