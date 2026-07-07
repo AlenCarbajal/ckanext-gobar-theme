@@ -1,26 +1,268 @@
-# POT del dominio ckanext-gobar_theme.
+# Translations template for ckanext-gobar-theme.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the ckanext-gobar-theme
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
-# CKAN usa este archivo SOLO para decidir qué msgid entran al catálogo JS
-# (build_js_translations filtra por ocurrencias en archivos *.js). Por eso
-# acá van únicamente las cadenas usadas desde JavaScript; las overrides de
-# templates/server no necesitan estar listadas (ver README_i18n.md).
-#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ckanext-gobar-theme\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: ckanext-gobar-theme 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-07-07 03:56+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
 
-#: ckanext/spatial/assets/js/spatial_query.js:92
-msgid "Please draw query extent in the map:"
+#: ckanext/gobar_theme/plugin.py:113
+msgid "Organizaciones"
 msgstr ""
 
-#: ckanext/spatial/assets/js/spatial_query.js:93
-msgid "Apply"
+#: ckanext/gobar_theme/plugin.py:114
+msgid "Grupos"
 msgstr ""
 
-#: ckanext/spatial/assets/js/spatial_query.js:94
-msgid "Cancel"
+#: ckanext/gobar_theme/plugin.py:115
+msgid "Formato"
 msgstr ""
+
+#: ckanext/gobar_theme/plugin.py:116
+msgid "Estado"
+msgstr ""
+
+#: ckanext/gobar_theme/plugin.py:117
+msgid "Frecuencia de actualización"
+msgstr ""
+
+#: ckanext/gobar_theme/plugin.py:120
+msgid "Provincia"
+msgstr ""
+
+#: ckanext/gobar_theme/plugin.py:121
+msgid "Etiquetas"
+msgstr ""
+
+#: ckanext/gobar_theme/views.py:640
+msgid "No encontramos esa serie de tiempo."
+msgstr ""
+
+#: ckanext/gobar_theme/logic/validators.py:6
+msgid "Required"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/home/index.html:3
+msgid "Datos Abiertos de Argentina"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:2
+msgid "E.g. environment"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:7
+msgid "Search data"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:9
+msgid "Search datasets"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:12
+msgid "Search"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/home/snippets/search.html:17
+msgid "Popular tags"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/package/snippets/package_item.html:10
+#: ckanext/gobar_theme/templates/snippets/package_item.html:30
+msgid "Draft"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/package/snippets/package_item.html:12
+#: ckanext/gobar_theme/templates/snippets/package_item.html:32
+msgid "Deleted"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:20
+#: ckanext/gobar_theme/templates/series/index.html:58
+#: ckanext/gobar_theme/templates/series/index.html:70
+#: ckanext/gobar_theme/templates/series/index.html:108
+msgid "No se pudo conectar con la API de series. Reintentá más tarde."
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:23
+msgid "Ruta de navegación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:24
+msgid "Series"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:41
+msgid "+ Agregar a comparación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:42
+msgid "Descargar CSV"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:51
+msgid "Metadata"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:53
+msgid "Tema"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:54
+msgid "Unidades"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:55
+msgid "Frecuencia"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:56
+msgid "Dataset"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:57
+msgid "Fecha de publicación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:59
+msgid "Cobertura temporal"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:62
+msgid "{n} valores"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:69
+msgid "Uso"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:72
+msgid "Último valor"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:77
+msgid "Consultas últimos 90 días"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/detail.html:82
+msgid "Consultas totales"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:30
+msgid "Buscar series de tiempo…"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:31
+msgid "Buscar series de tiempo"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:32
+msgid "Buscar"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:51
+msgid "Series de Tiempo"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:52
+msgid "Buscá, explorá y compará series."
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:75
+msgid "Series en comparación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:85
+#: ckanext/gobar_theme/templates/series/index.html:189
+msgid "Quitar de la comparación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:86
+msgid "Quitar {t} de la comparación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:119
+msgid "No encontramos series para “{q}”"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:121
+msgid "No encontramos series con estos filtros"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:125
+msgid "Probá con otras palabras, quitá algún filtro o explorá por tema."
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:133
+msgid "Filtros"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:162
+msgid "{count} series encontradas"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:165
+msgid "Ordenar por"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:177
+msgid "{n} serie(s) seleccionada(s) para comparar"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:180
+msgid "Comparar"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:189
+msgid "Agregar a la comparación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:212
+msgid "Paginación"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:214
+#: ckanext/gobar_theme/templates/series/index.html:216
+msgid "Anterior"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:218
+msgid "Página {page} de {pages}"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/series/index.html:220
+#: ckanext/gobar_theme/templates/series/index.html:222
+msgid "Siguiente"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/snippets/facet_list.html:50
+msgid "Show More {facet_type}"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/snippets/facet_list.html:53
+msgid "Show Only Popular {facet_type}"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/snippets/facet_list.html:57
+msgid "There are no {facet_type} that match this search"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/snippets/package_item.html:21
+msgid "Private"
+msgstr ""
+
+#: ckanext/gobar_theme/templates/snippets/package_item.html:65
+msgid "There is no description for this dataset"
+msgstr ""
+
