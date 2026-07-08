@@ -17,17 +17,21 @@
     <a class="nav-link" href="{{ h.url_for('dataset.search') }}">Datasets</a>
   </li>
   <li class="nav-item{% if request.path.startswith('/organization') %} active{% endif %}">
-    <a class="nav-link" href="{{ h.url_for('organization.index') }}">Organizaciones</a>
+    <a class="nav-link" href="{{ h.url_for('organization.index') }}">{{ h.gobar_organizations_label() }}</a>
   </li>
   <li class="nav-item{% if request.path.startswith('/group') %} active{% endif %}">
     <a class="nav-link" href="{{ h.url_for('group.index') }}">Temas</a>
   </li>
+  {% if h.gobar_show_recursos() %}
   <li class="nav-item{% if '/recursos' in request.path %} active{% endif %}">
     <a class="nav-link" href="{{ h.url_for('recursos.recursos') }}">Recursos</a>
   </li>
+  {% endif %}
+  {% if h.plugin_loaded('series_explorer') %}
   <li class="nav-item{% if '/series' in request.path %} active{% endif %}">
     <a class="nav-link" href="{{ h.url_for('series.series') }}">Series</a>
   </li>
+  {% endif %}
   <li class="nav-item{% if request.path.startswith('/about') %} active{% endif %}">
     <a class="nav-link" href="{{ h.url_for('home.about') }}">Acerca</a>
   </li>

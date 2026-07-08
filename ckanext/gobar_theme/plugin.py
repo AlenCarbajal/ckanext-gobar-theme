@@ -92,6 +92,50 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
             key.ckanext.gobar_theme.contact_email,
             "datosargentina@sicyt.gob.ar",
         )
+        # base|apn|nacional|subnacional. "nacional" preserva el look actual
+        # (Datos Abiertos) sin tocar .env en el portal ya desplegado.
+        declaration.declare(
+            key.ckanext.gobar_theme.profile, "nacional"
+        )
+        # Nombre/link institucional del footer ("Institucional"): vacío por
+        # defecto (todos los perfiles salvo "apn" usan el default fijo de
+        # helpers.gobar_institutional_name/url, "Dirección de Datos
+        # Abiertos"; en "apn" no se muestra el link salvo que se configure
+        # por .env, porque cada organismo APN tiene el suyo propio).
+        declaration.declare(key.ckanext.gobar_theme.institutional_name, "")
+        declaration.declare(key.ckanext.gobar_theme.institutional_url, "")
+        # true|false|auto. "auto" (default) = ocultar solo en el perfil
+        # "apn" (la sección /recursos son productos de la Dirección de
+        # Datos Abiertos, no aplican a un organismo APN individual);
+        # true/false fuerza el valor sin importar el perfil.
+        declaration.declare(key.ckanext.gobar_theme.show_recursos, "auto")
+        # Nombre de "Organizaciones" en nav/footer/home/faceta: algunos
+        # organismos APN son subdependencias de un ministerio y prefieren
+        # otro término (p. ej. "Organismos", "Dependencias"). Opcional: el
+        # default preserva el texto actual en todos los perfiles.
+        declaration.declare(
+            key.ckanext.gobar_theme.organizations_label, "Organizaciones"
+        )
+        # Subtítulo opcional del hero de la home (perfil apn, que no trae uno
+        # propio): vacío = no se muestra. Ej. MAGyP: "En este portal podrás
+        # obtener datos numéricos y estadísticos del sector agropecuario..."
+        declaration.declare(key.ckanext.gobar_theme.subtitle, "")
+        # Override puntual de colores (hex) por encima del preset del
+        # perfil, y de la imagen de fondo del hero de la home. Vacíos por
+        # defecto: no cambian nada hasta que se configuren por .env.
+        declaration.declare(key.ckanext.gobar_theme.color_primary, "")
+        declaration.declare(key.ckanext.gobar_theme.color_primary_dark, "")
+        declaration.declare(key.ckanext.gobar_theme.color_accent, "")
+        declaration.declare(key.ckanext.gobar_theme.hero_background_image, "")
+        # Logo institucional del pie (hoy Secretaría de Innovación, Ciencia y
+        # Tecnología): vacío = usa la imagen del theme. show=false lo oculta
+        # por completo para organismos sin ese logo.
+        declaration.declare_bool(key.ckanext.gobar_theme.show_secretariat_logo, True)
+        declaration.declare(key.ckanext.gobar_theme.secretariat_logo_url, "")
+        declaration.declare(
+            key.ckanext.gobar_theme.secretariat_logo_alt,
+            "Secretaría de Innovación, Ciencia y Tecnología",
+        )
         declaration.declare_int(
             key.ckanext.gobar_theme.featured_datasets_limit, 4
         )
@@ -110,7 +154,7 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         if package_type and package_type != "dataset":
             return facets_dict
         facets = OrderedDict()
-        facets["organization"] = toolkit._("Organizaciones")
+        facets["organization"] = gobar_helpers.gobar_organizations_label()
         facets["groups"] = toolkit._("Grupos")
         facets["res_format"] = toolkit._("Formato")
         facets["vocab_dataset_status"] = toolkit._("Estado")

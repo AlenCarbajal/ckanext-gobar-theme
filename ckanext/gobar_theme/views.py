@@ -5,8 +5,11 @@ import logging
 from typing import Any
 
 from flask import Blueprint
+import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.model as model
+
+from ckanext.gobar_theme.helpers import gobar_show_recursos
 
 log = logging.getLogger(__name__)
 
@@ -218,6 +221,8 @@ recursos_bp = Blueprint(
 
 @recursos_bp.route("/")
 def recursos():
+    if not gobar_show_recursos():
+        return toolkit.abort(404)
     return toolkit.render("recursos/index.html", extra_vars={
         "page_title": "Recursos",
     })
@@ -240,4 +245,7 @@ def series():
 
 
 def get_blueprints() -> list[Blueprint]:
-    return [custom_pages, recursos_bp, series_bp]
+    blueprints = [custom_pages, recursos_bp]
+    if plugins.plugin_loaded("series_explorer"):
+        blueprints.append(series_bp)
+    return blueprints

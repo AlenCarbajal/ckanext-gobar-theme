@@ -18,6 +18,8 @@ body.homepage .main { padding: 0; }
 .gobar-hero h1 { font-family: var(--font-titulos)!important; font-size: clamp(29px, 4vw, 42px); font-weight: 800; color: var(--gobar-navy); line-height: 1.15; letter-spacing: -.01em; margin: 0 0 16px; }
 .gobar-hero h1 .accent { color: var(--gobar-primary); }
 .gobar-hero .lead { font-family: var(--font-cuerpo); font-size: 17px; color: var(--gobar-gris-oscuro); line-height: 1.7; margin: 0 auto 30px; max-width: 640px; font-weight: 400; }
+/* Perfil apn: sin subtítulo configurado no hay .lead debajo, más aire. */
+body.theme-profile-apn .gobar-hero h1 { margin-bottom: 32px; }
 
 /* ── Buscador hero ── */
 .gobar-search { max-width: 600px; width: 100%; margin: 0 auto 44px; }
