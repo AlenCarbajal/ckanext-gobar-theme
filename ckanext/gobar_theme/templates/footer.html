@@ -44,7 +44,11 @@
   <div class="gobar-footer-legal">
     {% snippet "snippets/language_selector.html" %}
     {% if h.gobar_show_secretariat_logo() %}
-    <img src="{{ h.gobar_secretariat_logo_url() or h.url_for_static('images/Logo_Secretaria-Innovacion_Blanco.png') }}"
+    {% set footer_logo_path = h.gobar_footer_logo_path() %}
+    {# footer_logo_path puede ser una URL absoluta (http/https) o la ruta
+       de un archivo local servido por el theme (resuelta con url_for_static,
+       igual que el resto de las imágenes de public/). #}
+    <img src="{% if footer_logo_path.startswith('http://') or footer_logo_path.startswith('https://') %}{{ footer_logo_path }}{% elif footer_logo_path %}{{ h.url_for_static(footer_logo_path) }}{% else %}{{ h.url_for_static('images/Logo_Secretaria-Innovacion_Blanco.png') }}{% endif %}"
          alt="{{ h.gobar_secretariat_logo_alt() }}" />
     {% endif %}
   </div>

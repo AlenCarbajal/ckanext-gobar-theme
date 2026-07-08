@@ -83,14 +83,14 @@ Default: `Organizaciones` (sin cambios si no se configura).
 |---|---|---|
 | `ckanext.gobar_theme.institutional_name` | vacío (`Dirección de Datos Abiertos` en perfiles ≠ apn) | Texto del link institucional del footer |
 | `ckanext.gobar_theme.institutional_url` | vacío (link a datos-abiertos en perfiles ≠ apn) | URL de ese link |
-| `ckanext.gobar_theme.show_secretariat_logo` | `true` | Mostrar/ocultar el logo institucional de la esquina inferior derecha del footer |
-| `ckanext.gobar_theme.secretariat_logo_url` | vacío (usa el logo de Secretaría de Innovación del theme) | URL de un logo propio |
+| `ckanext.gobar_theme.show_secretariat_logo` | `auto` (`true`\|`false`\|`auto`) | Mostrar/ocultar el logo de la esquina inferior derecha del footer. En `auto` se oculta en el perfil `apn` salvo que se configure `footer_logo_path` (un organismo APN no tiene por qué llevar el logo de la Secretaría de Innovación) |
+| `ckanext.gobar_theme.footer_logo_path` | vacío (usa el logo de Secretaría de Innovación del theme) | Logo propio: una URL absoluta (`http(s)://...`) o la ruta de un archivo local dentro de `public/` del theme (se resuelve igual que el resto de las imágenes del theme, no hace falta que sea una URL) |
 | `ckanext.gobar_theme.secretariat_logo_alt` | `Secretaría de Innovación, Ciencia y Tecnología` | Texto alternativo de ese logo |
 
 ```
 CKANEXT__GOBAR_THEME__INSTITUTIONAL_NAME=Ministerio de Agricultura, Ganadería y Pesca
 CKANEXT__GOBAR_THEME__INSTITUTIONAL_URL=https://www.magyp.gob.ar
-CKANEXT__GOBAR_THEME__SECRETARIAT_LOGO_URL=https://miorganismo.gob.ar/logo-blanco.png
+CKANEXT__GOBAR_THEME__FOOTER_LOGO_PATH=https://miorganismo.gob.ar/logo-blanco.png
 CKANEXT__GOBAR_THEME__SECRETARIAT_LOGO_ALT=Ministerio de Agricultura, Ganadería y Pesca
 ```
 

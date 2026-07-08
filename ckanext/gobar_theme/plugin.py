@@ -130,11 +130,12 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         # Logo institucional del pie: vacío = usa el logo de la Secretaría
         # de Innovación (el del portal nacional). true|false|auto (default):
         # en "auto" se oculta en el perfil apn salvo que el organismo
-        # configure el suyo propio en secretariat_logo_url (un organismo
-        # APN no tiene por qué llevar el logo de la Secretaría de Innovación
-        # — pero si quiere mostrar el suyo en ese lugar, puede).
+        # configure el suyo propio en footer_logo_path — no necesariamente
+        # una URL, puede ser un archivo local servido por el theme (un
+        # organismo APN no tiene por qué llevar el logo de la Secretaría de
+        # Innovación, pero si quiere mostrar el suyo en ese lugar, puede).
         declaration.declare(key.ckanext.gobar_theme.show_secretariat_logo, "auto")
-        declaration.declare(key.ckanext.gobar_theme.secretariat_logo_url, "")
+        declaration.declare(key.ckanext.gobar_theme.footer_logo_path, "")
         declaration.declare(
             key.ckanext.gobar_theme.secretariat_logo_alt,
             "Secretaría de Innovación, Ciencia y Tecnología",

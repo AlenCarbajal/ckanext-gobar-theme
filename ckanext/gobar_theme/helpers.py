@@ -199,16 +199,16 @@ def gobar_show_secretariat_logo() -> bool:
     if raw == "auto":
         # Un organismo apn no tiene por qué llevar el logo de la Secretaría
         # de Innovación del portal nacional. Si configura su propio logo
-        # (secretariat_logo_url), mostrarlo igual — el "auto" solo esconde
+        # (footer_logo_path), mostrarlo igual — el "auto" solo esconde
         # el DEFAULT ajeno, no un logo propio ya configurado.
         return (not gobar_is_apn()) or bool(
-            toolkit.config.get("ckanext.gobar_theme.secretariat_logo_url", "")
+            toolkit.config.get("ckanext.gobar_theme.footer_logo_path", "")
         )
     return raw in ("true", "1", "yes", "on")
 
 
-def gobar_secretariat_logo_url() -> str:
-    return toolkit.config.get("ckanext.gobar_theme.secretariat_logo_url", "")
+def gobar_footer_logo_path() -> str:
+    return toolkit.config.get("ckanext.gobar_theme.footer_logo_path", "")
 
 
 def gobar_secretariat_logo_alt() -> str:
@@ -335,7 +335,7 @@ def get_helpers() -> dict[str, Any]:
         "gobar_institutional_url": gobar_institutional_url,
         "gobar_organizations_label": gobar_organizations_label,
         "gobar_show_secretariat_logo": gobar_show_secretariat_logo,
-        "gobar_secretariat_logo_url": gobar_secretariat_logo_url,
+        "gobar_footer_logo_path": gobar_footer_logo_path,
         "gobar_secretariat_logo_alt": gobar_secretariat_logo_alt,
         "gobar_color_overrides_style": gobar_color_overrides_style,
         "gobar_hero_background_style": gobar_hero_background_style,
