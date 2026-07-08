@@ -243,3 +243,7 @@ ul.hierarchy-tree li.highlighted > a {
   text-indent: -9999px;
   overflow: hidden;
 }
+
+/* /group y /organization (índices): sin sidebar de ayuda, el primary pasa
+   a ocupar todo el ancho en vez de dejar la columna vacía. */
+body.one-column .primary { width: 100%; max-width: 100%; float: none; }

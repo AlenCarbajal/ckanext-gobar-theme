@@ -158,7 +158,7 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
             return facets_dict
         facets = OrderedDict()
         facets["organization"] = gobar_helpers.gobar_organizations_label()
-        facets["groups"] = toolkit._("Grupos")
+        facets["groups"] = "Temas"
         facets["res_format"] = toolkit._("Formato")
         facets["vocab_dataset_status"] = toolkit._("Estado")
         facets["vocab_dataset_accrualPeriodicity"] = toolkit._(
@@ -170,13 +170,17 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IFacets exige también estos dos: CKAN los invoca en las páginas de
     # grupo/organización y sin ellos esas vistas dan 500 (AttributeError).
+    # Además de no romper, pisan los labels default de CKAN core
+    # ("Organizations"/"Groups" traducidos) con los mismos que usa
+    # dataset_facets, para que la faceta del sidebar diga lo mismo que el
+    # resto del sitio (Organismos/Temas) en vez de quedar inconsistente.
     def group_facets(
         self,
         facets_dict: "OrderedDict[str, Any]",
         group_type: str,
         package_type: str | None,
     ) -> "OrderedDict[str, Any]":
-        return facets_dict
+        return self._relabel_facets(facets_dict)
 
     def organization_facets(
         self,
@@ -184,6 +188,16 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         organization_type: str,
         package_type: str | None,
     ) -> "OrderedDict[str, Any]":
+        return self._relabel_facets(facets_dict)
+
+    @staticmethod
+    def _relabel_facets(
+        facets_dict: "OrderedDict[str, Any]",
+    ) -> "OrderedDict[str, Any]":
+        if "organization" in facets_dict:
+            facets_dict["organization"] = gobar_helpers.gobar_organizations_label()
+        if "groups" in facets_dict:
+            facets_dict["groups"] = "Temas"
         return facets_dict
 
     # ── IPackageController ──
