@@ -193,7 +193,18 @@ def gobar_organizations_label() -> str:
 
 
 def gobar_show_secretariat_logo() -> bool:
-    return toolkit.config.get("ckanext.gobar_theme.show_secretariat_logo", True)
+    raw = str(
+        toolkit.config.get("ckanext.gobar_theme.show_secretariat_logo", "auto")
+    ).strip().lower()
+    if raw == "auto":
+        # Un organismo apn no tiene por qué llevar el logo de la Secretaría
+        # de Innovación del portal nacional. Si configura su propio logo
+        # (secretariat_logo_url), mostrarlo igual — el "auto" solo esconde
+        # el DEFAULT ajeno, no un logo propio ya configurado.
+        return (not gobar_is_apn()) or bool(
+            toolkit.config.get("ckanext.gobar_theme.secretariat_logo_url", "")
+        )
+    return raw in ("true", "1", "yes", "on")
 
 
 def gobar_secretariat_logo_url() -> str:
