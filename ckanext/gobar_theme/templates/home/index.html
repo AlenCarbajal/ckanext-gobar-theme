@@ -1,21 +1,13 @@
 {% extends "page.html" %}
 
-{% block subtitle %}{{ _('Datos Abiertos de Argentina') }}{% endblock %}
+{% block subtitle %}{% if h.gobar_is_apn() %}{{ h.gobar_get_config('ckan.site_title', 'Portal de datos') }}{% else %}{{ _('Datos Abiertos de Argentina') }}{% endif %}{% endblock %}
 
-{# Los estilos de layout de la home (gobar-home.css) scopean por body.homepage;
-   core no pone ninguna clase en <body>, así que la agregamos acá. #}
-{% block bodytag %}{{ super() }} class="homepage"{% endblock %}
+{# La clase body.homepage la agrega base.html (única fuente de la clase del
+   body, junto con theme-profile-*, para no terminar con dos atributos
+   class="" en el mismo tag). #}
 
-{# Agregar assets del theme #}
-{% block styles %}
-  {{ super() }}
-  {% asset 'gobar_theme/gobar_theme_css' %}
-{% endblock %}
-
-{% block scripts %}
-  {{ super() }}
-  {% asset 'gobar_theme/gobar_theme_js' %}
-{% endblock %}
+{# gobar_theme_css/js ya los registra base.html vía el super() de page.html —
+   no hace falta volver a pedirlos acá. #}
 
 {# Eliminar breadcrumb y sidebar en la home #}
 {% block breadcrumb %}{% endblock %}
@@ -23,9 +15,11 @@
 
 {% block primary %}
 {# ── HERO ── #}
-<section class="gobar-hero">
+{% set hero_style = h.gobar_hero_background_style() %}
+<section class="gobar-hero"{% if hero_style %} style="{{ hero_style }}"{% endif %}>
   <div class="container">
     <div class="gobar-hero-center">
+      {% if not h.gobar_is_apn() %}
       <h1>
         Datos Abiertos<br/>
         <span class="accent">Argentina</span>
@@ -36,6 +30,17 @@
         puedas usarlos, modificarlos y compartirlos. Estos datos son tuyos.
         Podés crear visualizaciones, aplicaciones y herramientas con ellos.
       </p>
+      {% else %}
+      {% set site_title = h.gobar_get_config('ckan.site_title', 'Portal de datos') %}
+      {% set site_title_parts = site_title.rsplit(' ', 1) %}
+      <h1>
+        {{ site_title_parts[0] }}{% if site_title_parts|length > 1 %} <span class="accent">{{ site_title_parts[1] }}</span>{% endif %}
+      </h1>
+      {% set subtitle = h.gobar_get_config('ckanext.gobar_theme.subtitle', '') %}
+      {% if subtitle %}
+      <p class="lead">{{ subtitle }}</p>
+      {% endif %}
+      {% endif %}
 
       {# ── Buscador CENTRADO ── #}
       <div class="gobar-search">
@@ -44,7 +49,7 @@
             <input type="text"
                    class="form-control"
                    name="q"
-                   placeholder="Buscar datasets... Ej: ambiente, educación, transporte"
+                   placeholder="{% if h.gobar_is_apn() %}Buscar datasets{% else %}Buscar datasets... Ej: ambiente, educación, transporte{% endif %}"
                    autocomplete="off" />
             <span class="input-group-btn">
               <button class="btn" type="submit">
@@ -64,7 +69,7 @@
 
         <div class="gobar-counter">
           <div class="gobar-counter-number" data-target="{{ h.gobar_organization_count() }}">0</div>
-          <div class="gobar-counter-label">Organizaciones con datos</div>
+          <div class="gobar-counter-label">{{ h.gobar_organizations_label() }} con datos</div>
         </div>
 
         <div class="gobar-counter">
@@ -158,10 +163,10 @@
     <div class="gobar-section-header">
       <div>
         <div class="gobar-section-label">Quiénes publican</div>
-        <h2 class="gobar-section-title">Organizaciones</h2>
+        <h2 class="gobar-section-title">{{ h.gobar_organizations_label() }}</h2>
       </div>
       <a href="{{ h.url_for('organization.index') }}" class="gobar-section-link">
-        Ver las {{ h.gobar_organization_count() }} organizaciones →
+        Ver las {{ h.gobar_organization_count() }} {{ h.gobar_organizations_label()|lower }} →
       </a>
     </div>
 

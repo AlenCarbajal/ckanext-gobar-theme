@@ -152,6 +152,88 @@ def gobar_get_config(key: str, default: str = "") -> str:
     return toolkit.config.get(key, default)
 
 
+def gobar_theme_profile() -> str:
+    return toolkit.config.get("ckanext.gobar_theme.profile", "nacional")
+
+
+def gobar_is_apn() -> bool:
+    """Único lugar que compara contra el literal "apn": todo lo demás
+    (templates y helpers) llama a esta función en vez de repetir la
+    comparación de string."""
+    return gobar_theme_profile() == "apn"
+
+
+def gobar_show_recursos() -> bool:
+    raw = str(
+        toolkit.config.get("ckanext.gobar_theme.show_recursos", "auto")
+    ).strip().lower()
+    if raw == "auto":
+        return not gobar_is_apn()
+    return raw in ("true", "1", "yes", "on")
+
+
+def gobar_institutional_name() -> str:
+    configured = toolkit.config.get("ckanext.gobar_theme.institutional_name", "")
+    if configured:
+        return configured
+    return "" if gobar_is_apn() else "Dirección de Datos Abiertos"
+
+
+def gobar_institutional_url() -> str:
+    configured = toolkit.config.get("ckanext.gobar_theme.institutional_url", "")
+    if configured:
+        return configured
+    return "" if gobar_is_apn() else "https://www.argentina.gob.ar/datos-abiertos"
+
+
+def gobar_organizations_label() -> str:
+    return toolkit.config.get(
+        "ckanext.gobar_theme.organizations_label", "Organizaciones"
+    )
+
+
+def gobar_show_secretariat_logo() -> bool:
+    return toolkit.config.get("ckanext.gobar_theme.show_secretariat_logo", True)
+
+
+def gobar_secretariat_logo_url() -> str:
+    return toolkit.config.get("ckanext.gobar_theme.secretariat_logo_url", "")
+
+
+def gobar_secretariat_logo_alt() -> str:
+    return toolkit.config.get(
+        "ckanext.gobar_theme.secretariat_logo_alt",
+        "Secretaría de Innovación, Ciencia y Tecnología",
+    )
+
+
+def gobar_color_overrides_style() -> str:
+    """Construye el atributo style="..." con los overrides de color de
+    .ini/env (vacíos por defecto). Se aplica en el <body> (base.html) en
+    vez de un <style>/:root aparte: un atributo style inline le gana en
+    especificidad a body.theme-profile-* sin necesitar !important."""
+    overrides = {
+        "--gobar-primary": toolkit.config.get("ckanext.gobar_theme.color_primary", ""),
+        "--gobar-primary-dark": toolkit.config.get(
+            "ckanext.gobar_theme.color_primary_dark", ""
+        ),
+        "--gobar-accent": toolkit.config.get("ckanext.gobar_theme.color_accent", ""),
+    }
+    declarations = [f"{prop}: {value};" for prop, value in overrides.items() if value]
+    return " ".join(declarations)
+
+
+def gobar_hero_background_style() -> str:
+    image_url = toolkit.config.get("ckanext.gobar_theme.hero_background_image", "")
+    if not image_url:
+        return ""
+    return (
+        "background-image: linear-gradient(180deg, rgba(247,247,250,.88), "
+        f"rgba(255,255,255,.92)), url('{image_url}'); "
+        "background-size: cover; background-position: center;"
+    )
+
+
 def gobar_is_spatial_enabled() -> bool:
     plugins_str: str = toolkit.config.get("ckan.plugins", "")
     return any(
@@ -235,6 +317,17 @@ def get_helpers() -> dict[str, Any]:
         # Custom pages
         "gobar_page_list": gobar_page_list,
         "gobar_get_config": gobar_get_config,
+        "gobar_theme_profile": gobar_theme_profile,
+        "gobar_is_apn": gobar_is_apn,
+        "gobar_show_recursos": gobar_show_recursos,
+        "gobar_institutional_name": gobar_institutional_name,
+        "gobar_institutional_url": gobar_institutional_url,
+        "gobar_organizations_label": gobar_organizations_label,
+        "gobar_show_secretariat_logo": gobar_show_secretariat_logo,
+        "gobar_secretariat_logo_url": gobar_secretariat_logo_url,
+        "gobar_secretariat_logo_alt": gobar_secretariat_logo_alt,
+        "gobar_color_overrides_style": gobar_color_overrides_style,
+        "gobar_hero_background_style": gobar_hero_background_style,
         "gobar_is_spatial_enabled": gobar_is_spatial_enabled,
         "gobar_featured_datasets": gobar_featured_datasets,
         "gobar_format_date": gobar_format_date,

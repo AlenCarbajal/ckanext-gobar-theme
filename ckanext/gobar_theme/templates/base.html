@@ -1,5 +1,12 @@
 {%  ckan_extends %}
 
+{# Única fuente de atributos del <body>: class (theme-profile-*, homepage,
+   series-page) y el style inline con los overrides de color de .ini/env
+   (gobar_color_overrides_style — vacío si no hay overrides configurados).
+   Un style inline le gana en especificidad a body.theme-profile-* sin
+   necesitar !important ni un <style>/:root aparte. #}
+{% block bodytag %}{{ super() }} class="theme-profile-{{ h.gobar_theme_profile() }}{% if request.path == '/' %} homepage{% endif %}{% if '/series' in request.path %} series-page{% endif %}"{% set color_style = h.gobar_color_overrides_style() %}{% if color_style %} style="{{ color_style }}"{% endif %}{% endblock %}
+
 {% block styles %}
   {{ super() }}
   {% asset 'gobar_theme/gobar_theme_css' %}

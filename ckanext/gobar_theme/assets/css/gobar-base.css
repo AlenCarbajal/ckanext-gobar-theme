@@ -3,7 +3,7 @@
    Cargado en todas las páginas
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lora:wght@700&display=swap');
 
 /* ── VARIABLES ──
    Paleta e identidad de marca "Datos Abiertos" (Dirección de Datos Abiertos):
@@ -31,6 +31,21 @@
   --gobar-blanco: #FFFFFF;
   --font-titulos: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   --font-cuerpo: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ── VARIANTE PONCHO (perfiles apn/subnacional/base) ──
+   Prueba: pisa los mismos tokens con la paleta Poncho estricta (navy + celeste,
+   Lora+Montserrat), sin mosaico ni índigo/violeta. Todo el resto del CSS ya
+   consume estas variables, así que no hace falta tocar ningún componente. */
+body.theme-profile-apn,
+body.theme-profile-subnacional,
+body.theme-profile-base {
+  --gobar-primary: #232D4F;        /* navy-poncho */
+  --gobar-primary-dark: #1A2039;
+  --gobar-primary-darker: #141A2E;
+  --gobar-accent: #039BE5;         /* celeste */
+  --gobar-accent-dark: #0767A7;    /* enlace */
+  --font-titulos: 'Lora', Georgia, serif;
 }
 
 /* ── BASE ── */

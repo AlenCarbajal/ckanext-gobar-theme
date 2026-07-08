@@ -2,15 +2,13 @@
 
 {% block subtitle %}{{ page_title }}{% endblock %}
 
-{% block styles %}
-  {{ super() }}
-  {% asset 'gobar_theme/gobar_theme_css' %}
-{% endblock %}
+{# gobar_theme_css ya lo registra base.html vía el super() de page.html —
+   no hace falta volver a pedirlo acá. #}
 
 {% block content %}
 <div class="main" style="padding: 0;">
   {# ── Hero full-width, fuera del .container de CKAN ── #}
-  <section style="background-color: #383691; color: #fff; padding: 40px 0 32px;">
+  <section style="background-color: var(--gobar-primary); color: #fff; padding: 40px 0 32px;">
     <div class="container">
       <h1 style="margin: 0 0 8px; font-size: 2rem; font-weight: 700; color: #fff;">Recursos</h1>
       <p style="margin: 0; font-size: 1.05rem; opacity: 0.85;">
@@ -53,7 +51,7 @@
               rel="noopener noreferrer"
               style="
                 display: inline-block;
-                background-color: #383691;
+                background-color: var(--gobar-primary);
                 color: #fff;
                 border-radius: 4px;
                 padding: 8px 16px;
@@ -86,7 +84,7 @@
           ">
             <div style="margin-bottom: 14px;">
               <i class="{{ item.icon }}" aria-hidden="true"
-                 style="font-size: 2rem; color: #383691;"></i>
+                 style="font-size: 2rem; color: var(--gobar-primary);"></i>
             </div>
             <h3 style="font-size: 1rem; font-weight: 600; margin: 0 0 10px; color: #222;">
               {{ item.title }}
@@ -99,7 +97,7 @@
               {% if item.url.startswith('http') %}target="_blank" rel="noopener noreferrer"{% endif %}
               style="
                 display: inline-block;
-                background-color: #383691;
+                background-color: var(--gobar-primary);
                 color: #fff;
                 border-radius: 4px;
                 padding: 8px 16px;

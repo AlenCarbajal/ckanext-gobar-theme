@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block about %}
+  {% if not h.gobar_is_apn() %}
   <h2>Datos Abiertos</h2>
 
   <p>
@@ -68,6 +69,39 @@
     organismos nacionales, desarrollamos y ponemos a disposición los
     siguientes productos.
   </p>
+  {% else %}
+  <h2>Portal Andino</h2>
+
+  <p>
+    Portal redistribuible de datos abiertos de la República Argentina.
+  </p>
+
+  <p>
+    Es un portal de código abierto desarrollado por el equipo de Datos
+    Argentina y con las tecnologías de CKAN (Comprehensive Knowledge Archive
+    Network) con el fin de ayudar a los organismos públicos a abrir sus
+    datos.
+  </p>
+
+  <h2>¿Para qué sirve?</h2>
+
+  <p>
+    Andino es un portal diseñado para facilitar el proceso de publicación,
+    navegación y descarga de los datos que abren los organismos. Permite que
+    el público en general reutilice los datos y fomenta la transparencia en
+    las instituciones públicas. Cumple con el Perfil de Aplicación Nacional
+    de Metadatos para Datos Abiertos.
+  </p>
+
+  <h2>¿Qué son los datos abiertos?</h2>
+
+  <p>
+    Los datos son la materia prima para generar información. Los datos
+    públicos son aquellos generados en el ámbito gubernamental. Los datos son
+    abiertos cuando se encuentran publicados con un formato abierto, bajo una
+    licencia abierta explícita y con sus metadatos asociados.
+  </p>
+  {% endif %}
 
   <h2>Sobre CKAN</h2>
   {% snippet 'home/snippets/about_text.html' %}

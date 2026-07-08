@@ -2,12 +2,8 @@
 
 {% block subtitle %}{{ page_title }}{% endblock %}
 
-{% block styles %}
-  {{ super() }}
-  {% asset 'gobar_theme/gobar_theme_css' %}
-{% endblock %}
-
-{% block bodytag %}{{ super() }} class="series-page"{% endblock %}
+{# gobar_theme_css ya lo registra base.html vía el super() de page.html —
+   no hace falta volver a pedirlo acá. #}
 
 {% block content %}
 <div class="main">

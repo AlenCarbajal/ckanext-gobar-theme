@@ -59,13 +59,11 @@ To install ckanext-gobar-theme:
 
 ## Config settings
 
-None at present
-
-**TODO:** Document any optional config settings here. For example:
-
-	# The minimum number of hours to wait before re-checking a resource
-	# (optional, default: 24).
-	ckanext.gobar_theme.some_setting = some_default_value
+Ver [`docs/personalizacion.md`](docs/personalizacion.md): perfil visual
+(`ckanext.gobar_theme.profile`), colores, imagen de fondo, título/subtítulo
+de la home, label de "Organizaciones", sección Institucional y logo del
+footer, sección /recursos — todo configurable por `.env`/`ckan.ini`, sin
+tocar templates ni código.
 
 
 ## Developer installation
