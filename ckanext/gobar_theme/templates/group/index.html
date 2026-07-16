@@ -6,11 +6,11 @@
   <li class="active">{% link_for "Temas", named_route=group_type+'.index' %}</li>
 {% endblock %}
 
-{% block primary_content_inner %}
-  <h1 class="hide-heading">Temas</h1>
-  {% block groups_search_form %}
-    {% snippet 'snippets/search_form.html', form_id='group-search-form', type=group_type, query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder='Buscar temas...', show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
-  {% endblock %}
+{# Solo se cambia el buscador; el listado (groups_list) y la paginación los
+   sigue renderizando core. Overridear todo primary_content_inner borraba la
+   lista. #}
+{% block groups_search_form %}
+  {% snippet 'snippets/search_form.html', form_id='group-search-form', type=group_type, query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder='Buscar temas...', show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
 {% endblock %}
 
 {% block secondary %}{% endblock %}
