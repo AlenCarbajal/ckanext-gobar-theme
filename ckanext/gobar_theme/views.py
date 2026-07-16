@@ -5,7 +5,6 @@ import logging
 from typing import Any
 
 from flask import Blueprint
-import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.model as model
 
@@ -229,23 +228,6 @@ def recursos():
 
 
 
-# ── Blueprint de series de tiempo ──
-series_bp = Blueprint(
-    "series",
-    __name__,
-    url_prefix="/series",
-)
-
-
-@series_bp.route("/")
-def series():
-    return toolkit.render("series/index.html", extra_vars={
-        "page_title": "Series de Tiempo",
-    })
-
-
+# La página /series la registra ckanext-series-explorer (blueprint "series").
 def get_blueprints() -> list[Blueprint]:
-    blueprints = [custom_pages, recursos_bp]
-    if plugins.plugin_loaded("series_explorer"):
-        blueprints.append(series_bp)
-    return blueprints
+    return [custom_pages, recursos_bp]
