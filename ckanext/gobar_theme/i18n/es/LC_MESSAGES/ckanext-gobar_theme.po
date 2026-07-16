@@ -298,3 +298,26 @@ msgstr "No hay descripción para este dataset"
 #~ msgid "Cancel"
 #~ msgstr "Cancelar"
 
+
+# Overrides de CKAN core: /group se llama "Temas" en este portal
+msgid "Groups"
+msgstr "Temas"
+
+msgid "There are currently no groups for this site"
+msgstr "Todavía no hay temas en este portal"
+
+msgid "{number} group found for \"{query}\""
+msgid_plural "{number} groups found for \"{query}\""
+msgstr[0] "{number} tema encontrado para \"{query}\""
+msgstr[1] "{number} temas encontrados para \"{query}\""
+
+msgid "No groups found for \"{query}\""
+msgstr "No se encontraron temas para \"{query}\""
+
+msgid "{number} group found"
+msgid_plural "{number} groups found"
+msgstr[0] "{number} tema encontrado"
+msgstr[1] "{number} temas encontrados"
+
+msgid "No groups found"
+msgstr "No se encontraron temas"
