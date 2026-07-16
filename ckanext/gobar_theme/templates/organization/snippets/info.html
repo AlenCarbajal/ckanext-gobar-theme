@@ -1,0 +1,13 @@
+{% ckan_extends %}
+
+{# Sidebar de la organización: solo la cantidad de datasets — sin seguidores
+   ni miembros, que no le aportan nada al visitante del portal. #}
+{% block nums %}
+  {% set dataset_type = h.default_package_type() %}
+  <div class="nums">
+    <dl>
+      <dt>{{ h.humanize_entity_type('package', dataset_type, 'facet label') or _('Datasets') }}</dt>
+      <dd>{{ h.SI_number_span(organization.package_count) }}</dd>
+    </dl>
+  </div>
+{% endblock %}

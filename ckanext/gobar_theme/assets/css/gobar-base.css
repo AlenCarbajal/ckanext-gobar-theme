@@ -143,52 +143,10 @@ footer .lang-select .select2-chosen { color: #333!important; }
 }
 
 /* ── ORGANIZACIONES / GRUPOS ──
-   /organization usa el árbol de ckanext-hierarchy (hierarchy_theme.css: bullets,
-   líneas punteadas, link teal) en vez del grid de tarjetas del resto del sitio.
-   /group usa el grid nativo de CKAN (.media-grid), sin estilo propio. Ambos se
-   llevan acá a la línea visual de tarjetas del theme. */
-#publisher-tree {
-  background: var(--gobar-blanco);
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  padding: .25rem 1rem;
-}
-ul.hierarchy-tree-top,
-ul.hierarchy-tree {
-  list-style: none !important;
-  background: none !important;
-  margin: 0;
-  padding: 0;
-}
-ul.hierarchy-tree { margin-left: 1.25rem; }
-ul.hierarchy-tree-top > li,
-ul.hierarchy-tree li {
-  background: none !important;
-  padding: 0 !important;
-  border-bottom: 1px solid var(--gobar-gris-bg);
-}
-ul.hierarchy-tree-top > li:last-child { border-bottom: none; }
-ul.hierarchy-tree-top li > a,
-ul.hierarchy-tree li > a {
-  display: block;
-  padding: .6rem .25rem;
-  font-family: var(--font-cuerpo);
-  font-weight: 500;
-  color: var(--gobar-primary) !important;
-  text-decoration: none;
-  text-shadow: none !important;
-}
-ul.hierarchy-tree-top li > a:hover,
-ul.hierarchy-tree li > a:hover {
-  color: var(--gobar-primary-dark) !important;
-  background: var(--gobar-gris-bg);
-  border-radius: 6px;
-}
-ul.hierarchy-tree-top li.highlighted > a,
-ul.hierarchy-tree li.highlighted > a {
-  font-weight: 700;
-}
-
+   El índice de /organization lo dibuja el árbol propio de más abajo
+   (.gobar-org-tree, override del snippet de ckanext-hierarchy).
+   .media-grid es el grid genérico de CKAN que sigue usándose en otros
+   listados (dashboard, featured), se lleva a la línea visual del theme. */
 .media-grid {
   list-style: none;
   display: grid;
@@ -251,11 +209,37 @@ body.one-column .primary { width: 100%; max-width: 100%; float: none; }
 /* ── Listados de /organization (árbol de organismos) y /group (temas) ── */
 .gobar-temas-grid { margin-top: 24px; }
 
-.gobar-org-tree { list-style: none; padding: 0; margin: 24px 0 0; max-width: 780px; }
-.gobar-org-tree ul.hierarchy-tree { list-style: none; margin: 0 0 8px 24px; padding-left: 20px; border-left: 2px solid #DEE2E6; }
-.gobar-org-row { display: flex; align-items: center; gap: 14px; padding: 12px 18px; margin-bottom: 8px; background: var(--gobar-blanco); border: 1px solid #DEE2E6; border-radius: 4px; color: var(--gobar-navy) !important; text-decoration: none !important; transition: border-color .15s, box-shadow .15s; }
-.gobar-org-row:hover { border-color: var(--gobar-primary); box-shadow: 0 1px 3px rgba(33,45,81,.1); }
-.gobar-org-row-name { flex: 1; font-family: var(--font-cuerpo); font-size: 15px; font-weight: 600; line-height: 1.35; }
-.gobar-org-row-count { font-family: var(--font-cuerpo); font-size: 13px; color: var(--gobar-gris-oscuro); white-space: nowrap; }
+/* Árbol de organismos tipo explorador de directorios (handoff diseño 3d, sin
+   la tarjeta contenedora del mock): padres colapsables (<details> nativo),
+   guía vertical fina + conector horizontal por hijo, count como badge pegado
+   al nombre y filas fit-content (no se estiran a lo ancho). Tokens del
+   handoff; la tipografía queda la del portal (Montserrat), no IBM Plex. */
+.gobar-org-tree { margin: 24px 0 0; }
+.gobar-org-tree, .gobar-org-children { list-style: none; padding: 0; }
+.gobar-org-children { margin: 0; }
+.gobar-org-branch { margin: 0; }
+.gobar-org-row { display: flex; align-items: center; gap: 8px; padding: 12px 4px; width: fit-content; font-family: var(--font-cuerpo); }
+.gobar-org-row::before { content: "\25B8"; color: #9CA0B5; font-size: 11px; line-height: 1; flex: none; }
+summary.gobar-org-row { cursor: pointer; list-style: none; user-select: none; }
+summary.gobar-org-row::-webkit-details-marker { display: none; }
+/* Foco solo cuando se navega con teclado; el click no deja el recuadro azul */
+summary.gobar-org-row:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+details[open] > summary.gobar-org-row::before { content: "\25BE"; color: #372F86; }
+.gobar-org-row-name { font-size: 14.5px; font-weight: 700; color: #312E3D; text-decoration: none; transition: color .15s; }
+.gobar-org-row-name:hover { color: #372F86; text-decoration: underline; }
+.gobar-org-row-count { background: #F1EFFA; color: #7A76A8; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+/* Hijos: guía vertical dibujada por fila (::after) en vez de border-left del
+   ul, así en la última fila corta justo en su conector y no sigue de largo */
+.gobar-org-children { margin-left: 15px; padding-left: 22px; }
+.gobar-org-children > li { position: relative; }
+.gobar-org-children > li::before { content: ""; position: absolute; left: -22px; top: 50%; width: 16px; height: 1.5px; background: #E4E2F0; }
+.gobar-org-children > li::after { content: ""; position: absolute; left: -22px; top: 0; bottom: 0; width: 1.5px; background: #E4E2F0; }
+.gobar-org-children > li:last-child::after { bottom: auto; height: 50%; }
+.gobar-org-children .gobar-org-row { padding: 11px 4px; }
+.gobar-org-children .gobar-org-row::before { content: none; }
+.gobar-org-children summary.gobar-org-row::before { content: "\25B8"; }
+.gobar-org-children details[open] > summary.gobar-org-row::before { content: "\25BE"; }
+.gobar-org-children .gobar-org-row-name { font-size: 13.5px; font-weight: 600; color: #372F86; }
 /* Resultado resaltado por la búsqueda del árbol (hierarchy) */
-.gobar-org-tree li.highlighted > .gobar-org-row { border-color: var(--gobar-primary); box-shadow: 0 1px 3px rgba(33,45,81,.15); }
+.gobar-org-tree li.highlighted > .gobar-org-row .gobar-org-row-name,
+.gobar-org-tree li.highlighted > details > summary .gobar-org-row-name { color: #372F86; text-decoration: underline; }
