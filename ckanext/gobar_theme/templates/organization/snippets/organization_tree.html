@@ -1,25 +1,32 @@
 {#
-Override del árbol de ckanext-hierarchy: misma recursión y highlight de
-búsqueda, pero cada nodo como fila con logo y cantidad de datasets, y sin el
-asset viejo de hierarchy (los estilos viven en gobar-base.css).
+Override del árbol de ckanext-hierarchy según el handoff de diseño 2a:
+árbol tipo explorador de directorios, sin contenedor propio. Los padres
+son <details> nativos (colapsados por defecto, varios abiertos a la vez); el
+nombre navega, el resto de la fila expande/colapsa. Estilos en gobar-base.css.
 
-top_nodes - nodos raíz de h.group_tree() (name/title/highlighted/children)
+top_nodes  - nodos raíz de h.group_tree() (name/title/highlighted/children)
+expand_all - abrir todos los padres (se usa cuando hay búsqueda activa)
 #}
 {% set org_details = h.gobar_org_details_by_name() %}
 
-<ul class="hierarchy-tree-top gobar-org-tree">
-  {% for node in top_nodes recursive %}
-    {% set org = org_details.get(node.name) %}
-    <li id="node_{{ node.name }}"{% if node.highlighted %} class="highlighted"{% endif %}>
-      <a href="{{ h.url_for('organization.read', id=node.name) }}" class="gobar-org-row">
-        <span class="gobar-org-row-name">{{ node.title }}</span>
-        {% if org %}
-          <span class="gobar-org-row-count">{{ org.package_count }} datasets</span>
+<ul class="gobar-org-tree">
+    {% for node in top_nodes recursive %}
+      {% set org = org_details.get(node.name) %}
+      <li id="node_{{ node.name }}"{% if node.highlighted %} class="highlighted"{% endif %}>
+        {% if node.children %}
+          <details class="gobar-org-branch"{% if expand_all or node.highlighted %} open{% endif %}>
+            <summary class="gobar-org-row">
+              <a href="{{ h.url_for('organization.read', id=node.name) }}" class="gobar-org-row-name">{{ node.title }}</a>
+              {% if org %}<span class="gobar-org-row-count">{{ org.package_count }} datasets</span>{% endif %}
+            </summary>
+            <ul class="gobar-org-children">{{ loop(node.children) }}</ul>
+          </details>
+        {% else %}
+          <div class="gobar-org-row">
+            <a href="{{ h.url_for('organization.read', id=node.name) }}" class="gobar-org-row-name">{{ node.title }}</a>
+            {% if org %}<span class="gobar-org-row-count">{{ org.package_count }} datasets</span>{% endif %}
+          </div>
         {% endif %}
-      </a>
-      {% if node.children %}
-        <ul class="hierarchy-tree">{{ loop(node.children) }}</ul>
-      {% endif %}
-    </li>
-  {% endfor %}
+      </li>
+    {% endfor %}
 </ul>
