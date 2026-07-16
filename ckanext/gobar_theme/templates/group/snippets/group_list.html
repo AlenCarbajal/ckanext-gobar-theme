@@ -1,0 +1,25 @@
+{#
+Override del listado de /group: grilla de filas compactas (mismo patrón que
+las categorías de la home) en vez de la media-grid del core / árbol de
+groups_hierarchy. Los temas rara vez tienen jerarquía.
+
+groups - lista de groups (page.items, con all_fields)
+#}
+{% block group_list %}
+<div class="gobar-cat-grid gobar-temas-grid">
+  {% for group in groups %}
+    <a href="{{ h.url_for((group.type or 'group') ~ '.read', id=group.name) }}"
+       class="gobar-cat-card">
+      {% if group.image_display_url %}
+        <img src="{{ group.image_display_url }}" alt="" />
+      {% else %}
+        <div class="cat-icon-placeholder">
+          <i class="fa fa-folder-open"></i>
+        </div>
+      {% endif %}
+      <div class="gobar-cat-card-name">{{ group.display_name }}</div>
+      <div class="gobar-cat-card-count">{{ group.package_count }}</div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}
