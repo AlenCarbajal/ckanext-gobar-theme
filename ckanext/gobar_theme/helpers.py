@@ -62,6 +62,23 @@ def gobar_organizations_with_details(limit: int = 20) -> list[dict[str, Any]]:
         return []
 
 
+def gobar_org_details_by_name() -> dict[str, dict[str, Any]]:
+    """Mapa nombre → org (logo, package_count) para el árbol de /organization.
+
+    ponytail: all_fields está capado por
+    ckan.group_and_organization_list_all_fields_max (default 25); con más
+    organismos que eso, los excedentes se muestran sin logo/count — subir ese
+    valor en la config si hace falta.
+    """
+    try:
+        orgs = toolkit.get_action("organization_list")(
+            {"ignore_auth": True}, {"all_fields": True}
+        )
+        return {o["name"]: o for o in orgs}
+    except Exception:
+        return {}
+
+
 # ── Custom pages helpers ──
 
 def gobar_page_list() -> list[dict[str, str]]:
@@ -325,6 +342,7 @@ def get_helpers() -> dict[str, Any]:
         "gobar_group_count": gobar_group_count,
         "gobar_groups_with_details": gobar_groups_with_details,
         "gobar_organizations_with_details": gobar_organizations_with_details,
+        "gobar_org_details_by_name": gobar_org_details_by_name,
         # Custom pages
         "gobar_page_list": gobar_page_list,
         "gobar_get_config": gobar_get_config,

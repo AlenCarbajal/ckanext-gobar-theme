@@ -1,0 +1,25 @@
+{#
+Override del árbol de ckanext-hierarchy: misma recursión y highlight de
+búsqueda, pero cada nodo como fila con logo y cantidad de datasets, y sin el
+asset viejo de hierarchy (los estilos viven en gobar-base.css).
+
+top_nodes - nodos raíz de h.group_tree() (name/title/highlighted/children)
+#}
+{% set org_details = h.gobar_org_details_by_name() %}
+
+<ul class="hierarchy-tree-top gobar-org-tree">
+  {% for node in top_nodes recursive %}
+    {% set org = org_details.get(node.name) %}
+    <li id="node_{{ node.name }}"{% if node.highlighted %} class="highlighted"{% endif %}>
+      <a href="{{ h.url_for('organization.read', id=node.name) }}" class="gobar-org-row">
+        <span class="gobar-org-row-name">{{ node.title }}</span>
+        {% if org %}
+          <span class="gobar-org-row-count">{{ org.package_count }} datasets</span>
+        {% endif %}
+      </a>
+      {% if node.children %}
+        <ul class="hierarchy-tree">{{ loop(node.children) }}</ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

@@ -247,3 +247,15 @@ ul.hierarchy-tree li.highlighted > a {
 /* /group y /organization (índices): sin sidebar de ayuda, el primary pasa
    a ocupar todo el ancho en vez de dejar la columna vacía. */
 body.one-column .primary { width: 100%; max-width: 100%; float: none; }
+
+/* ── Listados de /organization (árbol de organismos) y /group (temas) ── */
+.gobar-temas-grid { margin-top: 24px; }
+
+.gobar-org-tree { list-style: none; padding: 0; margin: 24px 0 0; max-width: 780px; }
+.gobar-org-tree ul.hierarchy-tree { list-style: none; margin: 0 0 8px 24px; padding-left: 20px; border-left: 2px solid #DEE2E6; }
+.gobar-org-row { display: flex; align-items: center; gap: 14px; padding: 12px 18px; margin-bottom: 8px; background: var(--gobar-blanco); border: 1px solid #DEE2E6; border-radius: 4px; color: var(--gobar-navy) !important; text-decoration: none !important; transition: border-color .15s, box-shadow .15s; }
+.gobar-org-row:hover { border-color: var(--gobar-primary); box-shadow: 0 1px 3px rgba(33,45,81,.1); }
+.gobar-org-row-name { flex: 1; font-family: var(--font-cuerpo); font-size: 15px; font-weight: 600; line-height: 1.35; }
+.gobar-org-row-count { font-family: var(--font-cuerpo); font-size: 13px; color: var(--gobar-gris-oscuro); white-space: nowrap; }
+/* Resultado resaltado por la búsqueda del árbol (hierarchy) */
+.gobar-org-tree li.highlighted > .gobar-org-row { border-color: var(--gobar-primary); box-shadow: 0 1px 3px rgba(33,45,81,.15); }

@@ -1,0 +1,12 @@
+{#
+Override del listado de ckanext-hierarchy, sin el div #publisher-tree que
+solo agregaba un contenedor de más. Mantiene la lógica de highlight cuando
+hay búsqueda.
+#}
+{% if q is not defined %}{% set q = c.q %}{% endif %}
+{% if q %}
+  {% set top_nodes = h.group_tree_highlight(organizations, h.group_tree(type_='organization')) %}
+{% else %}
+  {% set top_nodes = h.group_tree(organizations=organizations, type_='organization') %}
+{% endif %}
+{% snippet 'organization/snippets/organization_tree.html', top_nodes=top_nodes %}
