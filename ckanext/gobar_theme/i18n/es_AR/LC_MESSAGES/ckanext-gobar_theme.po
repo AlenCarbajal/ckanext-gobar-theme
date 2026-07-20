@@ -274,8 +274,8 @@ msgstr "Privado"
 msgid "There is no description for this dataset"
 msgstr "No hay descripción para este dataset"
 
-#~ msgid "Datasets"
-#~ msgstr "Datasets"
+# NOTA: "Datasets" se activa como override de core más abajo (→ "datasets"),
+# por eso ya NO figura acá como entrada obsoleta (evita duplicado activo+#~).
 
 #~ msgid "Add Dataset"
 #~ msgstr "Agregar dataset"
@@ -429,3 +429,56 @@ msgstr[1] "{number} temas encontrados"
 
 msgid "No groups found"
 msgstr "No se encontraron temas"
+
+# --- Familia "organization": /organization se presenta como "Organismos" ---
+# El helper del theme reetiqueta la nav propia; estos overrides cubren las
+# páginas que renderiza CKAN CORE (índice/formularios/perfil de usuario),
+# donde el helper no llega.
+# EN SCOPE (etiquetas visibles de la UI de organizaciones que emite core):
+#   Organizations (PLURAL), Add Organization, Edit Organization,
+#   el empty-state del índice, y el contador {number} organization found
+#   (+plural, +for "{query}", +No organizations).
+# FUERA DE SCOPE (a propósito — NO tocar, mismo criterio que "Group" singular):
+#   "Organization" (SINGULAR suelto: validators/converters/views/stats/API,
+#     riesgo colateral global — puede deber quedar "Organización"),
+#   "There are no organizations to which you can assign this dataset.",
+#   "There are no organizations to purge",
+#   "{number} organizations have been purged",
+#   "Datasets with no organization can't be private."
+#     (errores / flash / papelera de sysadmin / API — no son la UI objetivo).
+msgid "Organizations"
+msgstr "Organismos"
+
+msgid "Add Organization"
+msgstr "Agregar organismo"
+
+msgid "Edit Organization"
+msgstr "Editar organismo"
+
+msgid "There are currently no organizations for this site"
+msgstr "Todavía no hay organismos en este portal"
+
+msgid "{number} organization found for \"{query}\""
+msgid_plural "{number} organizations found for \"{query}\""
+msgstr[0] "{number} organismo encontrado para \"{query}\""
+msgstr[1] "{number} organismos encontrados para \"{query}\""
+
+msgid "No organizations found for \"{query}\""
+msgstr "No se encontraron organismos para \"{query}\""
+
+msgid "{number} organization found"
+msgid_plural "{number} organizations found"
+msgstr[0] "{number} organismo encontrado"
+msgstr[1] "{number} organismos encontrados"
+
+msgid "No organizations found"
+msgstr "No se encontraron organismos"
+
+# --- Residuales de "dataset" que emite core (breadcrumb/tab y placeholder) ---
+# "Datasets": tab/label en perfiles de usuario y grupo (context/*, user/*).
+# "Search datasets...": placeholder de core (ckanext.tracking) — puntos ASCII.
+msgid "Datasets"
+msgstr "datasets"
+
+msgid "Search datasets..."
+msgstr "Buscar datasets..."
