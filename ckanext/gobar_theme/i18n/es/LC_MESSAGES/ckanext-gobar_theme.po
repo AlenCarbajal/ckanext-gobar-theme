@@ -270,21 +270,14 @@ msgstr "No hay descripción para este dataset"
 #~ msgid "Add Dataset"
 #~ msgstr "Agregar dataset"
 
+# NOTA: "There are no datasets that match this search" NO existe como msgid en
+# CKAN core 2.11 (verificado byte-exacto contra ckan.pot: core sólo emite el
+# parametrizado "There are no {facet_type} that match this search", ya activo
+# más arriba). Se deja OBSOLETO a propósito: activarlo sería una entrada muerta
+# que ITranslation nunca consulta. El vacío de "no hay resultados" en /dataset
+# ya lo cubre "No datasets found" (abajo, activo).
 #~ msgid "There are no datasets that match this search"
 #~ msgstr "No hay datasets que coincidan con esta búsqueda"
-
-#~ msgid "{number} dataset found for \"{query}\""
-#~ msgid_plural "{number} datasets found for \"{query}\""
-#~ msgstr[0] "{number} dataset encontrado para \"{query}\""
-#~ msgstr[1] "{number} datasets encontrados para \"{query}\""
-
-#~ msgid "{number} dataset found"
-#~ msgid_plural "{number} datasets found"
-#~ msgstr[0] "{number} dataset encontrado"
-#~ msgstr[1] "{number} datasets encontrados"
-
-#~ msgid "No datasets found"
-#~ msgstr "No se encontraron datasets"
 
 #~ msgid "Dataset extent"
 #~ msgstr "Extensión espacial"
@@ -299,12 +292,117 @@ msgstr "No hay descripción para este dataset"
 #~ msgstr "Cancelar"
 
 
-# Overrides de CKAN core: /group se llama "Temas" en este portal
+# ==========================================================================
+# OVERRIDES MANUALES DE CKAN CORE  (mantenimiento manual — NO auto-generado)
+# --------------------------------------------------------------------------
+# Sobrescriben traducciones de CKAN core por msgid idéntico (vía ITranslation).
+# NO llevan comentario `#:` porque NO salen de un pybabel extract de este repo:
+# se transcriben BYTE-EXACTAS desde ckan/i18n/ckan.pot del core instalado.
+#
+# HAZARD: `pybabel update` re-obsoleta (#~) estas entradas por no tener
+#   call-site en el theme. Si eso pasa hay que RE-ACTIVARLAS a mano (sacar el
+#   `#~`). Ya ocurrió una vez con el contador de datasets.
+# ==========================================================================
+
+# --- Contador de datasets: forzar "dataset(s)" en vez de "conjunto(s) de
+#     datos" (core: ckan/templates/snippets/search_result_text.html) ---
+msgid "{number} dataset found for \"{query}\""
+msgid_plural "{number} datasets found for \"{query}\""
+msgstr[0] "{number} dataset encontrado para \"{query}\""
+msgstr[1] "{number} datasets encontrados para \"{query}\""
+
+msgid "No datasets found for \"{query}\""
+msgstr "No se encontraron datasets para \"{query}\""
+
+msgid "{number} dataset found"
+msgid_plural "{number} datasets found"
+msgstr[0] "{number} dataset encontrado"
+msgstr[1] "{number} datasets encontrados"
+
+msgid "No datasets found"
+msgstr "No se encontraron datasets"
+
+# --- Familia "group": /group se presenta como "Temas" en este portal ---
+# EN SCOPE (etiquetas visibles de la UI de grupos: nav, listados, títulos,
+#   botones, widget de asociación dataset<->grupo):
+#   Groups, Group Form, Add Group, Edit Group, Create a Group, Create Group,
+#   Update Group, Save Group, My Group, My Groups, Search groups...,
+#   What are Groups?, Add to group, Associate this group with this dataset,
+#   Remove dataset from this group, Datasets in group: {group},
+#   There are no groups associated with this dataset,
+#   There are currently no groups for this site,
+#   A little information about my group..., los dos "delete group",
+#   y el contador {number} group found (+plural, +for "{query}", +No groups).
+# FUERA DE SCOPE (a propósito — NO tocar):
+#   "Group" (singular suelto: validators.py/converters.py/views/group.py/stats,
+#     riesgo colateral alto — puede deber quedar "Grupo"),
+#   "Group name already exists in database", "Group not found",
+#   "Group was not found.", "Group member has been deleted.",
+#   "{number} groups have been purged", "There are no groups to purge"
+#     (errores / flash / papelera de sysadmin),
+#   "No groups" (label de ckanext-stats, no es la UI objetivo).
 msgid "Groups"
 msgstr "Temas"
 
+msgid "Group Form"
+msgstr "Formulario de tema"
+
+msgid "Add Group"
+msgstr "Agregar tema"
+
+msgid "Edit Group"
+msgstr "Editar tema"
+
+msgid "Create a Group"
+msgstr "Crear un tema"
+
+msgid "Create Group"
+msgstr "Crear tema"
+
+msgid "Update Group"
+msgstr "Actualizar tema"
+
+msgid "Save Group"
+msgstr "Guardar tema"
+
+msgid "My Group"
+msgstr "Mi tema"
+
+msgid "My Groups"
+msgstr "Mis temas"
+
+msgid "Search groups..."
+msgstr "Buscar temas..."
+
+msgid "What are Groups?"
+msgstr "¿Qué son los temas?"
+
+msgid "Add to group"
+msgstr "Agregar a un tema"
+
+msgid "Associate this group with this dataset"
+msgstr "Asociar este tema a este dataset"
+
+msgid "Remove dataset from this group"
+msgstr "Quitar el dataset de este tema"
+
+msgid "There are no groups associated with this dataset"
+msgstr "No hay temas asociados a este dataset"
+
 msgid "There are currently no groups for this site"
 msgstr "Todavía no hay temas en este portal"
+
+msgid "Datasets in group: {group}"
+msgstr "Datasets en el tema: {group}"
+
+msgid "Are you sure you want to delete this Group?"
+msgstr "¿Estás seguro de que querés eliminar este tema?"
+
+msgid "Are you sure you want to delete group - {name}?"
+msgstr "¿Estás seguro de que querés eliminar el tema - {name}?"
+
+msgid "A little information about my group..."
+msgstr "Un poco de información sobre este tema..."
 
 msgid "{number} group found for \"{query}\""
 msgid_plural "{number} groups found for \"{query}\""
