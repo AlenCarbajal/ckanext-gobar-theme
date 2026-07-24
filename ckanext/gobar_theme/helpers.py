@@ -112,25 +112,25 @@ def gobar_productos_list() -> list[dict[str, str]]:
             "title": "Portal Andino",
             "description": "Plataforma de publicación de datos abiertos para organismos del Estado.",
             "logo": "images/Logo_Andino_Color.png",
-            "url": "https://github.com/datosgobar/portal-andino",
+            "url": "https://www.argentina.gob.ar/portal-andino",
         },
         {
             "title": "Georef",
             "description": "Servicio de normalización y codificación de datos geográficos de Argentina.",
             "logo": "images/Logo_Georef_Color.png",
-            "url": "https://georef-ar-api.readthedocs.io",
+            "url": "https://www.argentina.gob.ar/georef",
         },
         {
             "title": "Paquete de Apertura de Datos",
             "description": "Herramientas y guías para publicar datos abiertos de calidad.",
             "logo": "images/Logo_Paqueta-Apertura-Datos_Color.png",
-            "url": "https://github.com/datosgobar/paquete-apertura-datos",
+            "url": "https://www.argentina.gob.ar/paquete-de-apertura",
         },
         {
             "title": "Series de Tiempo",
             "description": "API para acceder y explorar series de tiempo de datos económicos y estadísticos.",
             "logo": "images/Logo_Series_de_Tiempo.png",
-            "url": "https://apis.datos.gob.ar/series",
+            "url": "https://www.argentina.gob.ar/datos-abiertos/api-series-de-tiempo",
         },
     ]
 

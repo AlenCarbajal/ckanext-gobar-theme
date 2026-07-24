@@ -105,4 +105,6 @@
 
   <h2>Sobre CKAN</h2>
   {% snippet 'home/snippets/about_text.html' %}
+
+  <p>{{ _('Este portal corre sobre CKAN {version}.').format(version=h.ckan_version()) }}</p>
 {% endblock %}
