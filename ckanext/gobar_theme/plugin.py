@@ -75,6 +75,13 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         # Favicon oficial de argentina.gob.ar, servido desde el public/ del
         # theme (el default de core es /base/images/ckan.ico).
         config_["ckan.favicon"] = "/images/favicon.ico"
+        # ponytail: default de core es 25 y el ckan.ini del portal ya lo fija
+        # explícito en ese valor, así que setdefault() no alcanza (update_config
+        # corre después del ini y necesita pisarlo). Con más organismos que
+        # esto, gobar_org_details_by_name() pierde logo/count de los
+        # excedentes (ver helpers.py). Si algún perfil necesitara otro valor,
+        # cambiarlo acá (no hay caso de uso hoy para que sea por-perfil).
+        config_["ckan.group_and_organization_list_all_fields_max"] = 200
 
     # ── IBlueprint ──
     def get_blueprint(self) -> list:

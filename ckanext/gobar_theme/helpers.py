@@ -66,9 +66,10 @@ def gobar_org_details_by_name() -> dict[str, dict[str, Any]]:
     """Mapa nombre → org (logo, package_count) para el árbol de /organization.
 
     ponytail: all_fields está capado por
-    ckan.group_and_organization_list_all_fields_max (default 25); con más
-    organismos que eso, los excedentes se muestran sin logo/count — subir ese
-    valor en la config si hace falta.
+    ckan.group_and_organization_list_all_fields_max (default core 25, el
+    theme lo sube a 200 en plugin.py update_config); con más organismos que
+    eso, los excedentes se muestran sin logo/count — subir ese valor en la
+    config si hiciera falta más.
     """
     try:
         orgs = toolkit.get_action("organization_list")(
@@ -113,7 +114,15 @@ def gobar_dedupe_top_nodes(top_nodes: list[dict]) -> list[dict]:
     # ``member`` de esos organismos; acá solo evitamos el duplicado visual.
     # Solo para el listado top-level (organization_list.html): el render de
     # hijos dentro del árbol expandido no pasa por acá.
+
+    ``top_nodes`` puede venir recortado a una sola página (CKAN pagina
+    ``/organization`` y pasa solo ``page.items`` a ``h.group_tree()``), así
+    que un hijo cuyo padre cayó en OTRA página se ve "top-level" en su propia
+    página aunque no lo sea. Por eso el set de "es hijo de algo" se arma
+    contra el árbol GLOBAL (sin restringir a ``organizations``), no contra
+    ``top_nodes`` — si no, el dedupe solo funciona dentro de una misma página.
     """
+    full_tree = toolkit.h.group_tree(type_="organization")
     child_names: set = set()
 
     def collect(nodes: list[dict]) -> None:
@@ -123,7 +132,7 @@ def gobar_dedupe_top_nodes(top_nodes: list[dict]) -> list[dict]:
                 child_names.add(child.get("name"))
             collect(children)
 
-    collect(top_nodes)
+    collect(full_tree)
     return [n for n in top_nodes if n.get("name") not in child_names]
 
 

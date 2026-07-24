@@ -57,8 +57,11 @@ def test_org_tree_with_counts_missing_details_default_zero(monkeypatch):
     assert by_name["economia"]["subtree_package_count"] == 0
 
 
-def test_dedupe_top_nodes_removes_nested_duplicate():
+def test_dedupe_top_nodes_removes_nested_duplicate(monkeypatch):
     top_nodes, by_name = _tree()
+    monkeypatch.setattr(
+        helpers.toolkit.h, "group_tree", lambda type_: top_nodes, raising=False
+    )
     # super_seguros aparece anidado bajo economia Y suelto en el top-level.
     top_nodes.append(by_name["super_seguros"])
 
@@ -68,6 +71,29 @@ def test_dedupe_top_nodes_removes_nested_duplicate():
     assert names == ["economia", "salud"]  # duplicado top-level filtrado
 
 
-def test_dedupe_top_nodes_noop_without_duplicates():
+def test_dedupe_top_nodes_noop_without_duplicates(monkeypatch):
     top_nodes, _ = _tree()
+    monkeypatch.setattr(
+        helpers.toolkit.h, "group_tree", lambda type_: top_nodes, raising=False
+    )
     assert helpers.gobar_dedupe_top_nodes(top_nodes) == top_nodes
+
+
+def test_dedupe_top_nodes_usa_arbol_global_no_la_pagina(monkeypatch):
+    # El bug real: /organization pagina y pasa solo esa página a group_tree(),
+    # así que un hijo cuyo padre cayó en OTRA página se ve "top-level" en la
+    # suya. El dedupe debe chequear contra el árbol GLOBAL, no contra
+    # top_nodes (que acá simula una página que ni siquiera contiene al padre).
+    full_top_nodes, by_name = _tree()
+    monkeypatch.setattr(
+        helpers.toolkit.h, "group_tree", lambda type_: full_top_nodes,
+        raising=False,
+    )
+    # "Página 2": solo trae super_seguros suelto (su padre economia quedó en
+    # la página 1 y no está en esta lista).
+    page_2_top_nodes = [by_name["super_seguros"], by_name["salud"]]
+
+    result = helpers.gobar_dedupe_top_nodes(page_2_top_nodes)
+
+    names = [n["name"] for n in result]
+    assert names == ["salud"]  # super_seguros se filtra aunque su padre no esté en esta página
