@@ -9,4 +9,5 @@ hay búsqueda.
 {% else %}
   {% set top_nodes = h.group_tree(organizations=organizations, type_='organization') %}
 {% endif %}
+{% set top_nodes = h.gobar_org_tree_with_counts(h.gobar_dedupe_top_nodes(top_nodes)) %}
 {% snippet 'organization/snippets/organization_tree.html', top_nodes=top_nodes, expand_all=q %}
