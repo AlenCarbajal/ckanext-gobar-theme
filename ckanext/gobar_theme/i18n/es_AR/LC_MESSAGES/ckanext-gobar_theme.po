@@ -482,3 +482,96 @@ msgstr "datasets"
 
 msgid "Search datasets..."
 msgstr "Buscar datasets..."
+
+# Overrides adicionales de core (activity stream, forms, purge, empty states)
+# sumados en la reconciliación de features/organismos-ux-y-recursos:
+msgid "{actor} created the organization {organization}"
+msgstr "{actor} creó el organismo {organization}"
+
+msgid "{actor} deleted the organization {organization}"
+msgstr "{actor} eliminó el organismo {organization}"
+
+msgid "{actor} updated the organization {organization}"
+msgstr "{actor} actualizó el organismo {organization}"
+
+msgid "{number} organizations have been purged"
+msgstr "{number} organismos fueron purgados"
+
+msgid "A little information about my organization..."
+msgstr "Un poco de información sobre mi organismo..."
+
+msgid "Added {pkg_link} to organization {new_org_link}"
+msgstr "Se agregó {pkg_link} al organismo {new_org_link}"
+
+
+msgid "Are you sure you want to delete organization - {name}?"
+msgstr "¿Seguro que querés eliminar el organismo - {name}?"
+
+msgid "Are you sure you want to purge organizations?"
+msgstr "¿Seguro que querés purgar los organismos?"
+
+msgid "Before you can create a dataset you need to create an organization."
+msgstr "Antes de crear un dataset necesitás crear un organismo."
+
+msgid "Create a new organization"
+msgstr "Crear un nuevo organismo"
+
+msgid "Create an Organization"
+msgstr "Crear un Organismo"
+
+msgid "Create Organization"
+msgstr "Crear Organismo"
+
+msgid "Datasets in organization: {group}"
+msgstr "Datasets en el organismo: {group}"
+
+msgid "Deleted organizations"
+msgstr "Organismos eliminados"
+
+msgid "My Organization"
+msgstr "Mi Organismo"
+
+msgid "My Organizations"
+msgstr "Mis Organismos"
+
+msgid "No Organization"
+msgstr "Sin organismo"
+
+msgid "Organization Form"
+msgstr "Formulario de Organismo"
+
+msgid "Organization"
+msgstr "Organismo"
+
+msgid "Removed {pkg_link} from organization {old_org_link}"
+msgstr "Se quitó {pkg_link} del organismo {old_org_link}"
+
+msgid "Save Organization"
+msgstr "Guardar Organismo"
+
+msgid "Search organizations..."
+msgstr "Buscar organismos..."
+
+msgid "There are no organizations to purge"
+msgstr "No hay organismos para purgar"
+
+msgid "There are no organizations to which you can assign this dataset."
+msgstr "No hay organismos a los que puedas asignar este dataset."
+
+msgid "There is no description for this organization"
+msgstr "No hay descripción para este organismo"
+
+msgid "This organization has no datasets associated to it"
+msgstr "Este organismo no tiene datasets asociados"
+
+msgid "Update Organization"
+msgstr "Actualizar Organismo"
+
+msgid "View {organization_name}"
+msgstr "Ver {organization_name}"
+
+msgid "What are Organizations?"
+msgstr "¿Qué son los Organismos?"
+
+msgid "You are not a member of any organizations."
+msgstr "No sos miembro de ningún organismo."

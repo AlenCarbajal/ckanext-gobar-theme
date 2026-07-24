@@ -79,6 +79,54 @@ def gobar_org_details_by_name() -> dict[str, dict[str, Any]]:
         return {}
 
 
+def gobar_org_tree_with_counts(top_nodes: list[dict]) -> list[dict]:
+    """Anota cada nodo de ``h.group_tree()`` con ``subtree_package_count``:
+    el ``package_count`` propio + el de todos sus descendientes (colapsado).
+
+    El count individual de cada organismo se resuelve por nombre con
+    ``gobar_org_details_by_name()`` (una sola llamada; no llamar por nodo).
+    Muta los dicts de ``group_tree`` in-place y los devuelve, así el snippet
+    del árbol lee ``node.subtree_package_count`` directamente.
+    """
+    details = gobar_org_details_by_name()
+
+    def annotate(node: dict) -> int:
+        own = (details.get(node.get("name")) or {}).get("package_count", 0) or 0
+        total = own + sum(annotate(c) for c in node.get("children") or [])
+        node["subtree_package_count"] = total
+        return total
+
+    for node in top_nodes:
+        annotate(node)
+    return top_nodes
+
+
+def gobar_dedupe_top_nodes(top_nodes: list[dict]) -> list[dict]:
+    """Filtra del listado top-level cualquier organismo que también aparezca
+    anidado como hijo de otro nodo del árbol.
+
+    # ponytail: parche de RENDER. El duplicado real (un organismo que sale
+    # anidado bajo un ministerio Y a la vez suelto en el top-level del listado
+    # paginado de /organization) nace de las relaciones ``member`` en los datos
+    # y de cómo ckanext-hierarchy arma el árbol — ambos externos a este repo
+    # (I1, no tocables). Para resolverlo de raíz hay que auditar las relaciones
+    # ``member`` de esos organismos; acá solo evitamos el duplicado visual.
+    # Solo para el listado top-level (organization_list.html): el render de
+    # hijos dentro del árbol expandido no pasa por acá.
+    """
+    child_names: set = set()
+
+    def collect(nodes: list[dict]) -> None:
+        for node in nodes:
+            children = node.get("children") or []
+            for child in children:
+                child_names.add(child.get("name"))
+            collect(children)
+
+    collect(top_nodes)
+    return [n for n in top_nodes if n.get("name") not in child_names]
+
+
 # ── Custom pages helpers ──
 
 def gobar_page_list() -> list[dict[str, str]]:
@@ -205,7 +253,7 @@ def gobar_institutional_url() -> str:
 
 def gobar_organizations_label() -> str:
     return toolkit.config.get(
-        "ckanext.gobar_theme.organizations_label", "Organizaciones"
+        "ckanext.gobar_theme.organizations_label", "Organismos"
     )
 
 
@@ -343,6 +391,8 @@ def get_helpers() -> dict[str, Any]:
         "gobar_groups_with_details": gobar_groups_with_details,
         "gobar_organizations_with_details": gobar_organizations_with_details,
         "gobar_org_details_by_name": gobar_org_details_by_name,
+        "gobar_org_tree_with_counts": gobar_org_tree_with_counts,
+        "gobar_dedupe_top_nodes": gobar_dedupe_top_nodes,
         # Custom pages
         "gobar_page_list": gobar_page_list,
         "gobar_get_config": gobar_get_config,

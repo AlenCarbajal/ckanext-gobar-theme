@@ -114,7 +114,7 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         # otro término (p. ej. "Organismos", "Dependencias"). Opcional: el
         # default preserva el texto actual en todos los perfiles.
         declaration.declare(
-            key.ckanext.gobar_theme.organizations_label, "Organizaciones"
+            key.ckanext.gobar_theme.organizations_label, "Organismos"
         )
         # Subtítulo opcional del hero de la home (perfil apn, que no trae uno
         # propio): vacío = no se muestra. Ej. MAGyP: "En este portal podrás

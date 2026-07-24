@@ -218,27 +218,30 @@ body.one-column .primary { width: 100%; max-width: 100%; float: none; }
 .gobar-org-tree, .gobar-org-children { list-style: none; padding: 0; }
 .gobar-org-children { margin: 0; }
 .gobar-org-branch { margin: 0; }
-.gobar-org-row { display: flex; align-items: center; gap: 8px; padding: 12px 4px; width: fit-content; font-family: var(--font-cuerpo); }
-.gobar-org-row::before { content: "\25B8"; color: #9CA0B5; font-size: 11px; line-height: 1; flex: none; }
+.gobar-org-row { display: flex; align-items: center; gap: 8px; padding: 12px 4px; width: 100%; font-family: var(--font-cuerpo); }
+/* Flecha solo en filas expandibles: el template usa <summary> para nodos con
+   hijos y <div> para hojas, así que apuntar a summary la muestra únicamente ahí
+   (incluye raíces sin hijos, que van como <div>). */
+summary.gobar-org-row::before { content: "\25B8"; color: var(--gobar-navy); font-size: 15px; line-height: 1; flex: none; }
 summary.gobar-org-row { cursor: pointer; list-style: none; user-select: none; }
 summary.gobar-org-row::-webkit-details-marker { display: none; }
 /* Foco solo cuando se navega con teclado; el click no deja el recuadro azul */
 summary.gobar-org-row:focus:not(:focus-visible) { outline: none; box-shadow: none; }
-details[open] > summary.gobar-org-row::before { content: "\25BE"; color: #372F86; }
-.gobar-org-row-name { font-size: 14.5px; font-weight: 700; color: #312E3D; text-decoration: none; transition: color .15s; }
+details[open] > summary.gobar-org-row::before { content: "\25BE"; color: var(--gobar-navy); }
+.gobar-org-row-name { font-size: 14.5px; font-weight: 700; color: #312E3D; text-decoration: none; transition: color .15s; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .gobar-org-row-name:hover { color: #372F86; text-decoration: underline; }
-.gobar-org-row-count { background: #F1EFFA; color: #7A76A8; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+.gobar-org-row-count { background: #F1EFFA; color: #7A76A8; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 5px; white-space: nowrap; flex: none; }
 /* Hijos: guía vertical dibujada por fila (::after) en vez de border-left del
    ul, así en la última fila corta justo en su conector y no sigue de largo */
 .gobar-org-children { margin-left: 15px; padding-left: 22px; }
 .gobar-org-children > li { position: relative; }
-.gobar-org-children > li::before { content: ""; position: absolute; left: -22px; top: 50%; width: 16px; height: 1.5px; background: #E4E2F0; }
+/* Conector anclado al centro de la FILA (~22px = 11px padding + media línea de
+   texto), no a top:50% del <li>: si el li contiene un <details> hijo expandido
+   crece en alto y el 50% se descuelga muy por debajo de su fila. */
+.gobar-org-children > li::before { content: ""; position: absolute; left: -22px; top: 22px; width: 16px; height: 1.5px; background: #E4E2F0; }
 .gobar-org-children > li::after { content: ""; position: absolute; left: -22px; top: 0; bottom: 0; width: 1.5px; background: #E4E2F0; }
-.gobar-org-children > li:last-child::after { bottom: auto; height: 50%; }
+.gobar-org-children > li:last-child::after { bottom: auto; height: 22px; }
 .gobar-org-children .gobar-org-row { padding: 11px 4px; }
-.gobar-org-children .gobar-org-row::before { content: none; }
-.gobar-org-children summary.gobar-org-row::before { content: "\25B8"; }
-.gobar-org-children details[open] > summary.gobar-org-row::before { content: "\25BE"; }
 .gobar-org-children .gobar-org-row-name { font-size: 13.5px; font-weight: 600; color: #372F86; }
 /* Resultado resaltado por la búsqueda del árbol (hierarchy) */
 .gobar-org-tree li.highlighted > .gobar-org-row .gobar-org-row-name,

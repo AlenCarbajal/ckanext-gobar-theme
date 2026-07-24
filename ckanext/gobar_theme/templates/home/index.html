@@ -136,7 +136,7 @@
              class="gobar-featured-card">
             <div class="gobar-featured-title">{{ pkg.title }}</div>
             <div class="gobar-featured-org">
-              {{ pkg.organization.title if pkg.organization else 'Sin organización' }}
+              {{ pkg.organization.title if pkg.organization else _('No Organization') }}
             </div>
             <div class="gobar-featured-desc">
               {{ h.truncate(pkg.notes or '', 120) }}
