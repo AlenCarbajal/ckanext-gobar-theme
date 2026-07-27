@@ -231,6 +231,11 @@ details[open] > summary.gobar-org-row::before { content: "\25BE"; color: var(--g
 .gobar-org-row-name { font-size: 14.5px; font-weight: 700; color: #312E3D; text-decoration: none; transition: color .15s; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .gobar-org-row-name:hover { color: #372F86; text-decoration: underline; }
 .gobar-org-row-count { background: #F1EFFA; color: #7A76A8; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 5px; white-space: nowrap; flex: none; }
+/* Padre colapsado muestra el total del subárbol; abierto, solo sus propios
+   datasets (los de los hijos ya figuran en cada fila hija). */
+.gobar-org-count-own { display: none; }
+details[open] > summary > .gobar-org-count-own { display: inline-block; }
+details[open] > summary > .gobar-org-count-total { display: none; }
 /* Hijos: guía vertical dibujada por fila (::after) en vez de border-left del
    ul, así en la última fila corta justo en su conector y no sigue de largo */
 .gobar-org-children { margin-left: 15px; padding-left: 22px; }

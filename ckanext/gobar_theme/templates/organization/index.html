@@ -1,5 +1,11 @@
 {% ckan_extends %}
 
+{# El listado y el pager se arman sobre las RAÍCES del árbol, no sobre la lista
+   plana de organismos que pagina core: los hijos se ven anidados bajo su padre,
+   así que ocupaban lugar en la página sin mostrarse en ella y dejaban las
+   páginas 2+ con uno o dos ítems. Ver h.gobar_org_root_page(). #}
+{% set org_page = h.gobar_org_root_page(q) %}
+
 {% block subtitle %}{{ h.gobar_organizations_label() }}{% endblock %}
 
 {% block breadcrumb_content %}
@@ -9,11 +15,20 @@
 {# h1 accesible (hide-heading) del core, con el label configurable #}
 {% block page_heading %}{{ h.gobar_organizations_label() }}{% endblock %}
 
-{# Solo se cambia el buscador; el listado (organizations_list) y la paginación
-   los sigue renderizando core. Overridear todo primary_content_inner borraba la
-   lista. #}
 {% block organizations_search_form %}
   {% snippet 'snippets/search_form.html', form_id='organization-search-form', type=group_type, query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder='Buscar ' ~ h.gobar_organizations_label()|lower ~ '...', show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
+{% endblock %}
+
+{% block organizations_list %}
+  {% if org_page.items %}
+    {% snippet 'organization/snippets/organization_tree.html', top_nodes=org_page.items, expand_all=q %}
+  {% elif not request.args %}
+    <p class="empty">{{ _('There are currently no organizations for this site') }}.</p>
+  {% endif %}
+{% endblock %}
+
+{% block page_pagination %}
+  {{ org_page.pager(q=q or '', sort=sort_by_selected or '') }}
 {% endblock %}
 
 {% block secondary %}{% endblock %}
