@@ -17,8 +17,11 @@ expand_all - abrir todos los padres (se usa cuando hay búsqueda activa)
           <details class="gobar-org-branch"{% if expand_all or node.highlighted %} open{% endif %}>
             <summary class="gobar-org-row">
               <a href="{{ h.url_for('organization.read', id=node.name) }}" class="gobar-org-row-name">{{ node.title }}</a>
+              {# Colapsado: total del subárbol. Expandido: solo los propios, que
+                 los de los hijos ya se ven en sus filas. Alterna por CSS. #}
               {% set branch_count = node.subtree_package_count if node.subtree_package_count is defined else (org.package_count if org else none) %}
-              {% if branch_count is not none %}<span class="gobar-org-row-count">{{ branch_count }} datasets</span>{% endif %}
+              {% if branch_count is not none %}<span class="gobar-org-row-count gobar-org-count-total">{{ branch_count }} datasets</span>{% endif %}
+              {% if org %}<span class="gobar-org-row-count gobar-org-count-own">{{ org.package_count }} datasets</span>{% endif %}
             </summary>
             <ul class="gobar-org-children">{{ loop(node.children) }}</ul>
           </details>

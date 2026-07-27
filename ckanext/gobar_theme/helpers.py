@@ -115,12 +115,14 @@ def gobar_dedupe_top_nodes(top_nodes: list[dict]) -> list[dict]:
     # Solo para el listado top-level (organization_list.html): el render de
     # hijos dentro del árbol expandido no pasa por acá.
 
-    ``top_nodes`` puede venir recortado a una sola página (CKAN pagina
-    ``/organization`` y pasa solo ``page.items`` a ``h.group_tree()``), así
-    que un hijo cuyo padre cayó en OTRA página se ve "top-level" en su propia
-    página aunque no lo sea. Por eso el set de "es hijo de algo" se arma
-    contra el árbol GLOBAL (sin restringir a ``organizations``), no contra
-    ``top_nodes`` — si no, el dedupe solo funciona dentro de una misma página.
+    ``top_nodes`` puede venir recortado a un subconjunto de organismos (el
+    snippet lo usan ``/dashboard/organizations`` y el perfil de usuario, que
+    pasan solo los del usuario), así que un hijo cuyo padre quedó fuera de esa
+    lista se ve "top-level" aunque no lo sea. Por eso el set de "es hijo de
+    algo" se arma contra el árbol GLOBAL, no contra ``top_nodes``.
+
+    ``/organization`` NO pasa por acá: pagina por raíces del árbol global con
+    ``gobar_org_root_page()``, donde por construcción no hay duplicados.
     """
     full_tree = toolkit.h.group_tree(type_="organization")
     child_names: set = set()
@@ -134,6 +136,40 @@ def gobar_dedupe_top_nodes(top_nodes: list[dict]) -> list[dict]:
 
     collect(full_tree)
     return [n for n in top_nodes if n.get("name") not in child_names]
+
+
+def gobar_org_root_page(q: str | None = None):
+    """Página del árbol de organismos, paginada por RAÍCES.
+
+    CKAN pagina la lista PLANA de organismos, pero ``/organization`` renderiza
+    un árbol donde solo las raíces son filas de primer nivel: los hijos se ven
+    anidados bajo su padre. Con la paginación de core, los hijos ocupaban lugar
+    en la página aunque no se mostraran ahí, y las páginas 2+ quedaban con uno o
+    dos ítems. Acá se pagina la lista de raíces, que es lo que efectivamente se
+    lista.
+
+    Devuelve un ``Page`` de core (mismo pager que el resto del sitio) con las
+    raíces de la página en ``.items``, ya anotadas con ``subtree_package_count``.
+    """
+    from ckan.lib.helpers import Page
+
+    top_nodes = gobar_org_tree_with_counts(
+        toolkit.h.group_tree(type_="organization")
+    )
+    if q:
+        # Marca las coincidencias sobre el árbol completo (no sobre la página
+        # de core, que solo traía las primeras N).
+        matches = toolkit.get_action("organization_list")(
+            {"ignore_auth": True}, {"q": q}
+        )
+        toolkit.h.group_tree_highlight([{"name": n} for n in matches], top_nodes)
+
+    return Page(
+        collection=top_nodes,
+        page=toolkit.h.get_page_number(toolkit.request.args),
+        url=toolkit.h.pager_url,
+        items_per_page=toolkit.config.get("ckan.datasets_per_page"),
+    )
 
 
 # ── Custom pages helpers ──
@@ -402,6 +438,7 @@ def get_helpers() -> dict[str, Any]:
         "gobar_org_details_by_name": gobar_org_details_by_name,
         "gobar_org_tree_with_counts": gobar_org_tree_with_counts,
         "gobar_dedupe_top_nodes": gobar_dedupe_top_nodes,
+        "gobar_org_root_page": gobar_org_root_page,
         # Custom pages
         "gobar_page_list": gobar_page_list,
         "gobar_get_config": gobar_get_config,
