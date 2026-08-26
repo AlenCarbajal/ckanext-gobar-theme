@@ -71,12 +71,4 @@ document.addEventListener('DOMContentLoaded', function () {
     track.addEventListener('scroll', updateButtons);
     updateButtons();
   }
-
-  // ── Custom pages nav active highlight ──
-  var currentPath = window.location.pathname;
-  document.querySelectorAll('.cp-nav-item a').forEach(function (link) {
-    if (link.getAttribute('href') === currentPath) {
-      link.parentElement.classList.add('active');
-    }
-  });
 });

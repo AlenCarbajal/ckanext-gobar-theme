@@ -7,45 +7,16 @@
    necesitar !important ni un <style>/:root aparte. #}
 {% block bodytag %}{{ super() }} class="theme-profile-{{ h.gobar_theme_profile() }}{% if request.path == '/' %} homepage{% endif %}{% if '/series' in request.path %} series-page{% endif %}{% if request.path in ('/group', '/group/', '/organization', '/organization/') %} one-column{% endif %}"{% set color_style = h.gobar_color_overrides_style() %}{% if color_style %} style="{{ color_style }}"{% endif %}{% endblock %}
 
+{# Solo se overridean bloques que core define EN base.html (bodytag, styles,
+   scripts). breadcrumb_content y primary viven en page.html, que es hijo de
+   este template: definirlos acá no renderiza nada. El bloque subtitle tampoco
+   va acá — cada página define el suyo. #}
 {% block styles %}
   {{ super() }}
   {% asset 'gobar_theme/gobar_theme_css' %}
 {% endblock %}
 
-{% block subtitle %}{{ page_title }} - {{ super() }}{% endblock %}
-{% block breadcrumb_content %}
-  <li class="breadcrumb-item"><a href="/paginas">Páginas</a></li>
-  {% block breadcrumb_extra %}{% endblock %}
-{% endblock %}
-
-{% block primary %}
-<div class="cp-wrapper">
-  <div class="cp-layout">
-    <aside class="cp-sidebar">
-      {% block custom_page_sidebar %}
-      <nav class="cp-nav" aria-label="Páginas del portal">
-        <h3 class="cp-nav-title">Páginas</h3>
-        <ul class="cp-nav-list">
-          {% for pg in h.gobar_page_list() %}
-          <li class="cp-nav-item {% if request.path == pg.url %}active{% endif %}">
-            <a href="{{ pg.url }}"><i class="fa fa-{{ pg.icon }}" aria-hidden="true"></i> {{ pg.title }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </nav>
-      {% endblock %}
-    </aside>
-    <section class="cp-main">
-      {% block page_heading %}<h1 class="cp-title">{{ page_title }}</h1>{% endblock %}
-      {% block page_description %}{% if page_description %}<p class="cp-description">{{ page_description }}</p>{% endif %}{% endblock %}
-      <div class="cp-body">{% block custom_page_content %}{% endblock %}</div>
-    </section>
-  </div>
-</div>
-{% endblock %}
-
 {% block scripts %}
   {{ super() }}
   {% asset 'gobar_theme/gobar_theme_js' %}
-  {% block custom_page_scripts %}{% endblock %}
 {% endblock %}

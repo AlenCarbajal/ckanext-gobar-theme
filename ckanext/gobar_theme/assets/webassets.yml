@@ -6,7 +6,6 @@ gobar_theme_css:
   contents:
     - css/gobar-base.css
     - css/gobar-home.css
-    - css/gobar-custom-pages.css
     - css/gobar-search.css
 
 gobar_theme_js:
