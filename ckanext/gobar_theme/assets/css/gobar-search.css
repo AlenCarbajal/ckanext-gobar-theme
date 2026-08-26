@@ -250,6 +250,22 @@
   margin: 0;
 }
 
+/* Metadatos del pie (estado + última modificación). margin-left:auto los
+   ancla a la derecha incluso cuando el dataset no tiene formatos a la
+   izquierda y el space-between del contenedor se queda sin segundo hijo. */
+.dataset-list .dataset-item .gobar-card-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.gobar-card-date {
+  font-size: 0.8rem;
+  color: var(--gobar-gris, #888);
+  white-space: nowrap;
+}
+
 /* Estado del dataset (derecha del pie), con punto de color */
 .gobar-card-status {
   display: inline-flex;

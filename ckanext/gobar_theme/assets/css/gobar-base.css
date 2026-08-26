@@ -251,3 +251,20 @@ details[open] > summary > .gobar-org-count-total { display: none; }
 /* Resultado resaltado por la búsqueda del árbol (hierarchy) */
 .gobar-org-tree li.highlighted > .gobar-org-row .gobar-org-row-name,
 .gobar-org-tree li.highlighted > details > summary .gobar-org-row-name { color: #372F86; text-decoration: underline; }
+
+/* ── Fecha de última modificación en el listado de recursos ── */
+.resource-item .gobar-res-date {
+  margin-left: 0.5rem;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gobar-gris, #888);
+  white-space: nowrap;
+}
+
+/* El botón "Explorar" de core está en position:absolute y queda fuera de
+   flujo: sin reservar este espacio, el título + la fecha se le meten por
+   debajo. Solo arriba de sm, que es donde core lo muestra (abajo de sm lo
+   oculta y el ancho completo vuelve a estar disponible). */
+@media (min-width: 576px) {
+  .resource-item { padding-right: 150px; }
+}

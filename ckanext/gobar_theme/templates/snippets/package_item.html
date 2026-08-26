@@ -6,7 +6,8 @@
     · título + chip de supertheme (acrónimo) arriba a la derecha
     · una línea de nodo (organización), atenuada
     · descripción
-    · pie separado por divisor: formatos (color CKAN) a la izquierda, estado a la derecha
+    · pie separado por divisor: formatos (color CKAN) a la izquierda,
+      estado + última modificación a la derecha
   CKAN 2.11 incluye este snippet desde snippets/package_list.html.
   `title` y `notes` los define el template padre a nivel módulo.
 #}
@@ -72,7 +73,8 @@
   {# El estado solo se muestra cuando NO es el estado "normal" (actualizado):
      se exhibe únicamente para estados marcados (desactualizado / sin mantenimiento). #}
   {% set show_status = status_label and status_label|lower not in ['actualizado'] %}
-  {% if has_res or show_status %}
+  {% set modified = package.metadata_modified %}
+  {% if has_res or show_status or modified %}
     <div class="gobar-card-footer">
       {% block resources %}
         {% if package.resources and not hide_resources %}
@@ -85,9 +87,14 @@
           </ul>
         {% endif %}
       {% endblock %}
-      {% if show_status %}
-        <span class="gobar-card-status" data-status="{{ status_label }}">{{ status_label }}</span>
-      {% endif %}
+      <div class="gobar-card-meta">
+        {% if show_status %}
+          <span class="gobar-card-status" data-status="{{ status_label }}">{{ status_label }}</span>
+        {% endif %}
+        {% if modified %}
+          <span class="gobar-card-date">{{ _('Últ. modif.') }} {{ h.gobar_format_date(modified) }}</span>
+        {% endif %}
+      </div>
     </div>
   {% endif %}
 {% endblock %}
