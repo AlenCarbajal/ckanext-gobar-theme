@@ -1,0 +1,17 @@
+{% ckan_extends %}
+
+{#
+  Override de ckanext-gobar-theme — item de recurso en "Datos y Recursos".
+  Agrega la fecha de última modificación del recurso a continuación del
+  título. Se usa super() para no duplicar el markup del <a class="heading">
+  de core (que incluye el truncate y el format-label).
+  last_modified es la fecha del archivo y puede venir vacía si el recurso
+  nunca se re-subió: en ese caso se cae a metadata_modified y luego a created.
+#}
+{% block resource_item_title %}
+  {{ super() }}
+  {% set res_modified = res.last_modified or res.metadata_modified or res.created %}
+  {% if res_modified %}
+    <span class="gobar-res-date">{{ h.gobar_format_date(res_modified) }}</span>
+  {% endif %}
+{% endblock %}

@@ -1,9 +1,12 @@
 """Tests unitarios de la lógica no trivial de helpers.py.
 
 Cubren el agregado recursivo del árbol de organismos y el dedupe del listado
-top-level. Ambos operan sobre dicts sintéticos de ``h.group_tree()``
-(name/title/children), sin fixtures de CKAN.
+top-level (sobre dicts sintéticos de ``h.group_tree()``, sin fixtures de
+CKAN) y el formateo de fechas que usan la tarjeta de dataset y el listado
+de recursos.
 """
+
+import pytest
 
 import ckanext.gobar_theme.helpers as helpers
 
@@ -97,3 +100,31 @@ def test_dedupe_top_nodes_usa_arbol_global_no_la_pagina(monkeypatch):
 
     names = [n["name"] for n in result]
     assert names == ["salud"]  # super_seguros se filtra aunque su padre no esté en esta página
+
+
+# ── gobar_format_date ──
+# Es la función que renderiza la fecha en la tarjeta de dataset
+# (package.metadata_modified) y en el listado de recursos
+# (resource.last_modified). Los casos son los formatos que efectivamente
+# emite CKAN, más la basura que puede llegar de un harvest.
+
+@pytest.mark.parametrize("valor,esperado", [
+    ("2024-03-15T10:23:45.123456", "15-03-2024"),  # metadata_modified
+    ("2024-03-15T10:23:45", "15-03-2024"),         # resource.last_modified
+    ("2024-03-15T10:23:45Z", "15-03-2024"),        # sufijo Z
+    ("2024-03-15T10:23:45+00:00", "15-03-2024"),   # con offset
+    ("2024-12-01T00:00:00", "01-12-2024"),         # cero-padding de día y mes
+])
+def test_format_date_formatos_de_ckan(valor, esperado):
+    assert helpers.gobar_format_date(valor) == esperado
+
+
+@pytest.mark.parametrize("vacio", [None, ""])
+def test_format_date_vacio_no_renderiza_nada(vacio):
+    # El template hace {% if %} sobre el valor crudo, pero si igual llegara
+    # acá tiene que devolver "" y no reventar.
+    assert helpers.gobar_format_date(vacio) == ""
+
+
+def test_format_date_invalida_devuelve_el_valor_original():
+    assert helpers.gobar_format_date("no-es-fecha") == "no-es-fecha"

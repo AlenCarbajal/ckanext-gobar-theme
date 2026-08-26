@@ -361,7 +361,7 @@ def gobar_featured_datasets(limit: int | None = None) -> list[dict[str, Any]]:
         return []
 
 
-def gobar_format_date(date_str: str | None, fmt: str = "%d/%m/%Y") -> str:
+def gobar_format_date(date_str: str | None, fmt: str = "%d-%m-%Y") -> str:
     if not date_str:
         return ""
     try:
