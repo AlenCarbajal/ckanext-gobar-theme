@@ -259,12 +259,28 @@ details[open] > summary > .gobar-org-count-total { display: none; }
   font-weight: 400;
   color: var(--gobar-gris, #888);
   white-space: nowrap;
+  /* Dígitos de ancho fijo: sin esto cada fecha mide distinto según los
+     números que le toquen y los bordes de la columna quedan desparejos. */
+  font-variant-numeric: tabular-nums;
 }
 
-/* El botón "Explorar" de core está en position:absolute y queda fuera de
-   flujo: sin reservar este espacio, el título + la fecha se le meten por
-   debajo. Solo arriba de sm, que es donde core lo muestra (abajo de sm lo
-   oculta y el ancho completo vuelve a estar disponible). */
+/* Arriba de sm la fecha sale del flujo y pasa a una columna fija, a la
+   izquierda del botón "Explorar" (que core ya posiciona absolute a la
+   derecha): así todas las fechas quedan alineadas entre sí en vez de
+   arrancar donde termine cada título. El padding reserva el ancho de esa
+   columna más el del botón, porque ambos están fuera de flujo y el texto
+   se les metería por debajo.
+   Abajo de sm core esconde el botón: ahí la fecha vuelve a ir en línea
+   después del título y se recupera el ancho completo. */
 @media (min-width: 576px) {
-  .resource-item { padding-right: 150px; }
+  /* Medidas de core: el botón "Explorar" mide ~135px y va a right:10px, o sea
+     que ocupa hasta los 145px desde el borde. La fecha (~76px) arranca 25px
+     más a la izquierda y el padding deja otros ~15px entre ella y el título. */
+  .resource-item { padding-right: 262px; }
+  .resource-item .gobar-res-date {
+    position: absolute;
+    top: 10px;
+    right: 170px;
+    margin-left: 0;
+  }
 }
