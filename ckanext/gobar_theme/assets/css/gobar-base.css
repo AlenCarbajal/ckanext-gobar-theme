@@ -274,13 +274,30 @@ details[open] > summary > .gobar-org-count-total { display: none; }
    después del título y se recupera el ancho completo. */
 @media (min-width: 576px) {
   /* Medidas de core: el botón "Explorar" mide ~135px y va a right:10px, o sea
-     que ocupa hasta los 145px desde el borde. La fecha (~76px) arranca 25px
-     más a la izquierda y el padding deja otros ~15px entre ella y el título. */
-  .resource-item { padding-right: 262px; }
+     que ocupa hasta los 145px desde el borde. El bloque de fecha arranca 25px
+     más a la izquierda (right:170px) y mide ~98px — lo manda la etiqueta, que
+     es más ancha que la fecha —, así que llega hasta los 268px. El padding
+     deja otros ~17px entre ese bloque y el título. */
+  .resource-item { padding-right: 285px; }
   .resource-item .gobar-res-date {
     position: absolute;
-    top: 10px;
+    top: 4px;
     right: 170px;
     margin-left: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gobar-gris-oscuro, #555);
+    line-height: 1.2;
   }
+}
+
+/* La etiqueta se apila arriba de la fecha. En mayúsculas por CSS y no en el
+   msgid, para que el texto a traducir siga siendo una frase normal. */
+.resource-item .gobar-res-date-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gobar-gris, #888);
 }

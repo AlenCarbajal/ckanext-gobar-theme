@@ -12,6 +12,9 @@
   {{ super() }}
   {% set res_modified = res.last_modified or res.metadata_modified or res.created %}
   {% if res_modified %}
-    <span class="gobar-res-date">{{ h.gobar_format_date(res_modified) }}</span>
+    <span class="gobar-res-date">
+      <span class="gobar-res-date-label">{{ _('Últ. modificación') }}</span>
+      {{ h.gobar_format_date(res_modified) }}
+    </span>
   {% endif %}
 {% endblock %}
