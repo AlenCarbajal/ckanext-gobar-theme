@@ -107,10 +107,7 @@ CKANEXT__GOBAR_THEME__SHOW_RECURSOS=true
 
 ## Otras variables existentes (no específicas de esta guía)
 
-- `ckanext.gobar_theme.contact_email` — destino del formulario de `/paginas/contacto`.
 - `ckanext.gobar_theme.featured_datasets_limit` — cantidad de datasets destacados en la home.
-- `ckanext.gobar_theme.spatial_map_max_results` — tope de resultados en el mapa espacial.
-- `ckanext.gobar_theme.show_api_docs` — muestra/oculta `/paginas/api-docs`.
 
 ## Cómo agregar una nueva variable personalizable
 

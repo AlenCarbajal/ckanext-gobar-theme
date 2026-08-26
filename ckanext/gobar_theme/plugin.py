@@ -95,10 +95,6 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     def declare_config_options(
         self, declaration: Declaration, key: Key
     ) -> None:
-        declaration.declare(
-            key.ckanext.gobar_theme.contact_email,
-            "datosargentina@sicyt.gob.ar",
-        )
         # base|apn|nacional|subnacional. "nacional" preserva el look actual
         # (Datos Abiertos) sin tocar .env en el portal ya desplegado.
         declaration.declare(
@@ -149,12 +145,6 @@ class GobarThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         )
         declaration.declare_int(
             key.ckanext.gobar_theme.featured_datasets_limit, 4
-        )
-        declaration.declare_int(
-            key.ckanext.gobar_theme.spatial_map_max_results, 200
-        )
-        declaration.declare_bool(
-            key.ckanext.gobar_theme.show_api_docs, True
         )
 
     # ── IFacets ──

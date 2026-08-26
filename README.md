@@ -14,8 +14,8 @@ Funcionalidades:
   (Datasets, Organismos, Temas, Recursos, Series, Acerca).
 * Perfiles visuales por nodo vía `ckanext.gobar_theme.profile`
   (`nacional` | `apn` | `subnacional` | `base`).
-* Páginas institucionales en `/paginas/*`, incluido un formulario de
-  contacto con envío de mail.
+* Página `Acerca` propia (override de `/about` de CKAN) con texto
+  distinto según el perfil. El contacto se deriva a argentina.gob.ar.
 * Sección `/recursos` opcional y nombre configurable para la sección de
   organizaciones (por ejemplo "Organismos").
 * Faceta de Provincia (a partir de la cobertura espacial de los datasets) y
