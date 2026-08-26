@@ -109,11 +109,11 @@ def test_dedupe_top_nodes_usa_arbol_global_no_la_pagina(monkeypatch):
 # emite CKAN, más la basura que puede llegar de un harvest.
 
 @pytest.mark.parametrize("valor,esperado", [
-    ("2024-03-15T10:23:45.123456", "15/03/2024"),  # metadata_modified
-    ("2024-03-15T10:23:45", "15/03/2024"),         # resource.last_modified
-    ("2024-03-15T10:23:45Z", "15/03/2024"),        # sufijo Z
-    ("2024-03-15T10:23:45+00:00", "15/03/2024"),   # con offset
-    ("2024-12-01T00:00:00", "01/12/2024"),         # cero-padding de día y mes
+    ("2024-03-15T10:23:45.123456", "15-03-2024"),  # metadata_modified
+    ("2024-03-15T10:23:45", "15-03-2024"),         # resource.last_modified
+    ("2024-03-15T10:23:45Z", "15-03-2024"),        # sufijo Z
+    ("2024-03-15T10:23:45+00:00", "15-03-2024"),   # con offset
+    ("2024-12-01T00:00:00", "01-12-2024"),         # cero-padding de día y mes
 ])
 def test_format_date_formatos_de_ckan(valor, esperado):
     assert helpers.gobar_format_date(valor) == esperado
