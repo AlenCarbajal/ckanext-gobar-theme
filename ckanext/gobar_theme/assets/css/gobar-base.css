@@ -140,6 +140,13 @@ footer .lang-select .select2-chosen { color: #333!important; }
   height: auto !important;
   aspect-ratio: 20 / 19;
   min-height: 260px;
+  /* Imprescindible junto al par aspect-ratio + min-height: cuando la caja es
+     más angosta que min-height x (20/19) = 274px, el min-height gana sobre la
+     altura que derivaría del ratio y entonces el ratio pasa a fijar el ANCHO
+     (274px fijos), con lo que el mapa se sale de su contenedor. Acotando el
+     ancho, el alto vuelve a derivarse de él y min-height solo actúa de piso. */
+  width: 100%;
+  max-width: 100%;
 }
 
 /* ── ORGANIZACIONES / GRUPOS ──
