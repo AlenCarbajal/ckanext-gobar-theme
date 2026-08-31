@@ -267,9 +267,6 @@ msgstr "No hay descripción para este dataset"
 # NOTA: "Datasets" se activa como override de core más abajo (→ "datasets"),
 # por eso ya NO figura acá como entrada obsoleta (evita duplicado activo+#~).
 
-#~ msgid "Add Dataset"
-#~ msgstr "Agregar dataset"
-
 # NOTA: "There are no datasets that match this search" NO existe como msgid en
 # CKAN core 2.11 (verificado byte-exacto contra ckan.pot: core sólo emite el
 # parametrizado "There are no {facet_type} that match this search", ya activo
@@ -282,15 +279,32 @@ msgstr "No hay descripción para este dataset"
 #~ msgid "Dataset extent"
 #~ msgstr "Extensión espacial"
 
-#~ msgid "Please draw query extent in the map:"
-#~ msgstr "Dibuje la extensión de la consulta en el mapa"
 
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
+#: ckanext/gobar_theme/templates/package/snippets/resource_item.html:15
+msgid "Últ. modificación"
+msgstr "Últ. modificación"
 
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
+# --- Strings del JavaScript de ckanext-spatial (modal de búsqueda espacial).
+#     A diferencia del resto de los overrides de core, estos SÍ llevan `#:`:
+#     CKAN arma el catálogo de JS (build_js_translations) tomando de cada .pot
+#     solo las entradas cuya ocurrencia termina en ".js", y el call-site lo da
+#     assets/js/i18n-overrides.js. Ese ancla es además lo que evita que
+#     `pybabel update` vuelva a obsoletarlas. ---
+#: ckanext/gobar_theme/assets/js/i18n-overrides.js:18
+msgid "Please draw query extent in the map:"
+msgstr "Dibujá en el mapa el área a consultar:"
 
+#: ckanext/gobar_theme/assets/js/i18n-overrides.js:19
+msgid "Apply"
+msgstr "Aplicar"
+
+#: ckanext/gobar_theme/assets/js/i18n-overrides.js:20
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ckanext/gobar_theme/assets/js/i18n-overrides.js:21
+msgid "Draw an extent"
+msgstr "Dibujar un área"
 
 # ==========================================================================
 # OVERRIDES MANUALES DE CKAN CORE  (mantenimiento manual — NO auto-generado)
@@ -321,6 +335,12 @@ msgstr[1] "{number} datasets encontrados"
 
 msgid "No datasets found"
 msgstr "No se encontraron datasets"
+
+# --- Botón "Agregar dataset" de /dataset (core:
+#     ckan/templates/snippets/add_dataset.html). Core es_AR lo traduce como
+#     "Agregar conjunto de datos"; en este portal la entidad es "dataset". ---
+msgid "Add Dataset"
+msgstr "Agregar dataset"
 
 # --- Familia "group": /group se presenta como "Temas" en este portal ---
 # EN SCOPE (etiquetas visibles de la UI de grupos: nav, listados, títulos,

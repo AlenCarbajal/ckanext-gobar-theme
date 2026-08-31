@@ -14,20 +14,6 @@
 {% block secondary %}{% endblock %}
 
 {% block primary %}
-{# ── AVISO NUEVA VERSIÓN ── #}
-{% if not h.gobar_is_apn() %}
-<div class="gobar-version-banner">
-  <div class="container">
-    <p>
-      ¡Bienvenido al nuevo Portal Nacional de Datos Públicos! Para saber más podés ingresar
-      <a href="https://argentina.gob.ar/portal-andino" target="_blank" rel="noopener">acá</a>,
-      y podés consultar la versión anterior
-      <a href="https://old.datos.gob.ar" target="_blank" rel="noopener">acá</a>.
-    </p>
-  </div>
-</div>
-{% endif %}
-
 {# ── HERO ── #}
 {% set hero_style = h.gobar_hero_background_style() %}
 <section class="gobar-hero"{% if hero_style %} style="{{ hero_style }}"{% endif %}>

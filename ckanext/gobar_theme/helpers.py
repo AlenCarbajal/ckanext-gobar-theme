@@ -172,25 +172,7 @@ def gobar_org_root_page(q: str | None = None):
     )
 
 
-# ── Custom pages helpers ──
-
-def gobar_page_list() -> list[dict[str, str]]:
-    pages = [
-        {"title": "Acerca del Portal", "url": "/paginas/acerca", "icon": "info-circle"},
-        {"title": "Guía de Uso", "url": "/paginas/guia", "icon": "book"},
-        {"title": "Estadísticas", "url": "/paginas/estadisticas", "icon": "bar-chart"},
-        {"title": "Mapa Espacial", "url": "/paginas/mapa", "icon": "globe"},
-    ]
-    show_api = toolkit.config.get("ckanext.gobar_theme.show_api_docs", True)
-    if show_api:
-        pages.append(
-            {"title": "API / Desarrolladores", "url": "/paginas/api-docs", "icon": "code"}
-        )
-    pages.append(
-        {"title": "Contacto", "url": "/paginas/contacto", "icon": "envelope"}
-    )
-    return pages
-
+# ── Contenido de /recursos, perfil y personalización ──
 
 def gobar_productos_list() -> list[dict[str, str]]:
     """Retorna la lista de productos de la Dirección de Datos Abiertos."""
@@ -253,7 +235,7 @@ def gobar_comunidad_list() -> list[dict[str, str]]:
             "title": "Contacto",
             "description": "Escribinos con tus consultas, sugerencias o para sumarte a la comunidad.",
             "icon": "fa fa-envelope",
-            "url": "/paginas/contacto",
+            "url": "https://www.argentina.gob.ar/datos-abiertos/contacto",
         },
     ]
 
@@ -379,7 +361,7 @@ def gobar_featured_datasets(limit: int | None = None) -> list[dict[str, Any]]:
         return []
 
 
-def gobar_format_date(date_str: str | None, fmt: str = "%d/%m/%Y") -> str:
+def gobar_format_date(date_str: str | None, fmt: str = "%d-%m-%Y") -> str:
     if not date_str:
         return ""
     try:
@@ -439,8 +421,7 @@ def get_helpers() -> dict[str, Any]:
         "gobar_org_tree_with_counts": gobar_org_tree_with_counts,
         "gobar_dedupe_top_nodes": gobar_dedupe_top_nodes,
         "gobar_org_root_page": gobar_org_root_page,
-        # Custom pages
-        "gobar_page_list": gobar_page_list,
+        # Perfil y personalización
         "gobar_get_config": gobar_get_config,
         "gobar_theme_profile": gobar_theme_profile,
         "gobar_is_apn": gobar_is_apn,

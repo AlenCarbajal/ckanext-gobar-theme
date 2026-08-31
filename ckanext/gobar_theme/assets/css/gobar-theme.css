@@ -1,1 +1,5 @@
-/* Legacy file — styles moved to gobar-base.css, gobar-home.css, gobar-custom-pages.css, gobar-series.css */
+/* Legacy file — estilos movidos a gobar-base.css, gobar-home.css y
+   gobar-search.css (ver assets/webassets.yml). gobar-series.css se fue con
+   la página /series a ckanext-series-explorer, y gobar-custom-pages.css con
+   el blueprint /paginas. Este archivo no está en ningún bundle: queda solo
+   como referencia. */

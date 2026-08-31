@@ -12,12 +12,6 @@ body.homepage .wrapper { padding: 0; display: block; }
 body.homepage .primary { width: 100%; max-width: 100%; float: none; padding: 0; }
 body.homepage .main { padding: 0; }
 
-/* ── Aviso nueva versión ── */
-.gobar-version-banner { background: var(--gobar-primary-darker); padding: 10px 0; }
-.gobar-version-banner p { font-family: var(--font-cuerpo); font-size: 14px; color: var(--gobar-blanco); text-align: center; margin: 0; }
-.gobar-version-banner a { color: var(--gobar-violeta-light); text-decoration: underline; }
-.gobar-version-banner a:hover { color: var(--gobar-blanco); }
-
 /* ── Hero claro ── */
 .gobar-hero { background: linear-gradient(180deg, #F7F7FA 0%, #FFFFFF 100%); border-bottom: 1px solid #DEE2E6; padding: 64px 0 56px; }
 .gobar-hero-center { text-align: center; display: flex; flex-direction: column; align-items: center; }
