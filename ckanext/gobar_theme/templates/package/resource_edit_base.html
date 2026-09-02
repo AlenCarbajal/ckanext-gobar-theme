@@ -1,0 +1,16 @@
+{% ckan_extends %}
+
+{#
+  Override de ckanext-gobar-theme — páginas de editar recurso y sus vistas.
+  Mismo criterio que resource_read.html: el breadcrumb de core corta el nombre
+  del recurso con `| truncate(30)`.
+#}
+{% block breadcrumb_content %}
+  {# super.super() saltea el bloque de core/package/resource_edit_base.html
+     (el que corta) y toma el de package/base.html. #}
+  {{ super.super() }}
+  {% if res %}
+    <li>{% link_for h.resource_display_name(res), named_route=pkg.type ~ '_resource.read', id=pkg.name, resource_id=res.id, title=h.resource_display_name(res) %}</li>
+    <li{% block breadcrumb_edit_selected %} class="active"{% endblock %}><a href="">{{ _('Edit') }}</a></li>
+  {% endif %}
+{% endblock %}
