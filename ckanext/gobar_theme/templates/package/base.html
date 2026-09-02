@@ -1,0 +1,28 @@
+{% ckan_extends %}
+
+{#
+  Override de ckanext-gobar-theme — breadcrumb de dataset y recurso.
+  Repite el breadcrumb de core SIN los `| truncate(30)` sobre el organismo y
+  el título del dataset: los títulos del estándar datgobar pasan holgadamente
+  esos 30 caracteres y se veían cortados con puntos suspensivos.
+  No alcanza con super(): el corte ya viene aplicado adentro del bloque.
+  El .breadcrumb de Bootstrap 5 trae flex-wrap, así que un título largo baja
+  de línea en vez de desbordar; no hace falta CSS.
+#}
+{% block breadcrumb_content %}
+  {% if pkg %}
+    {% set dataset = h.dataset_display_name(pkg) %}
+    {% if pkg.organization %}
+      {% set organization = h.get_translated(pkg.organization, 'title') or pkg.organization.name %}
+      {% set group_type = pkg.organization.type %}
+      <li>{% link_for h.humanize_entity_type('organization', group_type, 'breadcrumb') or _('Organizations'), named_route=group_type ~ '.index' %}</li>
+      <li>{% link_for organization, named_route=group_type ~ '.read', id=pkg.organization.name, title=organization %}</li>
+    {% else %}
+      <li>{% link_for _(dataset_type.title()), named_route=dataset_type ~ '.search' %}</li>
+    {% endif %}
+    <li{{ self.breadcrumb_content_selected() }}>{% link_for dataset, named_route=pkg.type ~ '.read', id=pkg.name, title=dataset %}</li>
+  {% else %}
+    {# Rama "crear dataset": core no trunca nada ahí. #}
+    {{ super() }}
+  {% endif %}
+{% endblock %}

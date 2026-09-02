@@ -1,0 +1,20 @@
+{% ckan_extends %}
+
+{#
+  Override de ckanext-gobar-theme — página de un recurso.
+  Saca los dos cortes que core aplica sobre el nombre del recurso: el
+  `| truncate(50)` del <h1> y el `| truncate(30)` del breadcrumb. Los nombres
+  del estándar datgobar pasan holgadamente esos límites, así que el corte con
+  puntos suspensivos era la regla y no la excepción.
+  En ninguno de los dos alcanza con super(): el corte ya viene aplicado
+  adentro del bloque de core.
+#}
+{% block breadcrumb_content %}
+  {# super.super() saltea el bloque de core/package/resource_read.html (que es
+     el que corta el nombre) y toma el de package/base.html — organismo y
+     dataset, ya sin truncate por nuestro override de ese template. #}
+  {{ super.super() }}
+  <li class="active"><a href="" title="{{ h.resource_display_name(res) }}">{{ h.resource_display_name(res) }}</a></li>
+{% endblock %}
+
+{% block resource_read_title %}<h1 class="page-heading" title="{{ h.resource_display_name(res) }}">{{ h.resource_display_name(res) }}</h1>{% endblock %}

@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+"""Chequeos estáticos de los templates del theme: no dependen de CKAN."""
+import os
+import re
+
+import jinja2
+import pytest
+
+TEMPLATES_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'templates')
+
+# Tags propias de CKAN que Jinja a secas no conoce.
+CKAN_TAGS = re.compile(
+    r'\{%-?\s*(ckan_extends|link_for|snippet|asset|url_for)\b.*?-?%\}',
+    re.DOTALL)
+
+# Los nombres del estándar datgobar son largos: truncarlos deja "..." en el
+# título. Ver templates/package/{base,resource_read,resource_edit_base}.html.
+TRUNCA_NOMBRES = re.compile(
+    r'(resource_display_name|dataset_display_name)\s*\([^)]*\)\s*\|\s*truncate')
+
+
+def _templates():
+    for root, _dirs, files in os.walk(TEMPLATES_DIR):
+        for name in files:
+            if name.endswith('.html'):
+                yield os.path.join(root, name)
+
+
+@pytest.mark.parametrize('path', sorted(_templates()))
+def test_jinja_syntax(path):
+    with open(path, encoding='utf-8') as f:
+        source = CKAN_TAGS.sub('', f.read())
+    jinja2.Environment().parse(source)
+
+
+@pytest.mark.parametrize('path', sorted(_templates()))
+def test_no_trunca_titulos(path):
+    with open(path, encoding='utf-8') as f:
+        assert not TRUNCA_NOMBRES.search(f.read()), \
+            'el override volvió a cortar el nombre con truncate'
